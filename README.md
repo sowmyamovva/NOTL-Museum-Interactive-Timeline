@@ -3,7 +3,7 @@
 ### **Team Members**
 
 | **Team Members**  | **Role** | **Student ID** |
-| ------------- | ------------- |
+| ------------- | ------------- | ------------- |
 | Sowmya Movva    | Scrum Master  / Developer  | 6299937 |
 | Tyvon Factor-Gaymon   | Product Owner / Developer |  |
 | Rimpy Saha  |  Product Owner / Developer | 6600258 |
