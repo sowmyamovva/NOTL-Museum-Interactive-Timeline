@@ -22,9 +22,9 @@ An interactive timeline will be developed to allow visitors of the Niagara On Th
   2) Ensuring that all inherent requirements for the museum and its stakeholders are met
 
 ### **Specifications**:
-  Potential Web-Development Tools -  Ajax, CSS, HTML, JavaScript, PHP, Python
-  Administrative Tools - Office 365, Trello, Zoom
-  Project Management Tools - Trello, Scrumdesk
+  | Potential Web-Development Tools |  Ajax, CSS, HTML, JavaScript, PHP, Python |
+  | Administrative Tools | Office 365, Trello, Zoom |
+  | Project Management Tools | Trello, Scrumdesk |
 
 ### **Communications**: 
 
