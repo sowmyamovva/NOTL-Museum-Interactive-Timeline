@@ -1,5 +1,13 @@
 # Cosc-4P02 - Interactive Timeline Project 
 
+| Team Members  | Role |
+| ------------- | ------------- |
+| Sowmya Movva    | Scrum Master  / Developer  |
+| Tyvon Factor-Gaymon   | Product Owner / Developer |
+| Rimpy Saha  |  Product Owner / Developer |
+| Peter Fung  | Developer / Tester |
+| George Gramatikov |  Developer / Tester |
+
 Team Members                    Role
 
 Sowmya Movva            Scrum Master  / Developer
