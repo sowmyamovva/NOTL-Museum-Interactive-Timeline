@@ -1,6 +1,6 @@
 # Cosc-4P02 - Interactive Timeline Project 
 
-** Team Members **
+__Team Members__
 
 | Team Members  | Role |
 | ------------- | ------------- |
