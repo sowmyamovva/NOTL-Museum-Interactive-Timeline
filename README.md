@@ -2,8 +2,6 @@
 
 ### **Team Members**
 
-👁️👄👁️
-
 | **Team Members**  | **Role** | **Student ID** |
 | ------------- | ------------- | ------------- |
 | Sowmya Movva    | Scrum Master  / Developer  | 6299937 |
