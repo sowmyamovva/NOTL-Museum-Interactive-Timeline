@@ -1,5 +1,7 @@
 # Cosc-4P02 - Interactive Timeline Project 
 
+** Team Members **
+
 | Team Members  | Role |
 | ------------- | ------------- |
 | Sowmya Movva    | Scrum Master  / Developer  |
