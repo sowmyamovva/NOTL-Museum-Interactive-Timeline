@@ -1,6 +1,7 @@
 # Cosc-4P02 - Interactive Timeline Project 
 
-![Museum Logo](https://raw.githubusercontent.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/master/Images/MuseumLogo.png)
+![Museum Logo](img src = "https://raw.githubusercontent.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/master/Images/MuseumLogo.png" width="150" height="100" )
+
 
 ### **Team Members**
 
