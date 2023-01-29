@@ -1,6 +1,6 @@
 # Cosc-4P02 - Interactive Timeline Project 
 
-<img src="https://raw.githubusercontent.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/master/Images/BadgerTech.png" width="210" height="50"> <img src="https://raw.githubusercontent.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/master/Images/logo.svg" width="80" height="50">
+<img src="https://raw.githubusercontent.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/master/Images/BadgerTech.png" width="210" height="50"> <img src="https://raw.githubusercontent.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/master/Images/MuseumLogo.png" width="80" height="50">
 
 
 ### **Team Members**
@@ -18,7 +18,7 @@
 The proposed timeline project that is to be developed for the Niagara On The Lake Museum will be developed using a Scrum methodology consisting of a small team of five members to ensure quality development.
 
 ### **Objectives**: 
-An interactive timeline will be developed to allow visitors of the Niagara On The Lake Museum to learn about the history of a particular topic and history at the desired point in time. Users are able to select a particular time period on an interactive application by clicking and dragging their cursor.
+An interactive timeline will be developed to allow visitors of the Niagara On The Lake Museum to learn about the history of a particular topic and history at the desired point in time. Users are able to select a particular time period on an interactive application by clicking and dragging their cursor or scrolling. With the additional features of interacting with artifacts, viewing [only] topics of interest in a detailed virtual space and decreased effort and time to introduce or manipulate information, we aim to decrease user effor and increase engagement in all manners. The features also make ths project a significant educational tool in making to spread more than just surface knowledge about history.
 
 ### **Goals**: 
   1) Creating an immersive experience for users based on historical periods of Niagara 
@@ -53,7 +53,8 @@ Client meetings will be conducted on an as-needed basis with one member of the d
 | Mar 29 - Apr 4  |  Sprint 9 |  |
 | Apr 5 - Apr 18 | Testing |  |   
      
-
+### **All Documentation**:
+<a href="[https://www.w3schools.com](https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/tree/main/Documentation%20Folder)">Documents</a>
   
   
 
