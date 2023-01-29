@@ -54,7 +54,7 @@ Client meetings will be conducted on an as-needed basis with one member of the d
 | Apr 5 - Apr 18 | Testing |  |   
      
 ### **All Documentation**:
-<a href="[https://www.w3schools.com](https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/tree/main/Documentation%20Folder)">Documents</a>
+<a href="https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/tree/main/Documentation%20Folder">Documents</a>
   
   
 
