@@ -1,4 +1,4 @@
-#Interactive Timeline Project 
+# - Interactive Timeline Project 
 
 <img src="https://raw.githubusercontent.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/master/Images/BadgerTech.png" width="210" height="50">  <img src="https://raw.githubusercontent.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/master/Images/MuseumLogo.png" width="80" height="50">
 
