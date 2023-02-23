@@ -1,0 +1,11 @@
+
+    #scrolldiv {
+        height:100%; 
+        width:100%; 
+        overflow-x:scroll; 
+        white-space: nowrap;
+    }
+
+    section::-webkit-scrollbar {
+        width: 0 !important
+        }
