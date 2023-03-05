@@ -192,23 +192,27 @@ header{
     width: 100%;
     height:60%;
     background-color:white;
-    margin-top: 90px;
+    margin-top: 4.7%;
     background-color:rgb(244,113,116);
+    
 
     .ourMissionArticle{
-        margin-top: 90px;
-        margin-left:100px;
+        margin-top: 9.5%;
+        margin-left:10.5%;
         margin-right: auto;
         position: relative;
         font-family: Georgia, 'Times New Roman', Times, serif;
+
+        h1{
+            color: aliceblue;
+        }
     }
 
     .ourMissionPic{
-       padding-top: 40px;
+       padding-top: 4.3%;
         img {
-            width: 800px;
+            width: 85%;
             height:auto;
-            
         }
     }
 
@@ -246,6 +250,7 @@ header{
         .contact-title{
             font-family:Georgia, 'Times New Roman', Times, serif;
             height:70px;
+            color:aliceblue;
             
         }
 
@@ -317,7 +322,7 @@ header{
         padding-top:100px;
         padding-left:20%;
         font-family: Georgia, 'Times New Roman', Times, serif;
-        color: white;
+        color: aliceblue;
         border-color: aqua;
 
         h1{
@@ -327,24 +332,26 @@ header{
     }
 }
 
+
 .servicepage-cont1{
     margin-left:20%;
     margin-right:19%;
-    margin-top:50px;
+    margin-top:2.5%;
     
     .servicescont-img{
         
         img{
-            width:550px;
+            width:96%;
         }
     }
 
     .servicescont-title{
-        padding-left: 40px;
+        padding-left: 8%;
+        
     }
 
     .servicescont-text{
-        padding-left: 40px;
+        padding-left: 8%;
     }
 
 
@@ -353,37 +360,39 @@ header{
 .servicepage-cont2{
     margin-left:20%;
     margin-right:19%;
-    margin-top:50px;
+    margin-top:2.5%;
     
+
     .servicescont-img{
+
         
         img{
-            width:550px;
+            width:100%;
         }
-        margin-left:30px;
+        margin-left:7%;
 
     }
 
     .servicescont-title{
-        padding-right: 40px;
+        padding-right: 8%;
     }
 
     .servicescont-text{
-        padding-right: 40px;
+        padding-right: 8%;
     }
 }
 
 .servicescont-button{
-    padding-top: 50px;
-    padding-left: 76%;
+    margin-top: 10%;
+    margin-left: 76%;
     
     button{
         color: white;
         background-color: rgb(244,113,116);
-        padding: 10px;
+        padding: 10%;
         text-align: center;
         text-decoration: none;
-        font-size: 16px;
+        font-size: 1em;
         border: none;
     }
 
