@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+.event:hover {
+  cursor: pointer;
+}
+
+.event-label {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid black;
+  padding: 5px;
+  display: none;
+}
+body {
+  background-color: #474e5d;
+  font-family: Helvetica, sans-serif;
+}
+</style>
+</head>
+<body>
+
+    <!-- <svg id="timeline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100vw 100vh" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+        <defs>
+          <linearGradient id="e0YvEuspUTQ2-stroke" x1="0" y1="50" x2="100" y2="50" spreadMethod="pad" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 0)">
+            <stop id="e0YvEuspUTQ2-stroke-0" offset="0%" stop-color="#fc259b" />
+            <stop id="e0YvEuspUTQ2-stroke-1" offset="100%" stop-color="#f85e08" />
+          </linearGradient>
+        </defs>
+      
+        <path id="mypath" d="M0,50h100" fill="#1c278a" stroke="url(#e0YvEuspUTQ2-stroke)" stroke-width="2" />
+        <circle cx="2" cy="50" r="2" fill="white" />
+      </svg> -->
+<!-- the last one -->
+      <!-- <svg cache-id="16de89faabdb48d1a0a46f23dde4f4b1" id="timeline" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 150" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+        <defs>
+          <linearGradient id="e0YvEuspUTQ2-stroke" x1="0" y1="100" x2="300" y2="100" spreadMethod="pad" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 0)">
+            <stop id="e0YvEuspUTQ2-stroke-0" offset="0%" stop-color="#fc259b" />
+            <stop id="e0YvEuspUTQ2-stroke-1" offset="100%" stop-color="#f85e08" />
+          </linearGradient>
+        </defs>
+        <path id="mypath" d="M0,100h300" fill="#1c278a" stroke="url(#e0YvEuspUTQ2-stroke)" stroke-width="2" />
+         <circle cx="30" cy="100" r="2.5" fill="white" />
+      </svg> -->
+
+
+
+      <div id="timeline_box">
+        <svg id ="timeline" cache-id="16de89faabdb48d1a0a46f23dde4f4b1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 200" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+          <defs>
+            <linearGradient id="e0YvEuspUTQ2-stroke" x1="0" y1="150" x2="300" y2="150" spreadMethod="pad" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 0)">
+              <stop id="e0YvEuspUTQ2-stroke-0" offset="0%" stop-color="#fc259b" />
+              <stop id="e0YvEuspUTQ2-stroke-1" offset="100%" stop-color="#f85e08" />
+            </linearGradient>
+          </defs>
+          
+            <line id = "mypath" x1="50" y1="100" x2="750" y2="100" fill="#1c278a" stroke="url(#e0YvEuspUTQ2-stroke)" stroke-width="5" />
+           
+          </svg>
+        </div>
+
+
+<!-- <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 400">
+<path d="M0.7168349623680115,396.415771484375C133.78135294715563,395.9677429199219,666.0394248863062,394.1756286621094,799.1039428710938,393.72760009765625" fill="none" stroke-width="6" stroke="url(&quot;#SvgjsLinearGradient1000&quot;)" stroke-linecap="round" transform="matrix(1,0,0,1,0.0896226167678833,-195.07168579101562)"></path>
+<defs>
+<linearGradient id="SvgjsLinearGradient1000">
+<stop stop-color="hsl(37, 99%, 67%)" offset="0"></stop>
+<stop stop-color="hsl(316, 73%, 52%)" offset="1"></stop>
+</linearGradient>
+</defs>
+          <path id="startmarker" x1="5px" y1="327px" x2="5px" y2="337px"></path>
+          <line id="endmarker" x1="725px" y1="327px" x2="725px" y2="337px"></line>
+        <line class="connector" nr="2" x1="130px" y1="307px" x2="130px" y2="332px"></line><circle class="connector" nr="2" cx="130px" xy="0" r="4" cy="332px"></circle><line class="connector" nr="4" x1="230px" y1="357.4000129699707px" x2="230px" y2="332px"></line><circle class="connector" nr="4" cx="230px" xy="0" r="4" cy="332px"></circle><line class="connector" nr="6" x1="360px" y1="307px" x2="360px" y2="332px"></line><circle class="connector" nr="6" cx="360px" xy="0" r="4" cy="332px"></circle><line class="connector" nr="8" x1="460px" y1="357.4000129699707px" x2="460px" y2="332px"></line><circle class="connector" nr="8" cx="460px" xy="0" r="4" cy="332px"></circle><line class="connector" nr="10" x1="590px" y1="307px" x2="590px" y2="332px"></line><circle class="connector" nr="10" cx="590px" xy="0" r="4" cy="332px"></circle>
+
+</svg>
+
+
+<div class="timeline">
+  <div class="container left">
+    <div class="content">
+      <h2>2017</h2>
+      <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+    </div>
+  </div>
+  <div class="container right">
+    <div class="content">
+      <h2>2016</h2>
+      <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+    </div>
+  </div>
+  <div class="container left">
+    <div class="content">
+      <h2>2015</h2>
+      <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+    </div>
+  </div>
+  <div class="container right">
+    <div class="content">
+      <h2>2012</h2>
+      <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+    </div>
+  </div>
+  <div class="container left">
+    <div class="content">
+      <h2>2011</h2>
+      <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+    </div>
+  </div>
+  <div class="container right">
+    <div class="content">
+      <h2>2007</h2>
+      <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+    </div>
+  </div>
+</div> -->
+
+</body>
+
+<script>
+var years = [1810,1810,1810,1810,1810,1810,1810,1810,1810,1810];
+for(let i = 0 ; i < years.length; i++)
+{
+    pathOnDiv(years[i], (i/(years.length-1)));
+}
+
+
+
+function pathOnDiv(text, pos)
+{
+   var  path = document.getElementById("mypath");
+   var  pathLength = path.getTotalLength();
+   var  loc = path.getPointAtLength(pos * pathLength);
+   var point = '<circle cx="'+loc.x+'" cy="'+loc.y+'" r="3.5" fill="white" class="event" data-year="'+text+'" />"';
+   document.getElementById('timeline').insertAdjacentHTML('beforeend',point);
+}
+
+
+
+
+
+
+
+const timeline = document.getElementById('timeline_box');
+const events = timeline.querySelectorAll('.event');
+
+events.forEach(event => {
+  event.addEventListener('click', () => {
+    const year = event.getAttribute('data-year');
+    const label = document.createElement('div');
+    label.textContent = year;
+    label.classList.add('event-label');
+    timeline.appendChild(label);
+    const rect = event.getBoundingClientRect();
+    label.style.top = rect.top - 40 + 'px';
+    label.style.left = rect.left + rect.width / 2 + 'px';
+    label.style.display = 'block';
+    setTimeout(() => {
+      label.parentNode.removeChild(label);
+    }, 3000);
+  });
+});
+
+</script>
+</html>
