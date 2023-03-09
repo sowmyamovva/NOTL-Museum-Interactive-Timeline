@@ -1,18 +1,20 @@
 
 // Clicky Zoom in and Zoom out
-const divs = document.querySelectorAll(".zoomable"); // Select all the divs with class "zoomable"
-const zoomIncrement = 0.2; // Zoom increment/decrement amount
-const maxZoomLevel = 1.2; // Maximum zoom level
-const minZoomLevel = 1; // Minimum zoom level
+const divs = document.querySelectorAll(".zoomable");
+const zoomIncrement = 0.5;
+const maxZoomLevel = 1.5;
+const minZoomLevel = 1;
 
 divs.forEach((div) => {
-  let zoomLevel = 1; // Initial zoom level for each div
-  let divOffsetX = 0; // Initial x offset of the div
-  let divOffsetY = 0; // Initial y offset of the div
+  let zoomLevel = 1;
+  let divOffsetX = 0;
+  let divOffsetY = 0;
+  let zoomEnabled = true;
 
-  // Add event listener to zoom in on mouse click
   div.addEventListener("click", (event) => {
-    if (event.button === 0) { // Check for left click
+    if (event.button === 0) {
+      if (!zoomEnabled) return;
+
       const prevZoomLevel = zoomLevel;
       zoomLevel = Math.min(maxZoomLevel, zoomLevel + zoomIncrement);
       const zoomRatio = zoomLevel / prevZoomLevel;
@@ -22,12 +24,15 @@ divs.forEach((div) => {
       divOffsetY = (divOffsetY + mouseY) * zoomRatio - mouseY;
       div.style.transform = `scale(${zoomLevel}) translate(${divOffsetX}px, ${divOffsetY}px)`;
       div.style.transformOrigin = `${event.clientX}px ${event.clientY}px`;
+
+      if (zoomLevel === maxZoomLevel) {
+        zoomEnabled = false;
+      }
     }
   });
 
-  // Add event listener to zoom out on right mouse click
   div.addEventListener("contextmenu", (event) => {
-    event.preventDefault(); // Prevent context menu from appearing
+    event.preventDefault();
     const prevZoomLevel = zoomLevel;
     zoomLevel = Math.max(minZoomLevel, zoomLevel - zoomIncrement);
     const zoomRatio = zoomLevel / prevZoomLevel;
@@ -37,8 +42,14 @@ divs.forEach((div) => {
     divOffsetY = (divOffsetY + mouseY) * zoomRatio - mouseY;
     div.style.transform = `scale(${zoomLevel}) translate(${divOffsetX}px, ${divOffsetY}px)`;
     div.style.transformOrigin = `${event.clientX}px ${event.clientY}px`;
+
+    if (zoomLevel === minZoomLevel) {
+      zoomEnabled = true;
+    }
   });
 });
+
+
 
 // ZOOM IN ON SVG
 
