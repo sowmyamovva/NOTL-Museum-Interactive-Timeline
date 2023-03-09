@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content = "IE-edge">
     <meta name= "viewport" content = "width=device-width, initial-scale = 1.0">
-    <title>Document</title>
+    <title>Home</title>
     <link rel= "stylesheet" href="/Project_Source_Code/Staging/CSS/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <script src="https://kit.fontawesome.com/746087b809.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <header>
@@ -20,9 +22,19 @@
                 <li><a href="Contact.html">Contact</a></li>
             </ul>
             </nav> 
-             <p>
-                <a href = "Login_Signup_1.html">LOG IN</a>
-             </p> 
+             <div class = dropdownMenu>
+                <i class="fa-regular fa-user fa-lg"></i>
+                <div class = "dropdownContent">
+
+                    <a href="AccountPage.html" class="active">
+                    <p> View Account</p>
+                    </a>
+                    <p> View Bookings</p>
+                    <p> View Donations </p>
+                    <a href="Home.html" c lass="active">
+                        <p> Log out</p>
+                </div>
+             </div>
         </div>
     </header>
     <section>
