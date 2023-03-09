@@ -43,9 +43,7 @@ nav {
 }
 
 
-/* 2. Hide the links if it's height is not enough to accommodate. That's how html works, if it's height is not enough it won't show, so as the user reduces the size of the window it decreases the height of the parent of the link item but the problem is that if you don't give it overflow:hidden it will jump to next line so hidden:0 and overflow:hidden will hide an html parent container */
-
-/* By default let's hide this */
+/* links hidden if height requirement is not met */
 .links {
   height: 0;
   overflow: hidden;
@@ -93,7 +91,7 @@ nav {
     justify-content: right;
   }
 
- /*   .SearchBar{
+    .SearchBar{
     max-width: 200px;
     background: rgba(255, 255, 255, 0.113);
     display: flex;
@@ -125,7 +123,7 @@ nav {
     background: #eceae6a6;
     cursor: pointer;
 
-  }*/
+  }
 
   a {
     background-color: transparent;
