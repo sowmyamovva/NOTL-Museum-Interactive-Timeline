@@ -97,6 +97,11 @@
    <span class="dot" onclick="currentSlide(3)"></span>
  </div>
 
+ <!--Footer-->
+ <div>
+    
+ </div>
+
 
         <!-- javascript -->
         <script src="app.js"></script>
