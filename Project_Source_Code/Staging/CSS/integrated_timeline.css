@@ -39,6 +39,23 @@ body {
 }
 
 
+.timeline_box div {
+  position: absolute;
+  left: calc(100% + 7px);
+  width: 280px;
+  padding: 15px;
+  font-size: 1rem;
+  white-space: normal;
+  color: black;
+  background: white;
+  overflow-wrap: break-word;
+}
+.timeline_box time {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
 /* .section SECTION
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -71,7 +88,7 @@ body {
 
 #timeline {
   height: 200px;
-  width: 8000px; /* Set the width of the timeline to a large value */
+  width: 2000px; /* Set the width of the timeline to a large value */
   position: relative;
 }
 
@@ -117,6 +134,6 @@ body {
         white-space: nowrap;
     }
 
-    section::-webkit-scrollbar {
+    #timeline_box::-webkit-scrollbar {
         width: 0 !important
         }
