@@ -1,22 +1,4 @@
-/* .event:hover {
-  cursor: pointer;
-}
 
-.event-label {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: black;
-  border: 1px solid black;
-  padding: 5px;
-  display: none;
-  color: white;
-} */
-body {
-  background-color: #474e5d;
-  font-family: Helvetica, sans-serif;
-}
 
 *,
 *::before,
@@ -26,16 +8,13 @@ body {
   box-sizing: border-box;
 }
 
-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
-}
+
 
 body {
   font: normal 16px/1.5 "Helvetica Neue", sans-serif;
   color: #fff;
+   background-color: #474e5d;
+  font-family: Helvetica, sans-serif;
 }
 
 
@@ -50,12 +29,14 @@ body {
   background: white;
   overflow-wrap: break-word;
 }
-.timeline_box time {
+
+.event-label time {
   display: block;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
+
 /* .section SECTION
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -72,13 +53,6 @@ body {
   text-align: center;
 }
 
-.section h1 {
-  font-size: 2.5rem;
-}
-
-.section h2 {
-  font-size: 1.3rem;
-}
 
 
 #timeline_box {
@@ -88,7 +62,8 @@ body {
 
 #timeline {
   height: 200px;
-  width: 2000px; /* Set the width of the timeline to a large value */
+  width: 2000px;
+  /* Set the width of the timeline to a large value */
   position: relative;
 }
 
@@ -111,29 +86,31 @@ body {
 
 
 /*Experimental*/
-.offset{
+.offset {
   max-width: 100%;
   height: auto;
   position: relative;
   top: -500px;
   left: -0px;
-} 
+}
+
 #first_offset {
   max-width: 100%;
   height: auto;
   position: relative;
   left: -0px;
-  top:350px;
-   z-index:-1;  /*Position image behind element*/
+  top: 350px;
+  z-index: -1;
+  /*Position image behind element*/
 }
 
-    .scrolldiv {
-        height:100%; 
-        width:100%; 
-        overflow-x:scroll; 
-        white-space: nowrap;
-    }
+.scrolldiv {
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
 
-    #timeline_box::-webkit-scrollbar {
-        width: 0 !important
-        }
+#timeline_box::-webkit-scrollbar {
+  width: 0 !important
+}
