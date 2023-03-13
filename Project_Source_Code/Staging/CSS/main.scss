@@ -1,0 +1,403 @@
+
+body{
+ background:rgb (241, 241, 241);
+ margin: 0;
+ height: 100vh;
+ font-family: 'Nunito', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+header{
+    background-color:rgb(244,113,116);
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+    height:100px;
+    position: fixed;
+    top:0;
+    left:0;
+    
+        .logo{
+            font-weight: bold;
+            font-size: 1.125rem;
+            color: rgb(244,113,116);
+            width:14%;
+            height: 100px;
+            background-image: url(/Images/MuseumLogo.png);
+            background-size: cover;
+        }
+
+        nav ul li {
+            display:inline;
+            color:white;
+            position:relative;
+            left: -100px;
+            margin-left: 50px;
+            margin-right: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: x-large;
+        }
+
+        nav ul li:hover {
+            border-bottom: 2px solid black;
+        }
+
+        p{
+            color:aliceblue;
+            font-size: large;
+        }
+
+
+        
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color:blue;
+    font-weight:400;
+
+}
+
+.inner{
+    width: 60%;
+    margin: 0 auto;
+}
+
+.slideshow{
+    width: 60%;
+    height: 700px;
+    margin-left: 20%;
+    margin-right: auto;
+    background-image: url(/Images/slideshow/slide1.jpg);
+    background-size: auto;
+
+}
+
+.transbox{
+    position: relative;
+    background-color: rgba(255,255,255, 0.4);
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 40%;
+    position: relative;
+    top: 25%;
+}
+
+.slideshowText h1{
+    font-size: 60px;
+    font-family: "lol", serif;
+    padding: 30px;
+    text-align: center;
+    color: #545453;
+}
+
+.slideshowButton {
+    position: relative;
+    margin-left:auto;
+    margin-right: auto;
+    width: 35%;
+    bottom:20%;
+    border-style: solid;
+    border-color: #545453;
+
+}
+
+.slideshowButton h1{
+    font-size: 25px;
+    text-align: center;
+    color: #545453;
+    position: relative;
+    bottom:20%;
+    text-decoration: underline;
+}
+
+.login{
+    width:40%;
+    height: 40%;
+    position: relative;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #D2D2CF;
+    align-items: center;
+    margin:auto;
+    margin-top: 10%;
+
+    .password{
+        padding-top: 10px;
+    }
+
+    .rememberMeSignup{
+        display: inline-flex;
+        position: relative;
+        width: 100%;
+
+        .rememberMe{
+            padding-top: 10px;
+        }
+
+        .signupLink{
+            width: fit-content;
+            height: fit-content;
+            padding-top:3px;
+            margin-left:300px;
+            float:right;
+        }
+    }
+    .signin{
+       padding-top:20px;
+       
+       .btn-primary{
+        background-color:#545453 !important;
+       }
+    }
+}//login scss
+
+
+.signup{
+    width:50%;
+    height:60%;
+    border-radius: 12px;
+    background-color: #D2D2CF;
+    align-items: center;
+    margin:auto;
+    margin-top: 10%;
+    padding: 20px;
+
+    .singleLine{
+        padding: 10px;
+    }
+
+    .name{
+        padding: 10px;
+    }
+
+    .row{
+        padding-top:10px;
+    }
+
+    .termsAndConditions{
+        padding:10px;
+    }
+}
+
+.ourMission{
+    width: 100%;
+    height:60%;
+    background-color:white;
+    margin-top: 4.7%;
+    background-color:rgb(244,113,116);
+    
+
+    .ourMissionArticle{
+        margin-top: 9.5%;
+        margin-left:10.5%;
+        margin-right: auto;
+        position: relative;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+
+        h1{
+            color: aliceblue;
+        }
+    }
+
+    .ourMissionPic{
+       padding-top: 4.3%;
+        img {
+            width: 85%;
+            height:auto;
+        }
+    }
+
+}
+
+.FAQ-Section{
+    width:70%;
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:30px;
+
+    .FAQ-title{
+        text-align: center;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    .FAQ-questions{
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    }
+}
+
+.contact-container{
+    width:100%;
+    height:auto;
+    background-color: rgb(244,113,116);
+    padding-top: 80px;
+    padding-left: 25%;
+    padding-right: 30%;
+    margin-bottom:10%;
+    .get-in-contact{
+        margin-top: 100px;
+        background-color: rgb(244,113,116) ;
+        
+        .contact-title{
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            height:70px;
+            color:aliceblue;
+            
+        }
+
+        .contact-form{
+            margin-top: 10%;
+        }
+
+        .singleLine{
+            padding-top: 10px;
+        }
+        .contact-submit{
+            margin-top: 30px;
+            button{
+                color: white;
+                background-color: #C35A5D;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                border: none;
+            }
+        }
+        
+    }
+}
+
+.services-container{
+    background-color:rgb(244,113,116);
+    height:auto;
+    width:100%;
+    padding-left:20%;
+    padding-right: 23%;
+    border-color: aqua;
+    border-style: solid;
+    .services{
+        border-color: aqua;
+        border-style: solid;
+        .services-photo{
+            img{
+                width:525px;
+                height:auto
+            }
+            
+        }
+    
+        .services-title{
+            margin-top: 40px;
+            margin-bottom: 30px;
+            border-color: aqua;
+            border-style: solid;
+        }
+    
+        .services-text{
+            border-color: aqua;
+            border-style: solid;
+            
+        }
+    }
+}
+
+.servicepage-heading{
+    background-color:rgb(244,113,116);
+    height:25%;
+    width:auto;
+    margin-top:100px;
+    
+
+    .servicepage-title{
+        padding-top:100px;
+        padding-left:20%;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: aliceblue;
+        border-color: aqua;
+
+        h1{
+            font-size:55px;
+        }
+
+    }
+}
+
+
+.servicepage-cont1{
+    margin-left:20%;
+    margin-right:19%;
+    margin-top:2.5%;
+    
+    .servicescont-img{
+        
+        img{
+            width:96%;
+        }
+    }
+
+    .servicescont-title{
+        padding-left: 8%;
+        
+    }
+
+    .servicescont-text{
+        padding-left: 8%;
+    }
+
+
+}
+
+.servicepage-cont2{
+    margin-left:20%;
+    margin-right:19%;
+    margin-top:2.5%;
+    
+
+    .servicescont-img{
+
+        
+        img{
+            width:100%;
+        }
+        margin-left:7%;
+
+    }
+
+    .servicescont-title{
+        padding-right: 8%;
+    }
+
+    .servicescont-text{
+        padding-right: 8%;
+    }
+}
+
+.servicescont-button{
+    margin-top: 10%;
+    margin-left: 76%;
+    
+    button{
+        color: white;
+        background-color: rgb(244,113,116);
+        padding: 10%;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1em;
+        border: none;
+    }
+
+}
+
+
+
+
