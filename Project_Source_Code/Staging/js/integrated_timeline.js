@@ -21,9 +21,6 @@ const events = timeline.querySelectorAll('.event');
 events.forEach(event => {
   event.addEventListener('click', () => {
     const label2 = document.getElementById('label');
-    /* label.style.top = (rect.top - 40) + 'px';
-    label.style.left = (rect.left + rect.width / 2) + 'px'; */
-    /*  label.style.display = 'block'; */
     if (label2) {
       label2.parentNode.removeChild(label2);
     }
@@ -32,7 +29,6 @@ events.forEach(event => {
     const label = document.createElement('div');
     label.textContent = year;
     label.classList.add('event-label');
-    /* timeline.appendChild(label); */
 
     const rect = event.getBoundingClientRect();
 
@@ -41,13 +37,5 @@ events.forEach(event => {
 
     timeline.insertAdjacentHTML('beforeend', year_info);
 
-    /* const label2 = document.getElementById('label'); */
-    
-    /* label.style.top = (rect.top - 40) + 'px';
-    label.style.left = (rect.left + rect.width / 2) + 'px'; */
-    /*  label.style.display = 'block'; */
-    /*     setTimeout(() => {
-          label2.parentNode.removeChild(label2);
-        }, 30000); */
   });
 });
