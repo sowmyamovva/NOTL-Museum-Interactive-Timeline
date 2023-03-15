@@ -31,8 +31,9 @@ window.addEventListener('load', function() {
 
 const timeline = document.getElementById('timeline_box');
 const events = timeline.querySelectorAll('.event');
-
+// this messes up the div position for now
 events.forEach(event => {
+  //maybe hover and click feature
   event.addEventListener('click', () => {
     const label2 = document.getElementById('label');
     if (label2) {
