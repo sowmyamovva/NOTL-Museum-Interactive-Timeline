@@ -1,0 +1,12 @@
+<div class="timeline_box" id = "timeline_box">
+  <svg width="5000" height="50">
+    <!-- timeline elements -->
+    <line x1="0" y1="25" x2="5000" y2="25" stroke="black" stroke-width="2" />
+    <circle cx="200" cy="25" r="10" fill="red" />
+    <circle cx="500" cy="25" r="10" fill="blue" />
+    <circle cx="800" cy="25" r="10" fill="green" />
+
+
+  </svg>
+</div>
+
