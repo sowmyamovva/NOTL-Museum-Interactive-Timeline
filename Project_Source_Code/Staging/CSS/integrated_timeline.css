@@ -16,18 +16,6 @@ body {
 }
 
 
-.timeline_box {
-  position: relative;
-  left: calc(100% + 7px);
-  width: 280px;
-  padding: 15px;
-  font-size: 1rem;
-  white-space: normal;
-  color: black;
-  background: white;
-  overflow-wrap: break-word;
-}
-
 .event-label time {
   display: block;
   font-size: 0.8rem;
@@ -66,7 +54,7 @@ body {
 }
 
 
-.scrolldiv {
+.timeline {
   height: 400px;
   width: 100%;
   overflow-x: scroll;
@@ -77,10 +65,3 @@ body {
   width: 0 !important
 }
 
-
-#redDiv {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: red;
-}
