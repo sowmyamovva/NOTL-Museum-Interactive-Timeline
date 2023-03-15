@@ -1,10 +1,10 @@
-var years = ["1810", "1810", "1810", "1810", "1810", "1810", "1810", "1810", "1810", "1810"];
+var years = ["1810", "1811", "1812", "1813", "1814", "1815", "1816", "1817", "1818", "1819"];
 var info = ["At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium"];
 for (let i = 0; i < years.length; i++) {
   pathOnDiv(years[i], (i / (years.length - 1)));
 }
 
-
+var cnt = 0;
 
 function pathOnDiv(text, pos) {
   var path = document.getElementById("mypath");
@@ -12,8 +12,22 @@ function pathOnDiv(text, pos) {
   var loc = path.getPointAtLength(pos * (pathLength - 10));
   var point = '<circle id=' + text + ' cx="' + (loc.x + 8) + '" cy="' + loc.y + '" r="5" fill="white" class="event" data-year="' + text + '" />"';
   document.getElementById('timeline').insertAdjacentHTML('beforeend', point);
-}
 
+}
+window.addEventListener('load', function() {
+  const container = document.querySelector('#timeline_box');
+  let prevX = 0;
+
+  container.addEventListener('mousemove', function(e) {
+    const x = e.clientX - container.offsetLeft;
+    if (x < prevX) {
+      container.scrollLeft -= 10;
+    } else if (x > prevX) {
+      container.scrollLeft += 10;
+    }
+    prevX = x;
+  });
+});
 
 const timeline = document.getElementById('timeline_box');
 const events = timeline.querySelectorAll('.event');
