@@ -1,0 +1,10 @@
+.timeline_box {
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+.event_name {
+  position: fixed;
+  background-color: white;
+  padding: 5px;
+  border: 1px solid black;
+}
