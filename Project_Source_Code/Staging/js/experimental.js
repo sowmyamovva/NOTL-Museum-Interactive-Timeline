@@ -17,11 +17,11 @@ var years = ["1810", "1811", "1812", "1813", "1814", "1815", "1816", "1817", "18
 // ];
 
 var info = [
-  "<div class='overlay-container'><img src='img/1700s.png' alt='1700s' class='overlay' title='This is an image of the 1700s'></div>",
-  "<div class='flip-card ' onclick='flipImage(this)'><div class='flip-card-inner'><div class='flip-card-front'><img src='img/1730s.webp' alt='1730s' title='This is an image of the 1730s' width='400' height='300'></div><div class='flip-card-back'><img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s' width='400' height='300'></div></div></div>",
-  "<div class='flip-card'><div class='flip-card-inner'><div class='flip-card-front'><img src='img/1730s.webp' alt='1730s' class='overlay' title='This is an image of the 1730s'></div><div class='flip-card-back'><img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'></div></div></div>",
-  "<div class='flip-container'><div class='flipper'><div class='front'><img src='img/1730s.webp' alt='1730s' class='overlay' title='This is an image of the 1730s'> </div><div class='back'><img src='img/1753.png' alt='1753s' class='overlay' title='This is an image of the 1753s'></div></div></div>",
-  "<img src='img/1753.png' alt='1753s' class='overlay' title='This is an image of the 1753s'>",
+  "<img src='img/1700s.png' alt='1700s' class='overlay' title='This is an image of the 1700s'>",
+  "<div class='flip-card ' onclick='flipImage(this)'><div class='flip-card-inner'><div class='flip-card-front'><img src='img/card_front.png' alt='1730s' class='overlay' title='This is an image of the 1730s'></div><div class='flip-card-back'><img src='img/card_back.png' alt='1776s' class='overlay' title='This is an image of the 1776s' width='400' height='300'></div></div></div>",
+  "<div class='flip-card'><div class='flip-card-inner'><div class='flip-card-front'><img src='img/card_front.png' alt='1730s' class='overlay' title='This is an image of the 1730s'></div><div class='flip-card-back'><img src='img/card_back.png' alt='1776s' class='overlay' title='This is an image of the 1776s'></div></div></div>",
+  "<div class='flip-container'><div class='flipper'><div class='front'><img src='img/card_front.png' alt='1730s' class='overlay' title='This is an image of the 1730s'> </div><div class='back'><img src='img/card_back.png' alt='1753s' class='overlay' title='This is an image of the 1753s'></div></div></div>",
+  "<div class = 'image-container'><img src='img/1753.png' alt='1753s' class='overlay back-image' title='This is an image of the 1753s' onclick='swapImages()'><img src='img/1700s.png' alt='1700s' class='overlay front-image' title='This is an image of the 1700s' onclick='swapImages()'></div>", // Stack tester
   "<img src='img/1760.png' alt='1760s' class='overlay' title='This is an image of the 1760s'>",
   "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
   "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
@@ -94,8 +94,8 @@ events.forEach(event => {
 
     const rect = event.getBoundingClientRect();
 
-
-    var year_info = ' <div id="label" class="event-label" style="top: ' + (rect.top - 180) + 'px; left: ' + (rect.left + rect.width / 2) + 'px; display: block;height: 150px; max-width:200px; white-space: normal; overflow:hidden; "><time>' + year + '</time>' + year_tooltip + '</div>';
+//Top: 150
+    var year_info = ' <div id="label" class="event-label" style="top: ' + (rect.top - 410) + 'px; left: ' + (rect.left + rect.width / 2) + 'px; display: block;height: 400px; max-width:250px; white-space: normal; overflow:hidden; "><time>' + year + '</time>' + year_tooltip + '</div>';
 
     timeline.insertAdjacentHTML('beforeend', year_info);
   });
@@ -128,3 +128,18 @@ function flipImage(card) {
 //     }
 //   });
 // });
+
+
+// Stack images Swapping function
+function swapImages() {
+  const backImage = document.querySelector(".back-image");
+  const frontImage = document.querySelector(".front-image");
+
+  if (frontImage.style.zIndex === "1") {
+    frontImage.style.zIndex = "2";
+    backImage.style.zIndex = "1";
+  } else {
+    frontImage.style.zIndex = "1";
+    backImage.style.zIndex = "2";
+  }
+}
