@@ -1,0 +1,357 @@
+
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+body {
+  font: normal 16px/1.5 "Helvetica Neue", sans-serif;
+  color: #fff;
+   background-color: #474e5d;
+  font-family: Helvetica, sans-serif; 
+}
+
+
+.timeline_box div {
+  position: absolute; /*previously absolute*/
+  /* top:500px; */
+  left: calc(100% + 7px);
+  width: 280px;
+  padding: 15px;
+  font-size: 1rem;
+  white-space: normal;
+  color: black;
+  background: white;
+  overflow-wrap: break-word;
+}
+
+.event-label time {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+/* .section SECTION
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.section {
+  background: #F45B69;
+  padding: 50px 0;
+
+}
+
+.section .container {
+  width: 90%;
+  max-width: 1500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+
+#timeline_box {
+  width: 100%;
+  position: relative;
+   top: 10px; 
+  overflow-x: scroll;
+}
+
+#timeline {
+  height: 200px;
+  width: 2000px;
+  /* Set the width of the timeline to a large value */
+  position: relative;
+  top: 0px;
+  left:80px;
+  
+}
+
+.event:hover {
+  cursor: pointer;
+}
+
+.event-label {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgb(0, 0, 0);
+  color: white;
+  border: 1px solid black;
+  padding: 5px;
+  display: none;
+  height: 500px;
+  width: 500px;
+}
+
+
+
+/*Experimental*/
+.offset {
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  top: -500px;
+  left: -0px;
+}
+
+#first_offset {
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  left: -0px;
+  top: 350px;
+  z-index: -1;
+  /*Position image behind element*/
+}
+
+.scrolldiv {
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+#timeline_box::-webkit-scrollbar {
+  width: 0 !important
+}
+
+/* OVERLAY */
+/* .overlay-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  display: block;
+  max-width: 75%;
+  max-height: 75%;
+  margin: auto;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+   display: none; 
+  z-index: 1;
+}
+
+.overlay.show {
+  display: block;
+}
+
+.overlay:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.overlay .overlay-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 300px;
+}
+
+.overlay img {
+  width: 100%;
+  height: 100%;
+  position:relative;
+  left:-200;
+} */
+
+/* 
+  #bottomSection {
+    position: relative;
+    height: 1000px;
+    width: 1000px;
+    background-color: #ffffff;
+  } */
+
+/* .reposition{
+  position: relative;
+  top:500px
+} */
+
+
+
+
+.overlay-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  /* display: none; */
+}
+
+.overlay.show {
+  display: block;
+}
+
+.overlay:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.overlay .overlay-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 300px;
+}
+
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+/* .flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+} */
+
+.flip-card-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+
+
+
+.flip-card-front {
+  z-index: 2;
+   transform: rotateY(0deg);  /*New hover functionality*/
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* New hover functionality */
+/* .flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card:hover .flip-card-front {
+  transform: rotateY(-180deg);
+}
+
+.flip-card:hover .flip-card-back {
+  transform: rotateY(0deg);
+} */
+
+
+
+/* Experimental Flip */
+
+.flip-container {
+  perspective: 1000px;
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+}
+
+.flipper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.6s ease;
+}
+
+.flip-container:hover .flipper,
+.flip-container.hover .flipper {
+  transform: rotateY(180deg);
+}
+
+.front, .back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.front {
+  z-index: 2;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.show-back {
+  transform: rotateY(180deg);
+}
+
+/* Experiemental */
+.message {
+  /* position: absolute;
+  top: 50%;
+  left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  z-index: 9999; /* set the z-index to a high value */
+}
