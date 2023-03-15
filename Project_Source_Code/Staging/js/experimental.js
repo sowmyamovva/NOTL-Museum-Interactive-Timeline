@@ -1,5 +1,53 @@
 var years = ["1810", "1811", "1812", "1813", "1814", "1815", "1816", "1817", "1818", "1819"];
-var info = ["At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium"];
+// var info = ["At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium", "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium"];
+
+// var info = [
+//   "<div class='overlay-container'>",
+//   "<img src='img/1700s.png' alt='1700s' class='overlay' title='This is an image of the 1700s'>",
+//   "<img src='img/1730s.webp' alt='1730s' class='overlay' title='This is an image of the 1730s'>",
+//   "<img src='img/1753.png' alt='1753s' class='overlay' title='This is an image of the 1753s'>",
+//   "<img src='img/1760.png' alt='1760s' class='overlay' title='This is an image of the 1760s'>",
+//   "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
+//   "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
+//   "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
+//   "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
+//   "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
+//   "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
+//   "</div>"
+// ];
+
+var info = [
+  "<div class='overlay-container'><img src='img/1700s.png' alt='1700s' class='overlay' title='This is an image of the 1700s'></div>",
+  "<div class='flip-card ' onclick='flipImage(this)'><div class='flip-card-inner'><div class='flip-card-front'><img src='img/1730s.webp' alt='1730s' title='This is an image of the 1730s' width='400' height='300'></div><div class='flip-card-back'><img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s' width='400' height='300'></div></div></div>",
+  "<div class='flip-card'><div class='flip-card-inner'><div class='flip-card-front'><img src='img/1730s.webp' alt='1730s' class='overlay' title='This is an image of the 1730s'></div><div class='flip-card-back'><img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'></div></div></div>",
+  "<div class='flip-container'><div class='flipper'><div class='front'><img src='img/1730s.webp' alt='1730s' class='overlay' title='This is an image of the 1730s'> </div><div class='back'><img src='img/1753.png' alt='1753s' class='overlay' title='This is an image of the 1753s'></div></div></div>",
+  "<img src='img/1753.png' alt='1753s' class='overlay' title='This is an image of the 1753s'>",
+  "<img src='img/1760.png' alt='1760s' class='overlay' title='This is an image of the 1760s'>",
+  "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
+  "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
+  "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
+  "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
+  "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
+  "<img src='img/1776.png' alt='1776s' class='overlay' title='This is an image of the 1776s'>",
+  "<div class='overlay'>",
+  "<div class='overlay-content'>",
+  "<div class='flip-card'>",
+  "<div class='flip-card-inner'>",
+  "<div class='flip-card-front'>",
+  "<img src='' alt=''>",
+  "</div>",
+  "<div class='flip-card-back'>",
+  "<img src='' alt=''>",
+  "</div>",
+  "</div>",
+  "</div>",
+  "</div>",
+  "</div>",
+  "</div>",
+  "</div>"
+];
+
+//
 for (let i = 0; i < years.length; i++) {
   pathOnDiv(years[i], (i / (years.length - 1)));
 }
@@ -10,7 +58,7 @@ function pathOnDiv(text, pos) {
   var path = document.getElementById("mypath");
   var pathLength = path.getTotalLength();
   var loc = path.getPointAtLength(pos * (pathLength - 10));
-  var point = '<circle id=' + text  + ' cx="' + (loc.x + 8) + '" cy="' + loc.y + '" r="5" fill="white" class="event" data-year="' + text + '" />"';
+  var point = '<circle id=' + text  + ' cx="' + (loc.x + 8) + '" cy="' + loc.y + '" r="5" fill="white" class="event message" data-year="' + text + '" />';
   document.getElementById('timeline').insertAdjacentHTML('beforeend', point);
 }
 
@@ -24,6 +72,7 @@ let displayedYear = '';
 events.forEach(event => {
   event.addEventListener('click', () => {
     const label2 = document.getElementById('label');
+
     if (label2 && displayedYear === event.getAttribute('data-year')) {
       label2.parentNode.removeChild(label2);
       isTextDisplayed = false;
@@ -36,6 +85,7 @@ events.forEach(event => {
     const label = document.createElement('div');
     label.textContent = year;
     label.classList.add('event-label');
+
     if (isTextDisplayed) {
       const label2 = document.getElementById('label');
       label2.parentNode.removeChild(label2);
@@ -45,12 +95,36 @@ events.forEach(event => {
     const rect = event.getBoundingClientRect();
 
 
-    var year_info = ' <div id="label" class="event-label" style="top: ' + (rect.top - 140) + 'px; left: ' + (rect.left + rect.width / 2) + 'px; display: block;height: 130px; max-width:200px; white-space: normal; overflow:hidden; "><time>' + year + '</time>' + year_tooltip + '</div>';
+    var year_info = ' <div id="label" class="event-label" style="top: ' + (rect.top - 180) + 'px; left: ' + (rect.left + rect.width / 2) + 'px; display: block;height: 150px; max-width:200px; white-space: normal; overflow:hidden; "><time>' + year + '</time>' + year_tooltip + '</div>';
 
     timeline.insertAdjacentHTML('beforeend', year_info);
   });
 });
 
+// Flip image on click
+function flipImage(card) {
+  card.classList.toggle("flip-card-flipped");
+}
 
-// Overlay
+// Alert
+// events.forEach(event => {
+//   // add click event listener to circle element
+//   event.addEventListener('click', () => {
+//     // display alert with message when circle is clicked
+//     alert('Circle with data-year="' + event.getAttribute('data-year') + '" was clicked!');
+//   });
+// });
 
+
+// Message
+// const messageElement = document.getElementsByClassName('message');
+
+// events.forEach(event => {
+//   // add click event listener to circle element
+//   event.addEventListener('click', () => {
+//     // set message with data-year when circle is clicked
+//     if (messageElement) {
+//       messageElement.innerHTML = 'Circle with data-year="' + event.getAttribute('data-year') + '" was clicked!';
+//     }
+//   });
+// });
