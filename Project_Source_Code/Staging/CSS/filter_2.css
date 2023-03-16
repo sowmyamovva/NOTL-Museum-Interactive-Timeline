@@ -1,0 +1,84 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.event_name {
+  position: fixed;
+  background-color: white;
+  padding: 5px;
+  border: 1px solid black;
+}
+.scroll-container {
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.scroll-content {
+  display: inline-block;
+  height: 250px;
+}
+
+.scroll-container:hover {
+  overflow-x: auto;
+}
+
+.scroll-container:hover::-webkit-scrollbar {
+  display: none;
+}
+.hidden {
+    display:none;
+}
+/*
+before this
+*/
+
+body {
+  font: normal 16px/1.5 "Helvetica Neue", sans-serif;
+  color: #fff;
+  background-color: #474e5d;
+  font-family: Helvetica, sans-serif;
+}
+
+.event-label time {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+#timeline {
+  height: 200px;
+  width: 2000px;
+  /* Set the width of the timeline to a large value */
+  position: relative;
+}
+
+.event:hover {
+  cursor: pointer;
+}
+
+.event-label {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  padding: 5px;
+  display: none;
+}
+
+.timeline {
+  /*  height: 400px;
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap; */
+}
+
+#timeline_box::-webkit-scrollbar {
+  width: 0 !important;
+}
