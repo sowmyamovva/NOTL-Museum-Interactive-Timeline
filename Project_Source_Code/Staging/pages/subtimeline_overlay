@@ -1,0 +1,16 @@
+<div class="timeline-container">
+  <svg class="timeline-svg">
+    <!-- Line and circle elements -->
+    <line class="line" x1="100" y1="50" x2="200" y2="50"></line>
+    <circle class="circle" cx="100" cy="50" r="8"></circle>
+    <circle class="circle" cx="200" cy="50" r="8"></circle>
+    <line class="line" x1="300" y1="50" x2="400" y2="50"></line>
+    <circle class="circle" cx="300" cy="50" r="8"></circle>
+    <circle class="circle" cx="400" cy="50" r="8"></circle>
+  </svg>
+  <svg class="dynamic-timeline">
+  </svg>
+</div>
+<div class="overlay">
+
+</div>
