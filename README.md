@@ -51,7 +51,7 @@ Client meetings will be conducted on an as-needed basis with one member of the d
 | Mar 15 - Mar 21  |  Sprint 7 |  |
 | Mar 22 - Mar 28   |   Sprint 8  |  Report & Presentation |
 | Mar 29 - Apr 4  |  Sprint 9 |  |
-| Apr 5 - Apr 18 | Testing | Final Report |   
+| Apr 5 - Apr 18 | Testing | Final Report & Presentation |   
      
 ### **All Documentation**:
 <a href="https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/tree/main/Documentation%20Folder">Documents</a>
