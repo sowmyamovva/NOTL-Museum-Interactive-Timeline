@@ -87,14 +87,10 @@ body {
 
 #timeline_box2 {
   width: 100%;
-  height:700px;
+  height:100%;
   position: relative;
    top: 0px; 
   overflow-y: scroll;
-}
-
-#subpath{
-  display:hidden;
 }
 
 #overlay {
@@ -322,4 +318,18 @@ body {
 /* Vertical timeline */
 .hidden {
   display: none;
+}
+
+/* Timeline Buttons */
+#toggle-btn1 {
+  position:fixed;
+  top: 1000px;
+  left: 300px;
+  z-index: 4;
+}
+
+#toggle-btn2 {
+  position:fixed;
+  top: 1000px;
+  left: 100px;
 }
