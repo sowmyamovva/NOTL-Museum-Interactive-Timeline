@@ -140,7 +140,8 @@ circles.forEach((circle) => {
   const div = document.createElement("div");
   div.textContent = circle.getAttribute("data-title");
   div.classList.add("event_name");
-  circle.addEventListener("mouseenter", () => {
+  circle.addEventListener("mousedown", () => {
+    circle.style.r = 12;
     div.style.top = `${circle.getBoundingClientRect().top - 20}px`;
     div.style.left = `${circle.getBoundingClientRect().left-8}px`;
     document.body.appendChild(div);
