@@ -1,0 +1,33 @@
+
+
+    #scrolldiv {
+        height:800px; 
+        width:100%; 
+        overflow-x:scroll; 
+        white-space: nowrap;
+        background-image: linear-gradient(rgb(21, 20, 20), rgb(86, 83, 83));   
+        background-color: dimgrey;
+
+        position:relative;
+        left:-10px;
+        Top: 300px;
+        padding:0px;
+        margin: 0 auto;    
+
+    }
+
+    #scrolldiv::-webkit-scrollbar {
+         display: none; 
+         width: 0 !important; 
+        }
+
+        .zoomable {
+            opacity: .9;
+          }
+
+    .zoom {
+    transform: scale(1.2);
+    transition: transform 0.5s ease;
+    }
+          
+          

@@ -1,0 +1,197 @@
+/* HORIZONTAL SCROLLER CSS*/
+.scrolldiv {
+    height:800px; 
+    width:100%; 
+    overflow-x:scroll; 
+    white-space: nowrap;
+    background-image: linear-gradient(rgb(21, 20, 20), rgb(86, 83, 83));   
+    background-color: dimgrey;
+
+    position:relative;
+    left:-10px;
+    Top: 300px;
+    padding:0px;
+    margin: 0 auto;    
+
+}
+
+.scrolldiv::-webkit-scrollbar {
+        display: none; 
+        width: 0 !important; 
+    }
+
+/* HIDE SCROLL BARS */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+/* OVERLAY */
+.overlay-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: none;
+  z-index: 1;
+}
+
+.overlay.show {
+  display: block;
+}
+
+.overlay:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.overlay .overlay-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 300px;
+}
+
+/* ZOOM  CSS*/
+
+
+  /*ZOOM 3*/
+  .zoomable {
+    overflow: hidden;
+    width: 500px; /* or any width you want */
+    height: 500px; /* or any height you want */
+  }
+  
+  .zoomable .content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform-origin: center center;
+    transition: transform 0.2s ease-out;
+    
+  }
+  
+  .zoom h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .zoom p {
+    font-size: 1rem;
+  } 
+
+/* ZOOM 2 Experimental Content */
+.zoom-container {
+  position:relative
+  /* width: 100%; */
+  /* height: 100%; */
+  /* overflow: hidden; */
+}
+
+.zoom-content {
+  transform-origin: top left;
+  transition: transform 0.1s ease-out;
+}
+
+/* Hover */
+.zoom:hover { 
+    transform: scale(1.5);
+    transform-origin: center center;
+  }
+
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* For example  */
+
+  p.mod {
+    position:relative;
+    left:0px;
+    Top:-15px;
+    padding:0px;
+    margin: 0 auto;
+    width:25em;
+    height:200px;
+    font-size:10px;
+    /* border: 2px solid rgb(0, 0, 0) ; */
+    overflow-wrap:break-word;
+    white-space: normal; /*Was needed to get wrapping to work*/
+  }
+
+  .top_images{
+     margin:0px 190px 0px 130px;    /*top, right, bottom, left*/
+     position: relative;
+    left: 0px;
+    top:130px; 
+    /* background-color:#33ccff; */
+    display: inline-block;
+    z-index:1;
+  }
+
+    .bottom_description{
+    /* margin:0px 0px 0px 0px; */
+    width:100%;
+    height: 50%;
+    position: absolute;
+    left: 0px;
+    Top: 370px;
+    font-size:20px;
+    text-align: center;
+    overflow-wrap: break-word;
+    white-space: normal;
+    display: inline-block;
+    border: 1px;
+  }
+
+  .lighten_background{
+    background: hsl(0, 50%, 45%);
+    opacity: .9;
+  }
+  
+/* Original css */
+.event:hover {
+  cursor: pointer;
+}
+
+.event-label {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid black;
+  padding: 5px;
+  display: none;
+}
+body {
+  background-color: #474e5d;
+  font-family: Helvetica, sans-serif;
+}
+
+
