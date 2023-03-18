@@ -150,7 +150,7 @@ events2.forEach(event => {
 
 
 
-   
+
    var year_info2 = ' <div id="label2" class="event-label2" style="top: ' + tooltipTop + 'px; left: ' + tooltipLeft + 'px; display: block;height: 400px; max-width:250px; white-space: normal; overflow:hidden; "><time>' + year2 + '</time>' + year_tooltip2 + '</div>';
    timeline2.insertAdjacentHTML('beforeend', year_info2);
  });
@@ -176,3 +176,46 @@ function swapImages() {
     backImage.style.zIndex = "2";
   }
 }
+
+
+// This section is for toggling on and off either timelines
+// Get the timelines and the buttons
+const timeline_1 = document.getElementById("timeline_box");
+const timeline_2 = document.getElementById("timeline_box2");
+const button1 = document.getElementById("toggle-btn1");
+const button2 = document.getElementById("toggle-btn2");
+
+// Hide the both timelines by default
+timeline_1.style.visibility = "hidden"; // For some reason if the display of timeline_1 is set to none, timeline 2 stops functionaing as expected.
+timeline_2.style.display = "none";       // The workaround was to make it hidden as opposed to setting its display to none
+// Add a click event listener to the first button
+var b1 = false
+button1.addEventListener("click", function() {
+  // Show the first timeline and hide the second one
+  if (b1 === false){
+  timeline_1.style.visibility = "visible";
+  timeline_2.style.display = "none";
+  b1 = true;
+  }
+  else {
+    timeline_1.style.visibility = "hidden";
+    timeline_2.style.display = "none";
+    b1 = false;
+  }
+});
+
+// Add a click event listener to the second button
+var b2 = false;
+button2.addEventListener("click", function() {
+  // Show the second timeline and hide the first one
+  if (b2 === false){
+  timeline_2.style.display = "inline-block";
+  timeline_1.style.visibility = "hidden";
+  b2 = true;
+  }
+  else {
+    timeline_1.style.visibility = "hidden";
+    timeline_2.style.display = "none";
+     b2 = false;
+  }
+});
