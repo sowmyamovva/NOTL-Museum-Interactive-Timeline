@@ -35,10 +35,40 @@ function process_images(year_index){
     return "<div class='flip-container'><div class='flipper'><div class='front'><img src="+user_images[year_index*2]+" alt='1730s' class='overlay' title='This is an image of the 1730s'> </div><div class='back'><img src="+user_images[year_index*2+1]+" alt='1753s' class='overlay' title='This is an image of the 1753s'></div></div></div>"
 }
 
+var artifacts = [
+  'img/art_1.webp', 
+  'img/art_2.png', 
+
+  'img/art_1.webp', 
+  'img/art_2.png', 
+
+  'img/art_1.webp', 
+  'img/art_2.png', 
+
+  'img/art_1.webp', 
+  'img/art_2.png', 
+
+  'img/art_1.webp', 
+  'img/art_2.png', 
+
+  'img/art_1.webp', 
+  'img/art_2.png', 
+
+  'img/art_1.webp', 
+  'img/art_2.png', 
+
+  'img/art_1.webp', 
+  'img/art_2.png', 
+]
+function process_artifacts(year_index){
+  return "<img src="+artifacts[year_index*2]+" alt='1730s' class='overlay2 front-image' title='This is an image of the 1730s' onclick='swapImages()'><img src="+artifacts[year_index*2+1]+" alt='1753s' class='overlay2 back-image' title='This is an image of the 1753s' onclick='swapImages()'>"
+}
+
 // Swapper Function 
 //   "<div class='flip-container'><div class='flipper'><div class='front'><img src='img/card_front.png' alt='1730s' class='overlay front-image' title='This is an image of the 1730s' onclick='swapImages()> </div><div class='back'><img src='img/card_back.png' alt='1753s' class='overlay back-image' title='This is an image of the 1753s'></div></div></div><img src='img/1753.png' alt='1753s' class='overlay front-image' title='This is an image of the 1753s' onclick='swapImages()'>",
 // Click Function
 // "<div class='flip-card ' onclick='flipImage(this)'><div class='flip-card-inner'><div class='flip-card-front'><img src='img/card_front.png' alt='1730s' class='overlay' title='This is an image of the 1730s'></div><div class='flip-card-back'><img src='img/card_back.png' alt='1776s' class='overlay' title='This is an image of the 1776s' width='400' height='300'></div></div></div>",
+
 
 
 //
@@ -66,9 +96,12 @@ events.forEach(event => {
   event.addEventListener('click', () => {
   
     const label2 = document.getElementById('label');
+    const a_label = document.getElementById('artifact_label');
 
     if (label2 && displayedYear === event.getAttribute('data-year')) {
       label2.parentNode.removeChild(label2);
+      a_label.parentNode.removeChild(a_label)
+
       isTextDisplayed = false;
       displayedYear = '';
       return;
@@ -76,12 +109,15 @@ events.forEach(event => {
     displayedYear = event.getAttribute('data-year');
     const year = displayedYear;
     const year_tooltip = process_images(years.indexOf(year)) //info[years.indexOf(year)];
+    const artifact_tooltip = process_artifacts(years.indexOf(year));
     const label = document.createElement('div');
     label.textContent = year;
     label.classList.add('event-label');
+
     if (isTextDisplayed) {
       const label2 = document.getElementById('label');
       label2.parentNode.removeChild(label2);
+      a_label.parentNode.removeChild(a_label)
     }
     isTextDisplayed = true;
 
@@ -90,8 +126,9 @@ events.forEach(event => {
 
 //Top: 150                                                                                                                                                                                                                                                        //year_tooltip                              
     var year_info = ' <div id="label" class="event-label" style="top: ' + (rect.top - 410) + 'px; left: ' + (rect.left + rect.width / 2) + 'px; display: block;height: 400px; max-width:250px; white-space: normal; overflow:hidden; "><time>' + year + '</time>' + year_tooltip + '</div>';
-
+    var artifact_info = ' <div id="artifact_label" class="event-label" style="top: ' + (rect.top+20) + 'px; left: ' + (rect.left + rect.width / 2 ) + 'px; display: block;height: 500px; max-width:400px; white-space: normal; overflow:hidden; "><time>' + year + '</time>' + artifact_tooltip + '</div>';
     timeline.insertAdjacentHTML('beforeend', year_info);
+    timeline.insertAdjacentHTML('beforeend', artifact_info);
   });
 });
 
@@ -124,35 +161,44 @@ events2.forEach(event => {
  event.addEventListener('click', () => {
  
    const label3 = document.getElementById('label2');
+   const a_label2 = document.getElementById('artifact_label2');
 
    if (label3 && displayedYear2 === event.getAttribute('data-year')) {
      label3.parentNode.removeChild(label3);
+     a_label2.parentNode.removeChild(a_label2)
+
      isTextDisplayed2 = false;
      displayedYear2 = '';
      return;
    }
    displayedYear2 = event.getAttribute('data-year');
    const year2 = displayedYear2;
-   const year_tooltip2 = process_images(years.indexOf(year2)) //info[years.indexOf(year)];
+   const year_tooltip2 = process_images(years.indexOf(year2)); //info[years.indexOf(year)];
+   const artifact_tooltip2 = process_artifacts(years.indexOf(year2));
    const label = document.createElement('div');
    label.textContent = year2;
    label.classList.add('event-label2');
+
    if (isTextDisplayed2) {
      const label3 = document.getElementById('label2');
      label3.parentNode.removeChild(label3);
+     a_label2.parentNode.removeChild(a_label2)
    }
    isTextDisplayed2 = true;
 
-   // USed to fix images in place
+   // Used to fix images in place
    const containerRect = timeline2.getBoundingClientRect();
-   const tooltipLeft = containerRect.left  + parseFloat(event.getAttribute('cx')) +1200 - window.scrollX;// - 600; //- containerRect.left;  1750 //-200
-   const tooltipTop = containerRect.top + parseFloat(event.getAttribute('cy')) + window.scrollY + 100;// - containerRect.top ;
+   const tooltipLeft = containerRect.left  - parseFloat(event.getAttribute('cx')) + 950 - window.scrollX;
+   const tooltipTop = containerRect.top + parseFloat(event.getAttribute('cy')) + window.scrollY -100;
 
-
-
+   const tooltipLeft2 = containerRect.left  - parseFloat(event.getAttribute('cx')) + 1400 - window.scrollX;
+   const tooltipTop2 = containerRect.top + parseFloat(event.getAttribute('cy')) + window.scrollY -100;
 
    var year_info2 = ' <div id="label2" class="event-label2" style="top: ' + tooltipTop + 'px; left: ' + tooltipLeft + 'px; display: block;height: 400px; max-width:250px; white-space: normal; overflow:hidden; "><time>' + year2 + '</time>' + year_tooltip2 + '</div>';
+   var artifact_info2 = ' <div id="artifact_label2" class="event-label2" style="top: ' + tooltipTop2 + 'px; left: ' + tooltipLeft2 + 'px; display: block;height: 500px; max-width:400px; white-space: normal; overflow:hidden; "><time>' + year2 + '</time>' + artifact_tooltip2 + '</div>';
+
    timeline2.insertAdjacentHTML('beforeend', year_info2);
+   timeline2.insertAdjacentHTML('beforeend', artifact_info2);
  });
 });
 
@@ -162,6 +208,8 @@ events2.forEach(event => {
 function flipImage(card) {
   card.classList.toggle("flip-card-flipped");
 }
+
+
 
 // Stack images Swapping function
 function swapImages() {
@@ -204,6 +252,9 @@ button1.addEventListener("click", function() {
   }
 });
 
+
+
+
 // Add a click event listener to the second button
 var b2 = false;
 button2.addEventListener("click", function() {
@@ -219,3 +270,4 @@ button2.addEventListener("click", function() {
      b2 = false;
   }
 });
+
