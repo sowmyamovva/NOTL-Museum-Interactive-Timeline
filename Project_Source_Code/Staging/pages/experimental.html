@@ -4,6 +4,15 @@
     <!-- <link rel="stylesheet" href="../CSS/integrated_timeline.css" /> -->
     <link rel="stylesheet" href="/CSS/experimental.css" />
     <link rel="stylesheet" href="/CSS/embed_video.css" />
+    <link rel="stylesheet" href="/CSS/text-to-speech.css" />
+    <link rel="stylesheet" href="/CSS/calendar.css" />
+
+
+  
+
+    </script>
+  
+    <!-- <script src="/js/calendar.js"></script> -->
   </head>
   <body>
   <section>
@@ -37,14 +46,39 @@
     <!-- Button to toggle second timeline -->
     <button id="toggle-btn2">Vertical Timeline</button>
   </section>
+  <button id="speak-button">text-to-speech</button>
+  <div id="text-to-speak">
+    This is the text I want to be read aloud.
+  </div>
+  <div id="calendar"></div>
+  <div class="day" data-date="2023-03-30">
+    <div class="day-name">Thu</div>
+    <div class="day-number">30</div>
+    <div class="day-events">
+      <span class="event blue">Meeting with client</span>
+    </div>
+  </div>
+
+  <div class="addSpace"><div id = "video-container"></div></div>
+  
 
 
-    <div id = "video-container"></div>
-    <!-- <iframe width="949" height="1297" src="https://www.youtube.com/embed/GjesFM22xLc" title="Experience - Ludovico Einaudi \\ Synthesia Piano Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+
+
+
+
 
 <!-- <script src="../js/integrated_timeline.js"></script> -->
 <script src="/js/experimental.js"></script> 
 <script src="/js/embed_video.js"></script>
+<script src="/js/text-to-speech.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+
+<script src="/js/calendar.js"></script>
+
+
+
 </body>
 
 </html>
