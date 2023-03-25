@@ -1,0 +1,21 @@
+/* set the max width of the video container */
+#video-container {
+    position: relative;
+    /* top: 500px; */
+    left: 100px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  
+  /* set the aspect ratio of the video */
+  #video-container iframe {
+    display: flex;
+    width: 100%;
+    max-height: 100%;
+    /* padding-bottom: 56.25%; */
+  }
+  
+  /* remove the iframe border */
+  #video-container iframe {
+    border: solid;
+  }

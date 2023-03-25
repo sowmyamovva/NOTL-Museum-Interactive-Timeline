@@ -343,3 +343,10 @@ body {
   top: 1000px;
   left: 100px;
 }
+
+/*Adding space to bottom of page for further experiments*/
+.addSpace{
+  width: 2000px;
+  height: 2000px;
+  background-color:beige;
+}
