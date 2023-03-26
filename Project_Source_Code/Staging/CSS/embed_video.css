@@ -9,13 +9,12 @@
   
   /* set the aspect ratio of the video */
   #video-container iframe {
-    display: flex;
+    display: block;
     width: 100%;
     max-height: 100%;
     /* padding-bottom: 56.25%; */
   }
   
-  /* remove the iframe border */
   #video-container iframe {
     border: solid;
   }

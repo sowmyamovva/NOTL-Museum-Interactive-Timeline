@@ -1,11 +1,12 @@
-    // Define an array of dates to assign to the events
-    var dates = ['2023-03-01', '2023-03-05', '2023-03-10', '2023-03-15'];
-// eventName, calendarName, eventColor, date, endDate
-//eventName: 'Exhibit 1: 1812', calendar: 'Exhibit', color: 'blue' }
+// Define an array of dates to assign to the events
+var dates = ['2023-03-01', '2023-03-05', '2023-03-10', '2023-03-15'];
+
+// eventName, calendarName, eventColor (possible colors include only blue, yellow, green, and orange)
+
 var myEvent = [ "Exhibit 1: 1812, Exhibit, blue",
                 "Exhibit 2: Slavery, Exhibit, yellow",
                 "Exhibit 3: Niagara Falls, Exhibit, green",
-                "Exhibit 4: Native, Exhibit, orange",]
+                "Exhibit 4: Native, Exhibit, orange"]
 
 
 !function() {
@@ -389,3 +390,4 @@ var myEvent = [ "Exhibit 1: 1812, Exhibit, blue",
 // eventName, calendarName, eventColor, date, endDate
 var myEvent = "Exhibit, Work,blue,2023-03-28, 2023-03-29"
 
+// src: https://www.sliderrevolution.com/resources/html-calendar/

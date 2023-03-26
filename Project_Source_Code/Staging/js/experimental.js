@@ -271,3 +271,10 @@ button2.addEventListener("click", function() {
   }
 });
 
+// This function displays the timeline depending on what device you're using
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+if (isMobile) {
+  timeline_2.style.display = "inline-block";
+} else {
+  timeline_1.style.visibility = "visible";
+}
