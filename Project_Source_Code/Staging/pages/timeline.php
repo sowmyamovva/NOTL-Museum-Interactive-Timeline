@@ -26,7 +26,7 @@
 
   <div id="timeline_box" class="scroll-content">
 
-    <svg id="timeline" cache-id="16de89faabdb48d1a0a46f23dde4f4b1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+    <svg id="timeline" cache-id="16de89faabdb48d1a0a46f23dde4f4b1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"  x="0px" y="0px">
       <defs>
         <linearGradient id="e0YvEuspUTQ2-stroke" x1="0" y1="150" x2="300" y2="150" spreadMethod="pad" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 0)">
           <stop id="e0YvEuspUTQ2-stroke-0" offset="0%" stop-color="#fc259b" />
@@ -41,6 +41,16 @@
         <circle class="second-circle hidden" cx="200" cy="250" r="10" />
         <circle class="second-circle hidden" cx="300" cy="250" r="10" />
         <circle class="second-circle hidden" cx="400" cy="250" r="10" /> -->
+        <g id ="sub_timeline" class="arrow">
+            <style type="text/css">
+                .st0{fill:none;stroke:#000000;stroke-miterlimit:10;stroke-width: 3;}
+            </style>
+            <line id="sub_line1" class="st0" x1="186" y1="180" x2="185.5" y2="340"/>
+            <line id="sub_line2" class="st0" x1="8.5" y1="340" x2="181.5" y2="340"/>
+            <line id="sub_line3" class="st0" x1="362.5" y1="340" x2="181.5" y2="340"/>
+            <line id="sub_line4" class="st0" x1="8.5" y1="380" x2="8.5" y2="340"/>
+            <line id="sub_line5" class="st0" x1="362.5" y1="380" x2="362.5" y2="340"/>
+        </g>
       
     </svg>
 
@@ -49,7 +59,35 @@
 <div class = "right hidden" id = "right_arrow"  >
   <i class="material-icons" style='font-size:30px;color:white'>chevron_left</i>
 </div>
-</div> 
+</div>
+<!-- <script src='all_features.js'></script> -->
+
+<button onclick="show()">show</button>
+<div class="main-div">
+    <?xml version="1.0" encoding="utf-8"?>
+    <!-- Generator: Adobe Illustrator 27.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+    <!-- <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        viewBox="0 0 374.5 137.5" style="enable-background:new 0 0 374.5 137.5;" xml:space="preserve" class="arrow">
+    <style type="text/css">
+        .st0{fill:none;stroke:#000000;stroke-miterlimit:10;}
+    </style>
+    <line class="st0" x1="186" y1="9" x2="185.5" y2="91"/>
+    <line class="st0" x1="8.5" y1="91" x2="181.5" y2="91"/>
+    <line class="st0" x1="362.5" y1="91" x2="181.5" y2="91"/>
+    <line class="st0" x1="8.5" y1="132.5" x2="8.5" y2="91"/>
+    <line class="st0" x1="362.5" y1="132.5" x2="362.5" y2="91"/>
+    </svg> -->
+                            
+
+    <div class="expandend-div">
+        <h1>heading</h1>
+        <div class="grid">
+            <div><h2>first</h2></div>
+            <div><h2>second</h2></div>
+            <div><h2>third</h2></div>
+        </div>
+    </div>
+</div>
 <!--<script src='all_features.js'></script>-->
   <script>
   var years = [
