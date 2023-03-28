@@ -89,7 +89,7 @@
     </div>
 </div>
 <!--<script src='all_features.js'></script>-->
-  <script>
+<script>
   var years = [
   "1810",
   "1811",
@@ -225,7 +225,7 @@ circles_year.forEach((circle, index) => {
   const x = circle.getAttribute('cx');
   const y = circle.getAttribute('cy');
   text.setAttribute('x', x);
-  text.setAttribute('y', y - circle.getAttribute('r') - 20);
+  text.setAttribute('y', y - circle.getAttribute('r') - 40);
   
   // Add the text element to the SVG element
   svg.appendChild(text);
@@ -391,6 +391,8 @@ circles.forEach((circle) => {
 
 
 firstLine.addEventListener('click', (event) => {
+       
+
   const clickedX = event.clientX - event.target.getBoundingClientRect().left;
   const circleBefore = (findCircleBeforeX(clickedX)).cx.baseVal.value;
   const circleAfter = (findCircleAfterX(clickedX)).cx.baseVal.value;
@@ -398,18 +400,57 @@ firstLine.addEventListener('click', (event) => {
   console.log(" here");
   /* console.log(circleBefore.cx.baseVal.value + " here " + circleAfter.cx.baseVal.value) */
   if (circleBefore != 0 && circleAfter != 0) {
+
+
+    
     const centerX = (circleBefore + circleAfter) / 2;
     // console.log(circleBefore + " here " + circleAfter);
     const secondLineX1 = centerX - 200;
     const secondLineX2 = centerX + 200;
-    secondLine.setAttribute('x1', secondLineX1);
-    secondLine.setAttribute('x2', secondLineX2);
+
+    // var sub_timeline = document.querySelector('#sub_timeline');
+//    var line_indicator =  '<line class="st0" x1="'+centerX+'" y1="180" x2="'+centerX+'" y2="340"/><line class="st0" x1="'+centerX-180+'" y1="340" x2="'+centerX+'" y2="340"/> <line class="st0" x1="'+centerX+180+'" y1="340" x2="'+centerX+'" y2="340"/><line class="st0" x1="'+centerX-180+'" y1="380" x2="'+centerX-180+'" y2="340"/><line class="st0" x1="'+centerX+180+'" y1="380" x2="'+centerX+180+'" y2="340"/>';
+
+ //  sub_timeline.insertAdjacentHTML("beforeend",line_indicator);
+   var sub_line1 = document.querySelector('#sub_line1');
+   sub_line1.setAttribute('x1', centerX);
+   sub_line1.setAttribute('x2', centerX);
+
+   var sub_line2 = document.querySelector('#sub_line2');
+   sub_line2.setAttribute('x1', (centerX-280));
+   sub_line2.setAttribute('x2', centerX);
+
+   var sub_line3 = document.querySelector('#sub_line3');
+   sub_line3.setAttribute('x1', centerX);
+   sub_line3.setAttribute('x2', (centerX+280));
+
+   var sub_line4 = document.querySelector('#sub_line4');
+   sub_line4.setAttribute('x1', (centerX-280));
+   sub_line4.setAttribute('x2', (centerX-280));
+
+   var sub_line5 = document.querySelector('#sub_line5');
+   sub_line5.setAttribute('x1', (centerX+280));
+   sub_line5.setAttribute('x2', (centerX+280));
+
+    var x = document.querySelector(".arrow");
+    if(x.classList.contains("icon-active")){
+       x.classList.remove("icon-active");
+    document.querySelector(".expandend-div").classList.remove("div-active");
+    }
+    else{
+    document.querySelector(".arrow").classList.add("icon-active");
+    document.querySelector(".expandend-div").classList.add("div-active");
+    }
+
+
+    // secondLine.setAttribute('x1', secondLineX1);
+    // secondLine.setAttribute('x2', secondLineX2);
 //     for (let i = 0; i < years.length; i++) {
 //   pathOnDiv(years[i], i / (years.length - 1), titles[i]);
 // }
 
    // secondCircle.setAttribute('x', secondLineX1);
-    secondLine.classList.remove('hidden');
+    // secondLine.classList.remove('hidden');
     // secondCircle.classList.remove('hidden');
 
     years2=['1801','1802','1803']
@@ -420,7 +461,7 @@ for (let i = 0; i < years2.length; i++) {
   var point =
     "<circle id=" + years2[i] + ' cx="' + (loc.x + 8) + '" cy="' + loc.y + '"  r = 9 class=" unselected_circle event first-circle" data-year="' + years2[i]+ '" />"';
   //r="20" fill="white" stroke="#474e5d" stroke-width="3" stroke-r = "2"
-  document.getElementById("timeline").insertAdjacentHTML("beforeend", point);
+ // document.getElementById("timeline").insertAdjacentHTML("beforeend", point);
 }
   } else {
     // secondTimeline.classList.add('hidden');
@@ -479,3 +520,6 @@ function findCircleAfterX(x) {
 </script>
 </body>
 </html>
+
+
+
