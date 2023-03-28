@@ -228,7 +228,7 @@ body {
     padding: 5px;
 }
 .circle-label {
-  font-size: 20px;
+  font-size: 30px;
   fill: #ffffff;
   text-anchor: middle;
 }
@@ -246,3 +246,77 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #aaa;
 }
+
+.arrow{
+width:100%;
+}
+.arrow{
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+   
+    animation-delay: 1s;
+    animation-duration: 1s;
+    animation-name: iconMove;
+    animation-fill-mode: both;
+    /*filter: drop-shadow(0px 1px 3px black);*/
+}
+@keyframes iconAnimation{
+    0%{
+        
+        fill:white;
+    }
+
+    100%{
+    stroke-dashoffset: 0;
+    }
+}
+@keyframes iconMove{
+    100%{
+        transform: translateX(0%);
+    }
+}
+.icon-active {
+    animation: iconAnimation 5s linear forwards;
+    fill:black;
+ 
+}
+.div-active{
+animation: moveup 1s linear forwards;
+}
+.expandend-div{
+    position: relative;
+    bottom: 35vh;
+background:black;
+opacity:0;
+overflow:hidden;
+   
+animation-delay: 0.5s;
+transform: translateY(-78px);
+}
+@keyframes expand{
+100%{
+opacity:1;
+}
+}
+.grid{
+display:flex;
+    justify-content: space-evenly;
+}
+.grid > div{
+background:white;
+padding:2%;
+}
+
+.main-div{
+width:100%;
+}
+@keyframes moveup{
+0%{
+transform:translateY(50px);
+opacity:0;
+}
+100%{
+transform:translateY(-50px);
+opacity:1;
+}
+} 
