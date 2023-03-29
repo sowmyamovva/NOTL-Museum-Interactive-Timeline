@@ -8,7 +8,8 @@
 </head>
 <body>
   <div class = "outer-container">
-<div id="filter">
+<!-- <div id="filter">
+
   <select id="filter_title">
     <option value="all">All Titles</option>
   </select>
@@ -18,10 +19,23 @@
   <label for="to-year">To:</label>
   <input type="number" id="to-year" name="to-year" min="1990" max="2010" value="2010">
   <button id="filter-button">Filter</button>
-</div>
-<div class="left hidden" id = "left_arrow">
-  <i class="material-icons" style='font-size:30px;color:white'>chevron_left</i>
-</div>
+</div> -->
+
+<div class="filter-bar">
+    <div class="select-filter" id="filter">
+    <select id="filter_title">
+      <option value="all">All Titles</option>
+    </select>
+   </div>
+    <div class="range-filter">
+    <label for="from-year">From:</label>
+    <input type="number" id="from-year" name="from-year" min="1700" max="2010" value="1812" step="10">
+    <label for="to-year">To:</label>
+    <input type="number" id="to-year" name="to-year" min="1990" max="2010" value="2010">
+    <button id="filter-button">Filter</button>
+    </div>
+  </div>
+
 <div id="timeline_container" class="scroll-container">
 
   <div id="timeline_box" class="scroll-content">
@@ -29,8 +43,10 @@
     <svg id="timeline" cache-id="16de89faabdb48d1a0a46f23dde4f4b1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"  x="0px" y="0px">
       <defs>
         <linearGradient id="e0YvEuspUTQ2-stroke" x1="0" y1="150" x2="300" y2="150" spreadMethod="pad" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 0)">
-          <stop id="e0YvEuspUTQ2-stroke-0" offset="0%" stop-color="#fc259b" />
-          <stop id="e0YvEuspUTQ2-stroke-1" offset="100%" stop-color="#f85e08" />
+          <!-- <stop id="e0YvEuspUTQ2-stroke-0" offset="0%" stop-color="#fc259b" />
+          <stop id="e0YvEuspUTQ2-stroke-1" offset="100%" stop-color="#f85e08" /> -->
+          <stop id="e0YvEuspUTQ2-stroke-0" offset="0%" stop-color="#94b8b4" />
+          <stop id="e0YvEuspUTQ2-stroke-1" offset="100%" stop-color="#ac80b0" />
         </linearGradient>
       </defs>
 
@@ -43,7 +59,7 @@
         <circle class="second-circle hidden" cx="400" cy="250" r="10" /> -->
         <g id ="sub_timeline" class="arrow">
             <style type="text/css">
-                .st0{fill:none;stroke:#000000;stroke-miterlimit:10;stroke-width: 3;}
+                .st0{fill:none;stroke:whitesmoke;stroke-miterlimit:10;stroke-width: 3;z-index: 11;}
             </style>
             <line id="sub_line1" class="st0" x1="186" y1="180" x2="185.5" y2="340"/>
             <line id="sub_line2" class="st0" x1="8.5" y1="340" x2="181.5" y2="340"/>
@@ -51,18 +67,22 @@
             <line id="sub_line4" class="st0" x1="8.5" y1="380" x2="8.5" y2="340"/>
             <line id="sub_line5" class="st0" x1="362.5" y1="380" x2="362.5" y2="340"/>
         </g>
-      
+        
     </svg>
 
   </div>
 </div>
-<div class = "right hidden" id = "right_arrow"  >
-  <i class="material-icons" style='font-size:30px;color:white'>chevron_left</i>
+
 </div>
+<div class="left hidden" id = "left_arrow">
+    <i class="material-icons" style='font-size:30px;color:white'>chevron_left</i>
+  </div>
+<div class = "right hidden" id = "right_arrow"  >
+  <i class="material-icons" style='font-size:30px;color:white'>chevron_right</i>
 </div>
 <!-- <script src='all_features.js'></script> -->
 
-<button onclick="show()">show</button>
+
 <div class="main-div">
     <?xml version="1.0" encoding="utf-8"?>
     <!-- Generator: Adobe Illustrator 27.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
@@ -88,7 +108,6 @@
         </div>
     </div>
 </div>
-<!--<script src='all_features.js'></script>-->
 
 
 <div id="calendar"></div>
@@ -536,10 +555,3 @@ function findCircleAfterX(x) {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
