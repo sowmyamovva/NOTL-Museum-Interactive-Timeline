@@ -98,12 +98,56 @@ body {
   padding: 5px;
   display: none;
 }
+.filter-bar {
+  background-color: #94b8b4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
 
-.timeline {
-  /*  height: 400px;
-  width: 100%;
-  overflow-x: scroll;
-  white-space: nowrap; */
+.range-filter label,
+.select-filter label {
+  color: #fff;
+  margin-right: 10px;
+  font-size:20px;
+}
+
+.range-filter input[type="number"] {
+  width: 80px;
+  background-color: #3c3c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  /* padding: 5px; */
+  margin-right: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+.select-filter select {
+  background-color: #3c3c3c;
+   color: #fff;
+    border: none;
+  border-radius: 5px;
+  /* padding: 5px; */
+  margin-right: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+  }
+#filter-button {
+ background-color: #3c3c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#filter-button:hover {
+ background-color: #242424;
 }
 
 #timeline_box::-webkit-scrollbar {
@@ -341,7 +385,6 @@ opacity:1;
     opacity: 0;
 }
 } 
-/*active element to indicate click here, make an empty div with this class to try*/
 .click_active
 {
     display: block;
