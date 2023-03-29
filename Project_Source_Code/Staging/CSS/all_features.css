@@ -1,4 +1,4 @@
-  *,
+*,
 *::before,
 *::after {
   margin: 0;
@@ -29,16 +29,34 @@
   width: 0px !important;
 }
 .scroll-container:hover::-webkit-scrollbar {
-  display: none;
+  /*display: none;*/
 }
 .hidden {
     display:none;
 }
-.left .right{
-  top: 87px;
+.left{
+    max-height: fit-content;
+    max-width: fit-content;
+    margin: 0px;
+    z-index: 4;
     position: relative;
-    width: 70px;
-    height: 70px;
+    padding: 3px 4px 0px 4px;
+    top: -58vh;
+    left:2%;
+    background: dimgray;
+    border-radius: 5%;
+}
+.right{
+    max-height: fit-content;
+    max-width: fit-content;
+    margin: 0px;
+    z-index: 5;
+    position: relative;
+    padding: 3px 4px 0px 4px;
+    top: -58vh;
+    left:95%;
+    background: dimgray;
+    border-radius: 5%;
 }
 /*
 before this
@@ -47,7 +65,7 @@ before this
 body {
   font: normal 16px/1.5 "Helvetica Neue", sans-serif;
   color: #fff;
-  background-color: #474e5d;
+  background-color: #242424;
   font-family: Helvetica, sans-serif;
 }
 
@@ -93,15 +111,15 @@ body {
 }
 
 
-.overlay {
+div.overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 9999;
-  display: none;
+  z-index: 10;
+  opacity: 0.5;
 }
 
 .dynamic-timeline {
@@ -115,17 +133,17 @@ body {
 }
 
 .selected_circle{
-   r: 24;
+   r: 28;
    fill:url(#e0YvEuspUTQ2-stroke);
    stroke: white;
    stroke-width: 5;
 }
 
 .unselected_circle {
-   r: 22;
+   r: 24;
    fill:white;
-   stroke: #474e5d;
-   stroke-width: 3;
+   stroke: #242424;
+   stroke-width: 5;
   
 }
 
@@ -207,15 +225,6 @@ body {
   transform: rotateY(180deg);
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%; 
-  height: 95%;
-  z-index: 10;
-  background-color: transparent;
-}
 
 .show-back {
   transform: rotateY(180deg);
@@ -254,8 +263,8 @@ width:100%;
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
    
-    animation-delay: 1s;
-    animation-duration: 1s;
+    animation-delay: 0.5s;
+    animation-duration: 0.5s;
     animation-name: iconMove;
     animation-fill-mode: both;
     /*filter: drop-shadow(0px 1px 3px black);*/
@@ -276,7 +285,7 @@ width:100%;
     }
 }
 .icon-active {
-    animation: iconAnimation 5s linear forwards;
+    animation: iconAnimation 2s linear forwards;
     fill:black;
  
 }
@@ -289,9 +298,10 @@ animation: moveup 1s linear forwards;
 background:black;
 opacity:0;
 overflow:hidden;
-   
-animation-delay: 0.5s;
+    width:80%;
+animation-delay: 0.2s;
 transform: translateY(-78px);
+z-index: 11;
 }
 @keyframes expand{
 100%{
@@ -309,6 +319,7 @@ padding:2%;
 
 .main-div{
 width:100%;
+text-align: -webkit-center;
 }
 @keyframes moveup{
 0%{
@@ -320,3 +331,30 @@ transform:translateY(-50px);
 opacity:1;
 }
 } 
+@keyframes scaleIn{
+0% {
+    transform: scale(.5, .5);
+    opacity: .5;
+}
+100% {
+    transform: scale(2.5, 2.5);
+    opacity: 0;
+}
+} 
+/*active element to indicate click here, make an empty div with this class to try*/
+.click_active
+{
+    display: block;
+    position: absolute;
+    background: white;
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    /* top: -70.75rem; */
+    left: 106px;
+    margin: 0;
+    box-shadow: 2px 2px 4px #888;
+    opacity: 0;
+    animation: scaleIn 4s infinite cubic-bezier(.36, .11, .89, .32);
+    z-index: 11;
+}
