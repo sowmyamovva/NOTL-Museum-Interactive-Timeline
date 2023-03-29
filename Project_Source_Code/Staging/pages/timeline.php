@@ -4,7 +4,7 @@
 
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="C:/RS/COSC 4P02/all_features.css"> 
+  <link rel="stylesheet" href="../CSS/all_features.css"> 
 </head>
 <body>
   <div class = "outer-container">
@@ -89,6 +89,19 @@
     </div>
 </div>
 <!--<script src='all_features.js'></script>-->
+
+
+<div id="calendar"></div>
+<div class="addSpace"><div id = "video-container"></div></div>
+<div class = "overlay hidden">
+    <div>
+
+    </div>
+</div>
+
+<script>
+
+    </script>
 <script>
   var years = [
   "1810",
@@ -300,7 +313,7 @@ container.addEventListener("mousemove", (e) => {
   const scrollAmount = hoverPercent * (contentWidth - containerWidth);
 
   container.scrollLeft = scrollAmount;
-  console.log(left_arrow.classList);
+ // console.log(left_arrow.classList);
    if (scrollAmount - oldScrollX >= 10) {
       left_arrow.classList.add("hidden");
       right_arrow.classList.remove("hidden");
@@ -334,7 +347,7 @@ const circles_title = document.querySelectorAll("circle");
 filterSelect.addEventListener("change", function() {
   var selectedValue = this.value;
   circles_title.forEach((circle) => {
-    console.log(selectedValue + " and " + circle.getAttribute("data-title"));
+   // console.log(selectedValue + " and " + circle.getAttribute("data-title"));
     if (
       selectedValue === "all" ||
       circle.getAttribute("data-title") == selectedValue
@@ -412,26 +425,29 @@ firstLine.addEventListener('click', (event) => {
 //    var line_indicator =  '<line class="st0" x1="'+centerX+'" y1="180" x2="'+centerX+'" y2="340"/><line class="st0" x1="'+centerX-180+'" y1="340" x2="'+centerX+'" y2="340"/> <line class="st0" x1="'+centerX+180+'" y1="340" x2="'+centerX+'" y2="340"/><line class="st0" x1="'+centerX-180+'" y1="380" x2="'+centerX-180+'" y2="340"/><line class="st0" x1="'+centerX+180+'" y1="380" x2="'+centerX+180+'" y2="340"/>';
 
  //  sub_timeline.insertAdjacentHTML("beforeend",line_indicator);
-   var sub_line1 = document.querySelector('#sub_line1');
-   sub_line1.setAttribute('x1', centerX);
-   sub_line1.setAttribute('x2', centerX);
+    var offset =800;
+    var sub_line1 = document.querySelector('#sub_line1');
+    sub_line1.setAttribute('x1', centerX);
+    sub_line1.setAttribute('x2', centerX);
 
-   var sub_line2 = document.querySelector('#sub_line2');
-   sub_line2.setAttribute('x1', (centerX-280));
-   sub_line2.setAttribute('x2', centerX);
+    var sub_line2 = document.querySelector('#sub_line2');
+    sub_line2.setAttribute('x1', (centerX-offset));
+    sub_line2.setAttribute('x2', centerX);
 
-   var sub_line3 = document.querySelector('#sub_line3');
-   sub_line3.setAttribute('x1', centerX);
-   sub_line3.setAttribute('x2', (centerX+280));
+    var sub_line3 = document.querySelector('#sub_line3');
+    sub_line3.setAttribute('x2', centerX);
+    sub_line3.setAttribute('x1', (centerX+offset));
 
-   var sub_line4 = document.querySelector('#sub_line4');
-   sub_line4.setAttribute('x1', (centerX-280));
-   sub_line4.setAttribute('x2', (centerX-280));
+    var sub_line4 = document.querySelector('#sub_line4');
+    sub_line4.setAttribute('x1', (centerX-offset));
+    sub_line4.setAttribute('x2', (centerX-offset));
 
-   var sub_line5 = document.querySelector('#sub_line5');
-   sub_line5.setAttribute('x1', (centerX+280));
-   sub_line5.setAttribute('x2', (centerX+280));
+    var sub_line5 = document.querySelector('#sub_line5');
+    sub_line5.setAttribute('x1', (centerX+offset));
+    sub_line5.setAttribute('x2', (centerX+offset));
 
+    var over = document.querySelector(".overlay");
+    over.classList.remove("hidden");
     var x = document.querySelector(".arrow");
     if(x.classList.contains("icon-active")){
        x.classList.remove("icon-active");
@@ -520,6 +536,7 @@ function findCircleAfterX(x) {
 </script>
 </body>
 </html>
+
 
 
 
