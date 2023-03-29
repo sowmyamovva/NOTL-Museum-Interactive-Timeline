@@ -196,6 +196,8 @@ var user_images = [ // User's Images
   'abstract.svg']
 ];
 
+
+
 function process_images(year_index){
 
 
@@ -441,7 +443,7 @@ firstLine.addEventListener('click', (event) => {
     const secondLineX2 = centerX + 200;
 
     // var sub_timeline = document.querySelector('#sub_timeline');
-//    var line_indicator =  '<line class="st0" x1="'+centerX+'" y1="180" x2="'+centerX+'" y2="340"/><line class="st0" x1="'+centerX-180+'" y1="340" x2="'+centerX+'" y2="340"/> <line class="st0" x1="'+centerX+180+'" y1="340" x2="'+centerX+'" y2="340"/><line class="st0" x1="'+centerX-180+'" y1="380" x2="'+centerX-180+'" y2="340"/><line class="st0" x1="'+centerX+180+'" y1="380" x2="'+centerX+180+'" y2="340"/>';
+  //    var line_indicator =  '<line class="st0" x1="'+centerX+'" y1="180" x2="'+centerX+'" y2="340"/><line class="st0" x1="'+centerX-180+'" y1="340" x2="'+centerX+'" y2="340"/> <line class="st0" x1="'+centerX+180+'" y1="340" x2="'+centerX+'" y2="340"/><line class="st0" x1="'+centerX-180+'" y1="380" x2="'+centerX-180+'" y2="340"/><line class="st0" x1="'+centerX+180+'" y1="380" x2="'+centerX+180+'" y2="340"/>';
 
  //  sub_timeline.insertAdjacentHTML("beforeend",line_indicator);
     var offset =800;
@@ -478,23 +480,13 @@ firstLine.addEventListener('click', (event) => {
     }
 
 
-    // secondLine.setAttribute('x1', secondLineX1);
-    // secondLine.setAttribute('x2', secondLineX2);
-//     for (let i = 0; i < years.length; i++) {
-//   pathOnDiv(years[i], i / (years.length - 1), titles[i]);
-// }
-
-   // secondCircle.setAttribute('x', secondLineX1);
-    // secondLine.classList.remove('hidden');
-    // secondCircle.classList.remove('hidden');
-
     years2=['1801','1802','1803']
 for (let i = 0; i < years2.length; i++) {
-  var path2 = document.getElementById('mypath2');
-  var pathLength = path2.getTotalLength();
-  var loc = path2.getPointAtLength(i *0.5* (pathLength - 10));
-  var point =
-    "<circle id=" + years2[i] + ' cx="' + (loc.x + 8) + '" cy="' + loc.y + '"  r = 9 class=" unselected_circle event first-circle" data-year="' + years2[i]+ '" />"';
+//   var path2 = document.getElementById('mypath2');
+//   var pathLength = path2.getTotalLength();
+//   var loc = path2.getPointAtLength(i *0.5* (pathLength - 10));
+//   var point =
+//     "<circle id=" + years2[i] + ' cx="' + (loc.x + 8) + '" cy="' + loc.y + '"  r = 9 class=" unselected_circle event first-circle" data-year="' + years2[i]+ '" />"';
   //r="20" fill="white" stroke="#474e5d" stroke-width="3" stroke-r = "2"
  // document.getElementById("timeline").insertAdjacentHTML("beforeend", point);
 }
@@ -502,6 +494,71 @@ for (let i = 0; i < years2.length; i++) {
     // secondTimeline.classList.add('hidden');
   }
 });
+
+
+
+function off() {
+  document.getElementById("overlay").classList.add("hidden");
+  var x = document.querySelector(".arrow");
+    if(x.classList.contains("icon-active")){
+       x.classList.remove("icon-active");
+    document.querySelector(".expandend-div").classList.remove("div-active");
+    }
+}
+
+
+function findCircleBeforeX(x) {
+  //console.log("findCircleBeforeX");
+  const circles = document.querySelectorAll('.first-circle');
+  let circleBefore = null;
+
+  circles.forEach(function(circle) {
+    // console.log(circle.cx);
+    const circleX = circle.getBoundingClientRect().left - event.target.getBoundingClientRect().left + circle.r.baseVal.value;
+
+    // console.log(circleX);
+    // console.log(x);
+    if (circleX <= x) {
+      circleBefore = circle;
+      // console.log(circle.cx.baseVal.value);
+    }
+  });
+
+  return circleBefore;
+}
+
+function findCircleAfterX(x) {
+  //console.log("findCircleAfterX");
+  const circles = document.querySelectorAll('.first-circle');
+  /* console.log(circles) */
+  let circleAfter = null;
+
+  var check = true;
+  // Iterate over all the circles and find the one with the closest X coordinate that is greater than the clicked X
+  circles.forEach(function(circle) {
+
+    const circleX = circle.getBoundingClientRect().left - event.target.getBoundingClientRect().left + circle.r.baseVal.value;
+    // console.log(circleX);
+    // console.log(x);
+    if (circleX > x && check) {
+      check = false;
+      // console.log(circle.cx.baseVal.value);
+      circleAfter = circle;
+
+    }
+  });
+  return circleAfter;
+}
+
+
+
+
+
+
+</script>
+</body>
+</html>
+
 
 
 function findCircleBeforeX(x) {
