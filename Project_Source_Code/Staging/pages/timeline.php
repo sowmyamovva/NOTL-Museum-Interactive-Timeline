@@ -85,19 +85,6 @@
 
 <div class="main-div">
     <?xml version="1.0" encoding="utf-8"?>
-    <!-- Generator: Adobe Illustrator 27.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-    <!-- <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        viewBox="0 0 374.5 137.5" style="enable-background:new 0 0 374.5 137.5;" xml:space="preserve" class="arrow">
-    <style type="text/css">
-        .st0{fill:none;stroke:#000000;stroke-miterlimit:10;}
-    </style>
-    <line class="st0" x1="186" y1="9" x2="185.5" y2="91"/>
-    <line class="st0" x1="8.5" y1="91" x2="181.5" y2="91"/>
-    <line class="st0" x1="362.5" y1="91" x2="181.5" y2="91"/>
-    <line class="st0" x1="8.5" y1="132.5" x2="8.5" y2="91"/>
-    <line class="st0" x1="362.5" y1="132.5" x2="362.5" y2="91"/>
-    </svg> -->
-                            
 
     <div class="expandend-div">
         <h1>heading</h1>
@@ -106,13 +93,16 @@
             <div><h2>second</h2></div>
             <div><h2>third</h2></div>
         </div>
+        
+    <button class="close" onclick="off()">x</button>
     </div>
+    
 </div>
 
 
 <div id="calendar"></div>
 <div class="addSpace"><div id = "video-container"></div></div>
-<div class = "overlay hidden">
+<div class = "overlay hidden" id ="overlay" onclick="off()">
     <div>
 
     </div>
