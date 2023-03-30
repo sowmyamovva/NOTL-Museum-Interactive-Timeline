@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:500');
 
-body {
-  box-sizing: border-box;
-  margin: 0;
-  padding:0;
-  font-family: 'Raleway', sans-serif;
-  background-color: rgba(213, 201, 201, 0.749);
-}
 ul {
   list-style-type: none;
 }
@@ -58,7 +51,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0px;
+    padding: 1px;
   }
 
   /* Hide toggle on the large screen */
@@ -72,7 +65,7 @@ nav {
   }
   .links a {
     padding: 0;
-    margin: 0rem;
+    margin: 0 0.5rem;
     color: rgb(252, 252, 252);
   }
   .links a:hover {
@@ -112,6 +105,7 @@ nav {
 
   .SearchBar button img{
     width: 13px;
+	display: in;
   }
 
   .SearchBar button{
@@ -150,26 +144,43 @@ nav {
 }
 body {
   font-family: Verdana, sans-serif;
-  margin: 0
+  margin: 0 auto;
 }
 
-.landingopener {margin-top:50px!important;}
-body {font-size:5px !important;
-font-family:Helvetica Neue;}
-img{max-width:100%;}
 
-.bg-image {
-	background-image: url('/Images/paper.jpg');
-	background-size:auto;
-	background-position: center center;
+.containerf{
+	background-color: rgba(255,255,255,0.8);
+	background-repeat: no-repeat;
+	background-size: cover;
   }
 
+  .containerf .row:first-child {
+	/* Apply background to the first section only */
+	background-image: url('/Images/paper.jpg'); /* Add a semi-transparent background color to make the text readable */
+  }
+
+  .row-circa {
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+	width: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+	padding-top: 75px;
+	padding-bottom: 75px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+  .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
 
 .overlaylanding-text {
   font-size:3.5vw;
   width: 100%; /*important*/
-  bottom:0.5vw; /*important*/
-  padding: 25px;
+  padding: 80px;
 }
 
 .btn {
@@ -273,7 +284,7 @@ img{max-width:100%;}
 
 
 div.container-footer.w-container {
-	background-color: #111111;
+	background-color: #292828;
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
@@ -359,7 +370,6 @@ div.container-footer.w-container {
     border-width: 0;
     box-sizing: border-box;
     display: inline-block;
-    float: left;
     max-width: 100%;
     vertical-align: middle;
   }
