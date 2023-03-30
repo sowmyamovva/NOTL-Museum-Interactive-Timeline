@@ -166,16 +166,20 @@ CloseCon($conn);
 
     </script>
 <script>
-const arrayColumn = (arr, n) => arr.map(x => x[n]);
-var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","11,000 years ago","0"],
-                    ["2","EurContactA","EurContactB","1500",null,"1500s","0"],
-                    ["3","FortNiagaraA","FortNiagaraB","1764",null,"1764","0"],
-                    ["4","WhyNiagaraA","WhyNiagaraB","1790",null,"1790","0"],
-                    ["5","UsRevolutionA","UsRevolutionB","1791",null,"1791","0"],
-                    ["6","WarA","WarB","1812",null,"1812","1"],
-                    ["7","RebuildA","RebuildB","1815",null,"1815","0"],
-                    ["8","ShippingA","ShippingB","1831",null,"1831","0"]];
-var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSubK","WarSubB,WarSubD,WarSubF,WarSubH,WarSubJ,WarSubL","6"]];
+// const arrayColumn = (arr, n) => arr.map(x => x[n]);
+// var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","11,000 years ago","0"],
+//                     ["2","EurContactA","EurContactB","1500",null,"1500s","0"],
+//                     ["3","FortNiagaraA","FortNiagaraB","1764",null,"1764","0"],
+//                     ["4","WhyNiagaraA","WhyNiagaraB","1790",null,"1790","0"],
+//                     ["5","UsRevolutionA","UsRevolutionB","1791",null,"1791","0"],
+//                     ["6","WarA","WarB","1812",null,"1812","1"],
+//                     ["7","RebuildA","RebuildB","1815",null,"1815","0"],
+//                     ["8","ShippingA","ShippingB","1831",null,"1831","0"]];
+// var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSubK","WarSubB,WarSubD,WarSubF,WarSubH,WarSubJ,WarSubL","6"]];
+  const arrayColumn = (arr, n) => arr.map(x => x[n]);
+  var years_all_info = <?php echo json_encode($year_info); ?>;
+  var sub_events = <?php echo json_encode($sub_info); ?>;
+
 
 
 function process_images(year_index){
