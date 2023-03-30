@@ -1,0 +1,29 @@
+
+body{
+    background-image: url('/Images/'); /* set the background image of the body element */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.container{
+    padding-top: 300px;
+    padding-bottom: 300px;
+}
+
+.card-body{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.custom-login {
+    background-color: black;
+}
+
+.logtext{
+    color: rgb(245, 243, 240);
+}
+
+.custom-signup{
+    background-color: rgb(245, 243, 240);
+}
