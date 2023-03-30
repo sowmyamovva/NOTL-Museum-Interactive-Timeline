@@ -1,4 +1,5 @@
-*,
+
+  *,
 *::before,
 *::after {
   margin: 0;
@@ -18,7 +19,7 @@
 
 .scroll-content {
   display: inline-block;
-  height: 250px;
+  height: 60vh;
 }
 
 .scroll-container:hover {
@@ -32,9 +33,9 @@
   /*display: none;*/
 }
 .hidden {
-    display:none;
+    display:none !important;
 }
-.left{
+.left_arrow{
     max-height: fit-content;
     max-width: fit-content;
     margin: 0px;
@@ -46,7 +47,7 @@
     background: dimgray;
     border-radius: 5%;
 }
-.right{
+.right_arrow{
     max-height: fit-content;
     max-width: fit-content;
     margin: 0px;
@@ -63,10 +64,12 @@ before this
 */
 
 body {
-  font: normal 16px/1.5 "Helvetica Neue", sans-serif;
+   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   color: #fff;
-  background-color: #242424;
-  font-family: Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif !important;
+  background-color: #242424 !important;
 }
 
 .event-label time {
@@ -92,9 +95,9 @@ body {
   top: -30px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: black;
+  /* background-color: black; */
   color: white;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 5px;
   display: none;
 }
@@ -301,10 +304,10 @@ div.overlay {
   background-color: #aaa;
 }
 
-.arrow{
+.arrow_sub{
 width:100%;
 }
-.arrow{
+.arrow_sub{
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
    
@@ -338,15 +341,27 @@ width:100%;
 animation: moveup 1s linear forwards;
 }
 .expandend-div{
-    position: relative;
-    bottom: 35vh;
-background:black;
+
+position: relative;
+
+bottom: 35vh;
+
+height: 350px;
+
+background:#3c3c3c;
+
 opacity:0;
+
 overflow:hidden;
-    width:80%;
+
+width:80%;
+
 animation-delay: 0.2s;
+
 transform: translateY(-78px);
+
 z-index: 11;
+
 }
 .close {
   position: absolute;
@@ -368,8 +383,8 @@ display:flex;
     justify-content: space-evenly;
 }
 .grid > div{
-background:white;
-padding:2%;
+/* background:white; */
+padding:0;
 }
 
 .main-div{
