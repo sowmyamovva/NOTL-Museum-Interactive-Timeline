@@ -4,11 +4,12 @@
 
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="C:/RS/COSC 4P02/all_features.css"> 
+  <link rel="stylesheet" href="../CSS/all_features.css"> 
 </head>
 <body>
   <div class = "outer-container">
-<div id="filter">
+<!-- <div id="filter">
+
   <select id="filter_title">
     <option value="all">All Titles</option>
   </select>
@@ -18,10 +19,23 @@
   <label for="to-year">To:</label>
   <input type="number" id="to-year" name="to-year" min="1990" max="2010" value="2010">
   <button id="filter-button">Filter</button>
-</div>
-<div class="left hidden" id = "left_arrow">
-  <i class="material-icons" style='font-size:30px;color:white'>chevron_left</i>
-</div>
+</div> -->
+
+<div class="filter-bar">
+    <div class="select-filter" id="filter">
+    <select id="filter_title">
+      <option value="all">All Titles</option>
+    </select>
+   </div>
+    <div class="range-filter">
+    <label for="from-year">From:</label>
+    <input type="number" id="from-year" name="from-year" min="1700" max="2010" value="1812" step="10">
+    <label for="to-year">To:</label>
+    <input type="number" id="to-year" name="to-year" min="1990" max="2010" value="2010">
+    <button id="filter-button">Filter</button>
+    </div>
+  </div>
+
 <div id="timeline_container" class="scroll-container">
 
   <div id="timeline_box" class="scroll-content">
@@ -29,8 +43,10 @@
     <svg id="timeline" cache-id="16de89faabdb48d1a0a46f23dde4f4b1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"  x="0px" y="0px">
       <defs>
         <linearGradient id="e0YvEuspUTQ2-stroke" x1="0" y1="150" x2="300" y2="150" spreadMethod="pad" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 0)">
-          <stop id="e0YvEuspUTQ2-stroke-0" offset="0%" stop-color="#fc259b" />
-          <stop id="e0YvEuspUTQ2-stroke-1" offset="100%" stop-color="#f85e08" />
+          <!-- <stop id="e0YvEuspUTQ2-stroke-0" offset="0%" stop-color="#fc259b" />
+          <stop id="e0YvEuspUTQ2-stroke-1" offset="100%" stop-color="#f85e08" /> -->
+          <stop id="e0YvEuspUTQ2-stroke-0" offset="0%" stop-color="#94b8b4" />
+          <stop id="e0YvEuspUTQ2-stroke-1" offset="100%" stop-color="#ac80b0" />
         </linearGradient>
       </defs>
 
@@ -43,7 +59,7 @@
         <circle class="second-circle hidden" cx="400" cy="250" r="10" /> -->
         <g id ="sub_timeline" class="arrow">
             <style type="text/css">
-                .st0{fill:none;stroke:#000000;stroke-miterlimit:10;stroke-width: 3;}
+                .st0{fill:none;stroke:whitesmoke;stroke-miterlimit:10;stroke-width: 3;z-index: 11;}
             </style>
             <line id="sub_line1" class="st0" x1="186" y1="180" x2="185.5" y2="340"/>
             <line id="sub_line2" class="st0" x1="8.5" y1="340" x2="181.5" y2="340"/>
@@ -51,33 +67,24 @@
             <line id="sub_line4" class="st0" x1="8.5" y1="380" x2="8.5" y2="340"/>
             <line id="sub_line5" class="st0" x1="362.5" y1="380" x2="362.5" y2="340"/>
         </g>
-      
+        
     </svg>
 
   </div>
 </div>
-<div class = "right hidden" id = "right_arrow"  >
-  <i class="material-icons" style='font-size:30px;color:white'>chevron_left</i>
+
 </div>
+<div class="left hidden" id = "left_arrow">
+    <i class="material-icons" style='font-size:30px;color:white'>chevron_left</i>
+  </div>
+<div class = "right hidden" id = "right_arrow"  >
+  <i class="material-icons" style='font-size:30px;color:white'>chevron_right</i>
 </div>
 <!-- <script src='all_features.js'></script> -->
 
-<button onclick="show()">show</button>
+
 <div class="main-div">
     <?xml version="1.0" encoding="utf-8"?>
-    <!-- Generator: Adobe Illustrator 27.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-    <!-- <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        viewBox="0 0 374.5 137.5" style="enable-background:new 0 0 374.5 137.5;" xml:space="preserve" class="arrow">
-    <style type="text/css">
-        .st0{fill:none;stroke:#000000;stroke-miterlimit:10;}
-    </style>
-    <line class="st0" x1="186" y1="9" x2="185.5" y2="91"/>
-    <line class="st0" x1="8.5" y1="91" x2="181.5" y2="91"/>
-    <line class="st0" x1="362.5" y1="91" x2="181.5" y2="91"/>
-    <line class="st0" x1="8.5" y1="132.5" x2="8.5" y2="91"/>
-    <line class="st0" x1="362.5" y1="132.5" x2="362.5" y2="91"/>
-    </svg> -->
-                            
 
     <div class="expandend-div">
         <h1>heading</h1>
@@ -86,9 +93,24 @@
             <div><h2>second</h2></div>
             <div><h2>third</h2></div>
         </div>
+        
+    <button class="close" onclick="off()">x</button>
+    </div>
+    
+</div>
+
+
+<div id="calendar"></div>
+<div class="addSpace"><div id = "video-container"></div></div>
+<div class = "overlay hidden" id ="overlay" onclick="off()">
+    <div>
+
     </div>
 </div>
-<!--<script src='all_features.js'></script>-->
+
+<script>
+
+    </script>
 <script>
   var years = [
   "1810",
@@ -163,6 +185,8 @@ var user_images = [ // User's Images
   ['clubs_ace.svg',  
   'abstract.svg']
 ];
+
+
 
 function process_images(year_index){
 
@@ -300,7 +324,7 @@ container.addEventListener("mousemove", (e) => {
   const scrollAmount = hoverPercent * (contentWidth - containerWidth);
 
   container.scrollLeft = scrollAmount;
-  console.log(left_arrow.classList);
+ // console.log(left_arrow.classList);
    if (scrollAmount - oldScrollX >= 10) {
       left_arrow.classList.add("hidden");
       right_arrow.classList.remove("hidden");
@@ -334,7 +358,7 @@ const circles_title = document.querySelectorAll("circle");
 filterSelect.addEventListener("change", function() {
   var selectedValue = this.value;
   circles_title.forEach((circle) => {
-    console.log(selectedValue + " and " + circle.getAttribute("data-title"));
+   // console.log(selectedValue + " and " + circle.getAttribute("data-title"));
     if (
       selectedValue === "all" ||
       circle.getAttribute("data-title") == selectedValue
@@ -409,29 +433,32 @@ firstLine.addEventListener('click', (event) => {
     const secondLineX2 = centerX + 200;
 
     // var sub_timeline = document.querySelector('#sub_timeline');
-//    var line_indicator =  '<line class="st0" x1="'+centerX+'" y1="180" x2="'+centerX+'" y2="340"/><line class="st0" x1="'+centerX-180+'" y1="340" x2="'+centerX+'" y2="340"/> <line class="st0" x1="'+centerX+180+'" y1="340" x2="'+centerX+'" y2="340"/><line class="st0" x1="'+centerX-180+'" y1="380" x2="'+centerX-180+'" y2="340"/><line class="st0" x1="'+centerX+180+'" y1="380" x2="'+centerX+180+'" y2="340"/>';
+  //    var line_indicator =  '<line class="st0" x1="'+centerX+'" y1="180" x2="'+centerX+'" y2="340"/><line class="st0" x1="'+centerX-180+'" y1="340" x2="'+centerX+'" y2="340"/> <line class="st0" x1="'+centerX+180+'" y1="340" x2="'+centerX+'" y2="340"/><line class="st0" x1="'+centerX-180+'" y1="380" x2="'+centerX-180+'" y2="340"/><line class="st0" x1="'+centerX+180+'" y1="380" x2="'+centerX+180+'" y2="340"/>';
 
  //  sub_timeline.insertAdjacentHTML("beforeend",line_indicator);
-   var sub_line1 = document.querySelector('#sub_line1');
-   sub_line1.setAttribute('x1', centerX);
-   sub_line1.setAttribute('x2', centerX);
+    var offset =800;
+    var sub_line1 = document.querySelector('#sub_line1');
+    sub_line1.setAttribute('x1', centerX);
+    sub_line1.setAttribute('x2', centerX);
 
-   var sub_line2 = document.querySelector('#sub_line2');
-   sub_line2.setAttribute('x1', (centerX-280));
-   sub_line2.setAttribute('x2', centerX);
+    var sub_line2 = document.querySelector('#sub_line2');
+    sub_line2.setAttribute('x1', (centerX-offset));
+    sub_line2.setAttribute('x2', centerX);
 
-   var sub_line3 = document.querySelector('#sub_line3');
-   sub_line3.setAttribute('x1', centerX);
-   sub_line3.setAttribute('x2', (centerX+280));
+    var sub_line3 = document.querySelector('#sub_line3');
+    sub_line3.setAttribute('x2', centerX);
+    sub_line3.setAttribute('x1', (centerX+offset));
 
-   var sub_line4 = document.querySelector('#sub_line4');
-   sub_line4.setAttribute('x1', (centerX-280));
-   sub_line4.setAttribute('x2', (centerX-280));
+    var sub_line4 = document.querySelector('#sub_line4');
+    sub_line4.setAttribute('x1', (centerX-offset));
+    sub_line4.setAttribute('x2', (centerX-offset));
 
-   var sub_line5 = document.querySelector('#sub_line5');
-   sub_line5.setAttribute('x1', (centerX+280));
-   sub_line5.setAttribute('x2', (centerX+280));
+    var sub_line5 = document.querySelector('#sub_line5');
+    sub_line5.setAttribute('x1', (centerX+offset));
+    sub_line5.setAttribute('x2', (centerX+offset));
 
+    var over = document.querySelector(".overlay");
+    over.classList.remove("hidden");
     var x = document.querySelector(".arrow");
     if(x.classList.contains("icon-active")){
        x.classList.remove("icon-active");
@@ -443,23 +470,13 @@ firstLine.addEventListener('click', (event) => {
     }
 
 
-    // secondLine.setAttribute('x1', secondLineX1);
-    // secondLine.setAttribute('x2', secondLineX2);
-//     for (let i = 0; i < years.length; i++) {
-//   pathOnDiv(years[i], i / (years.length - 1), titles[i]);
-// }
-
-   // secondCircle.setAttribute('x', secondLineX1);
-    // secondLine.classList.remove('hidden');
-    // secondCircle.classList.remove('hidden');
-
     years2=['1801','1802','1803']
 for (let i = 0; i < years2.length; i++) {
-  var path2 = document.getElementById('mypath2');
-  var pathLength = path2.getTotalLength();
-  var loc = path2.getPointAtLength(i *0.5* (pathLength - 10));
-  var point =
-    "<circle id=" + years2[i] + ' cx="' + (loc.x + 8) + '" cy="' + loc.y + '"  r = 9 class=" unselected_circle event first-circle" data-year="' + years2[i]+ '" />"';
+//   var path2 = document.getElementById('mypath2');
+//   var pathLength = path2.getTotalLength();
+//   var loc = path2.getPointAtLength(i *0.5* (pathLength - 10));
+//   var point =
+//     "<circle id=" + years2[i] + ' cx="' + (loc.x + 8) + '" cy="' + loc.y + '"  r = 9 class=" unselected_circle event first-circle" data-year="' + years2[i]+ '" />"';
   //r="20" fill="white" stroke="#474e5d" stroke-width="3" stroke-r = "2"
  // document.getElementById("timeline").insertAdjacentHTML("beforeend", point);
 }
@@ -467,6 +484,17 @@ for (let i = 0; i < years2.length; i++) {
     // secondTimeline.classList.add('hidden');
   }
 });
+
+
+
+function off() {
+  document.getElementById("overlay").classList.add("hidden");
+  var x = document.querySelector(".arrow");
+    if(x.classList.contains("icon-active")){
+       x.classList.remove("icon-active");
+    document.querySelector(".expandend-div").classList.remove("div-active");
+    }
+}
 
 
 function findCircleBeforeX(x) {
@@ -523,3 +551,54 @@ function findCircleAfterX(x) {
 
 
 
+function findCircleBeforeX(x) {
+  //console.log("findCircleBeforeX");
+  const circles = document.querySelectorAll('.first-circle');
+  let circleBefore = null;
+
+  circles.forEach(function(circle) {
+    // console.log(circle.cx);
+    const circleX = circle.getBoundingClientRect().left - event.target.getBoundingClientRect().left + circle.r.baseVal.value;
+
+    // console.log(circleX);
+    // console.log(x);
+    if (circleX <= x) {
+      circleBefore = circle;
+      // console.log(circle.cx.baseVal.value);
+    }
+  });
+
+  return circleBefore;
+}
+
+function findCircleAfterX(x) {
+  //console.log("findCircleAfterX");
+  const circles = document.querySelectorAll('.first-circle');
+  /* console.log(circles) */
+  let circleAfter = null;
+
+  var check = true;
+  // Iterate over all the circles and find the one with the closest X coordinate that is greater than the clicked X
+  circles.forEach(function(circle) {
+
+    const circleX = circle.getBoundingClientRect().left - event.target.getBoundingClientRect().left + circle.r.baseVal.value;
+    // console.log(circleX);
+    // console.log(x);
+    if (circleX > x && check) {
+      check = false;
+      // console.log(circle.cx.baseVal.value);
+      circleAfter = circle;
+
+    }
+  });
+  return circleAfter;
+}
+
+
+
+
+
+
+</script>
+</body>
+</html>
