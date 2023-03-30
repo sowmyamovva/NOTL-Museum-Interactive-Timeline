@@ -190,6 +190,16 @@ body {
       background-color:#a09d9d;
   }
 
+  .col-md-7 {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+  }
+
+
+.col-md-5 {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
 /* Next & previous buttons */
 .prev,
 .next {
