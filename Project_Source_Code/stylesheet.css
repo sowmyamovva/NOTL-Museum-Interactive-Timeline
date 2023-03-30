@@ -161,7 +161,6 @@ body {
 
   .row-circa {
     display: flex;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 	width: 100%;
     padding-right: 20px;
