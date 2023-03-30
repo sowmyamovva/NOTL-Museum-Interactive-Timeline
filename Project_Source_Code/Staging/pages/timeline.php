@@ -1,3 +1,61 @@
+<?php
+//echo getcwd() . "\n";
+include 'db.php';
+$conn = OpenCon();
+//echo "Connected Successfully";
+
+$sql = "SELECT id, image_front, image_back, date,date_title,date_marker,sub_events FROM events";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  $cnt1 = 0;
+  $cnt2 = 0;
+  $year_info = array(array());
+  while($row = $result->fetch_assoc()) {
+      $cnt2 = 0;
+      $year_info[$cnt1][$cnt2++] = $row["id"];
+      $year_info[$cnt1][$cnt2++] = $row["image_front"];
+      $year_info[$cnt1][$cnt2++] = $row["image_back"];
+      $year_info[$cnt1][$cnt2++] = $row["date"];
+      $year_info[$cnt1][$cnt2++] = $row["date_marker"];
+      $year_info[$cnt1][$cnt2++] = $row["date_title"];
+       $year_info[$cnt1][$cnt2++] = $row["sub_events"];
+     $cnt1++;
+  }
+} 
+
+$sql2 = "SELECT id, image_front, image_back, event_id FROM sub_events";
+$results = $conn->query($sql2);
+
+if ($results->num_rows > 0) {
+  // output data of each row
+  $cnt1 = 0;
+  $cnt2 = 0;
+  $sub_info = array(array());
+  $event_ids= array();
+  while($row = $results->fetch_assoc()) {
+     if(in_array($row["event_id"], $event_ids))
+     {
+        
+      $index = array_search($row["event_id"], $event_ids);
+      $sub_info[$index][0] = $sub_info[$index][0].",".$row["id"];
+      $sub_info[$index][1] = $sub_info[$index][1].",".$row["image_front"];
+      $sub_info[$index][2] = $sub_info[$index][2].",".$row["image_back"];
+     }
+    else{
+      $cnt2 = 0;
+      $sub_info[$cnt1][$cnt2++] = $row["id"];
+      $sub_info[$cnt1][$cnt2++] = $row["image_front"];
+      $sub_info[$cnt1][$cnt2++] = $row["image_back"];
+      $sub_info[$cnt1][$cnt2++] = $row["event_id"];
+      $event_ids[$cnt1] = $row["event_id"];
+     $cnt1++;
+    }
+  }
+} 
+CloseCon($conn);
+?>
 <!DOCTYPE html>
 <html>
 <head>
