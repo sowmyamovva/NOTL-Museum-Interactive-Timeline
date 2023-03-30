@@ -19,7 +19,7 @@
         </div>
         <!-- links -->
         <ul class="links">
-            <li> <a href="index.html">home</a> </li>
+            <li> <a href="index.html">Home</a> </li>
             <li> <a href="about.html">Services</a> </li>
             <li> <a href="projects.html">Visit Us</a> </li>
             <li> <a href="Login.html">Login</a> </li>
