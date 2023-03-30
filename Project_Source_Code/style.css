@@ -159,6 +159,27 @@ body {
 img {
   vertical-align: middle;
 }
+.landingopener {margin-top:50px!important;}
+body {font-size:17px;
+font-family:Helvetica Neue;}
+img{max-width:100%;}
+
+.overlaylanding-text {
+  font-size:3.5vw;
+  float:right;
+  width:65%; /*important*/
+  bottom:21vw; /*important*/
+  padding: 25px;
+}
+
+.btn {
+  background-color: #0c0c0c;
+}
+
+.btn :hover {
+      background-color:#c6c6c6;
+  }
+
 .slideshow-container {
   max-width: 1000px;
   position: relative;
@@ -542,5 +563,4 @@ div.container-footer.w-container {
     box-sizing: border-box;
     font-weight: 700;
   }
-
 
