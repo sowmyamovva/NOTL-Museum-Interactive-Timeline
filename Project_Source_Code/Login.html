@@ -4,33 +4,48 @@
 	<title>Login Page</title>
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-DW5cX/mKzsRbfLb5jb5BVZXOj/Qbsxw1dTXZrxbh8HqpW0bK9g40abDewMvOQ2LWxjN0pm/eSHdncHrZk8Wakg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<!-- Custom CSS -->
-	<link rel="stylesheet" href="stylesheet.css">
+	<link rel="stylesheet" href="sheet.css">
 </head>
 <body>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form class="form-login">
-                    <h1 class="h3 mb-3 font-weight-normal text-center">Login</h1>
-                    <label for="inputEmail" class="sr-only">Email address</label>
-                    <input type="email" id="inputEmail" class="form-control mb-2" placeholder="Email address" required autofocus>
-                    <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" id="inputPassword" class="form-control mb-2" placeholder="Password" required>
-                    <div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" value="remember-me"> Remember me
-                        </label>
-                    </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                    <div class="text-center mt-3">
-                        <p class="mb-1">Don't have an account? <a href="#">Sign up</a></p>
-                        <p><a href="#">Forgot password?</a></p>
-                    </div>
-                </form>
-            </div>
+        <div class="row">
+          <div class="col-md-6">
+            <form>
+              <h2>Login</h2>
+              <div class="form-group">
+                <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+              </div>
+              <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <form>
+              <h2>Sign Up</h2>
+              <div class="form-group">
+                <input type="text" class="form-control" id="inputName" placeholder="Enter name">
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+              </div>
+              <button type="submit" class="btn btn-primary">Sign up</button>
+            </form>
+          </div>
         </div>
-    </div>
+      </div>
 	<!-- Login Form goes here -->
 </body>
 </html>
