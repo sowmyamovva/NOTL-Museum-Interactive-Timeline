@@ -22,7 +22,7 @@
             <li> <a href="index.html">home</a> </li>
             <li> <a href="about.html">Services</a> </li>
             <li> <a href="projects.html">Visit Us</a> </li>
-            <li> <a href="contact.html">Login</a> </li>
+            <li> <a href="Login.html">Login</a> </li>
         </ul>
         <!----Searchbar goes here ----->
         <ul class="container">
