@@ -108,6 +108,7 @@ CloseCon($conn);
                     stroke: white;
                     stroke-width: 3;}
             </style>
+          <!--The following html code is the code for the line that shows up to indicate sub timeline -->
             <line id="sub_line1" class="st0" x1="186" y1="180" x2="185.5" y2="340"/>
             <circle id ="sub_circle" class="st1 hidden" cx = "186" cy = "340" />
             <!-- <line id="sub_line2" class="st0" x1="8.5" y1="340" x2="181.5" y2="340"/>
@@ -122,6 +123,7 @@ CloseCon($conn);
 </div>
 
 </div>
+  <!-- The signifiers -->
 <div class="left_arrow hidden" id = "left_arrow">
     <i class="material-icons" style='font-size:30px;color:white'>chevron_left</i>
   </div>
@@ -130,23 +132,21 @@ CloseCon($conn);
 </div>
 <!-- <script src='all_features.js'></script> -->
 
-
+<!-- The element that holds the sub-timeline -->
 <div class="main-div">
     <?xml version="1.0" encoding="utf-8"?>
 
     <div class="expandend-div hidden">
         <h1 id = "sub_heading">heading</h1>
         <div class="grid" id="sub_events_container">
-            <!-- <div><h2>first</h2></div>
-            <div><h2>second</h2></div>
-            <div><h2>third</h2></div> -->
+          
         </div>
         
     <button class="close" onclick="off()">x</button>
     </div>
     
 </div>
-
+<!-- The overlay for when the subtimeline appears. -->
 <div class = "overlay hidden" id ="overlay" onclick="off()">
     <div>
 
@@ -181,7 +181,7 @@ CloseCon($conn);
   var sub_events = <?php echo json_encode($sub_info); ?>;
 
 
-
+// To change the the card that shows up on clicking circles on teh subtimeline make edits here
 function process_images(year_index){
     var time ="";
     if (years_all_info[year_index][4] !=null)
@@ -196,6 +196,7 @@ function process_images(year_index){
     return year_info;
 }
 
+  // SImilarly for teh cards in sub-timeline make edits here
 function process_sub_images(front,back,title){
 
     var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+front+".jpg?raw=true' alt='1730s'  title='"+title+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+back+".jpg?raw=true' alt='1753s'  title='"+title+"'></div></div></div>";
@@ -205,6 +206,7 @@ function process_sub_images(front,back,title){
     return year_tooltip;
 }
 
+  // This collects all titles available and  makes them into an option under the select
 for (let i = 0; i < years_all_info.length; i++) {
   //console.log("here");
   var option = " <option value=" + years_all_info[i][5] + ">" + years_all_info[i][5]  + "</option>";
@@ -213,6 +215,7 @@ for (let i = 0; i < years_all_info.length; i++) {
     .insertAdjacentHTML("beforeend", option);
 }
 
+  // This iterates over every event we have and called pathondiv to make a circle element for it.
 for (let i = 0; i < years_all_info.length; i++) {
   pathOnDiv(( years_all_info[i][3]+"_"+years_all_info[i][4]), i / (years_all_info.length - 1), years_all_info[i][5] , years_all_info[i][6], years_all_info[i][0]);
 }
@@ -242,7 +245,7 @@ circles_year.forEach((circle, index) => {
 
 
 var cnt = 0;
-
+// This function makes the circle element for each event. This si where you can make changes to what data is shows and stores.
 function pathOnDiv(text, pos, title,sub,id) {
   var path = document.getElementById("mypath");
   var pathLength = path.getTotalLength();
@@ -258,13 +261,20 @@ function pathOnDiv(text, pos, title,sub,id) {
     "'data-eventid='" +
     id +
     "' />";
+  // To add additional data, simply add a data-name attribute and assign it values in the variable point.
+  // The data can then be accessed by getting the circle element and using the function circle .getAttribute("data-name");
+  
   //r="20" fill="white" stroke="#474e5d" stroke-width="3" stroke-r = "2"
   document.getElementById("timeline").insertAdjacentHTML("beforeend", point);
 }
+  
+// The following function scrolls on Hover, change the type of function or numbers to edit the functionality
 window.addEventListener("load", function() {
   const container = document.querySelector("#timeline_box");
   let prevX = 0;
 
+  // if we want signifiers on click scroll - modify the following code by 
+  //getting the signifier elements and changing the "mousemove" to "mousedown"
   container.addEventListener("mousemove", function(e) {
     const x = e.clientX - container.offsetLeft;
     if (x < prevX) {
@@ -277,6 +287,10 @@ window.addEventListener("load", function() {
 
 });
 
+  
+// The following code makes a particular signifier to show which way we are hover scrolling,
+// modify the following code if the code for hover scrolling is modified
+  //BEGIN
 const timeline = document.getElementById("timeline_box");
 const events = timeline.querySelectorAll(".first-circle");
 // this messes up the div position for now
@@ -311,6 +325,10 @@ container.addEventListener("mousemove", (e) => {
      oldScrollX = scrollAmount;
 });
 
+  //END of on scroll show functionality
+  
+  
+//The following the range filter functionalty.  
 const filterButton = document.querySelector("#filter-button");
 var circles = document.querySelectorAll(".first-circle");
 
@@ -340,6 +358,8 @@ filterButton.addEventListener("click", () => {
   });
 });
 
+  
+//The following is the title filter functionality
 var filterSelect = document.querySelector("#filter_title");
 const circles_title = document.querySelectorAll(".first-circle");
 filterSelect.addEventListener("change", function() {
@@ -373,8 +393,10 @@ const firstLine = document.querySelector('#mypath');
 /* const secondCircle = document.querySelector('.second-circle'); */
 var circle_index = 0;
 var circles2 = document.querySelectorAll(".first-circle");
-console.log(circles2);
+//console.log(circles2);
 
+  
+  // The following code is for what a circle does on click
 circles2.forEach((circle) => {
 
   const div = document.createElement("div");
@@ -410,6 +432,8 @@ circles2.forEach((circle) => {
     document.body.appendChild(div);
   });
 
+  // The following code is to ensure the cards move with scroll. will have to add similar code
+  // for document so it is consistent with scroll up and down.
   document.getElementById("timeline_container").addEventListener("scroll", () => {
 
     div.style.top = `${circle.getBoundingClientRect().top + 70}px`;
@@ -419,6 +443,7 @@ circles2.forEach((circle) => {
 });
 
 
+  // The following is for sub-timeline
 firstLine.addEventListener('click', (event) => {
        
 
@@ -462,6 +487,8 @@ firstLine.addEventListener('click', (event) => {
     // console.log(index);
     var front_images = sub_events[index][1].split(",");
     var back_images = sub_events[index][2].split(",");
+    //AFter setting all values in place only then show the subtimeline. Here we are using insertAdjacentHTML.
+    // right before that we need to add code to clear out all elements from the sub_events_container element.
     const sub_events_container = document.querySelector("#sub_events_container");
     for (let i = 0; i < front_images.length; i++) {
         var grid_elements = process_sub_images(front_images[i],back_images[i],("Before "+circleElemAfter.getAttribute("data-title")));
@@ -491,7 +518,8 @@ firstLine.addEventListener('click', (event) => {
 });
 
 
-
+// This is function for the overlay functionality. since there are more than one ways 
+  //the function is made separately and called for each type of trigger like click on overlay or cross button
 function off() {
   document.getElementById("overlay").classList.add("hidden");
   var x = document.querySelector(".arrow_sub");
@@ -503,7 +531,8 @@ function off() {
     }
 }
 
-
+// This is when a user clicks on timeline to view sub-timeline, the code has to find the circle before
+  // and after to add the line-indicator for the subtimeline in the right position
 function findCircleBeforeX(x) {
   //console.log("findCircleBeforeX");
   const circles = document.querySelectorAll('.first-circle');
