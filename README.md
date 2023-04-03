@@ -10,8 +10,8 @@
 | Sowmya Movva    | Scrum Master  | 6299937 |
 | Tyvon Factor-Gaymon   | Product Owner | 6580310 |
 | Rimpy Saha  |  Product Owner | 6600258 |
-| Peter Fung  | Developer | 6509830 |
-| George Gramatikov |  Developer | 6281778 |
+| Peter Fung  | Tester | 6509830 |
+| George Gramatikov |  Tester | 6281778 |
 
 
 ### **Overview**: 
