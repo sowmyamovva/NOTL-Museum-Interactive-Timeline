@@ -8,10 +8,11 @@
 | **Team Members**  | **Role** | **Student ID** |
 | ------------- | ------------- | ------------- |
 | Sowmya Movva    | Scrum Master  | 6299937 |
-| Tyvon Factor-Gaymon   | Product Owner | 6580310 |
 | Rimpy Saha  |  Product Owner | 6600258 |
-| Peter Fung  | Tester | 6509830 |
+| Tyvon Factor-Gaymon   | Product Owner | 6580310 |
 | George Gramatikov |  Tester | 6281778 |
+| Peter Fung  | Tester | 6509830 |
+
 
 
 ### **Overview**: 
