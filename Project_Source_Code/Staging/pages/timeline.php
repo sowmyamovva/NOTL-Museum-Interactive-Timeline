@@ -442,7 +442,9 @@ circles2.forEach((circle) => {
   circle_index++;
 });
 
-
+// This boolean value tells us if we have content already contained within the subetimeline overlay
+var overlayPopulated = false;
+  
   // The following is for sub-timeline
 firstLine.addEventListener('click', (event) => {
        
@@ -490,11 +492,16 @@ firstLine.addEventListener('click', (event) => {
     //AFter setting all values in place only then show the subtimeline. Here we are using insertAdjacentHTML.
     // right before that we need to add code to clear out all elements from the sub_events_container element.
     const sub_events_container = document.querySelector("#sub_events_container");
-    for (let i = 0; i < front_images.length; i++) {
-        var grid_elements = process_sub_images(front_images[i],back_images[i],("Before "+circleElemAfter.getAttribute("data-title")));
-        sub_events_container.insertAdjacentHTML('beforeend',grid_elements);
+    
+    // If sub-timeline already contains content, do not add it again.
+    if (!overlayPopulated) {
+      for (let i = 0; i < front_images.length; i++) {
+          var grid_elements = process_sub_images(front_images[i],back_images[i],("Before "+circleElemAfter.getAttribute("data-title")));
+          sub_events_container.insertAdjacentHTML('beforeend',grid_elements);
+      }
+      overlayPopulated = true;
     }
-
+    
     var sub_events_heading = circleElemBefore.getAttribute("data-title")+" - "+circleElemAfter.getAttribute("data-title");
     document.querySelector("#sub_heading").innerHTML = sub_events_heading;
     var over = document.querySelector(".overlay");
