@@ -436,8 +436,42 @@ circles2.forEach((circle) => {
   // for document so it is consistent with scroll up and down.
   document.getElementById("timeline_container").addEventListener("scroll", () => {
 
-    div.style.top = `${circle.getBoundingClientRect().top + 70}px`;
-    div.style.left = `${circle.getBoundingClientRect().left +10}px`;
+    //div.style.top = `${circle.getBoundingClientRect().top + 70}px`;
+    //div.style.left = `${circle.getBoundingClientRect().left +10}px`;
+    
+    /* Here, we keep track of the event_id so that we know whether we are at an enen or odd numbered image.
+     * This way, we can alternate the y coordinate of each Image
+     */
+    var event_id = parseInt(circle.dataset.eventid,10)
+    // We want to center the dive based on how big the images are.
+    if (event_id % 2 !==1){  // Odd Numbered Image
+        div.style.top = `${cy-40}px`; // bottom image
+        if (div.querySelector('img').naturalWidth < 400){ // Check to see if we're dealing with small image
+            div.style.left = `${circle.getBoundingClientRect().left -85}px`;
+        }
+        else{ // We're dealing with bigger image
+            div.style.left = `${circle.getBoundingClientRect().left -150}px`;
+            }
+    }
+    else{ // Even Numbered Image
+      div.style.top = `${cy+300}px`; // top image
+        if (div.querySelector('img').naturalWidth < 400 ){ // Check to see if we're dealing with small image
+            div.style.left = `${circle.getBoundingClientRect().left -85}px`;
+        }
+        else{ // We're dealing with bigger image so poisition it accordingly
+            div.style.left = `${circle.getBoundingClientRect().left -150}px`;
+        }
+    }
+    //Reformats first div to be uniform with the rest of the bottom divs.
+    if (event_id == 1){
+      div.style.top = `${cy+275}px`; // modified bottom image because it was not lining up properly 
+      if (div.querySelector('img').naturalWidth < 400){ // Check to see if we're dealing with small image
+          div.style.left = `${circle.getBoundingClientRect().left -85}px`;
+      }
+      else{ // We're dealing with bigger image so poisition it accordingly
+          div.style.left = `${circle.getBoundingClientRect().left -150}px`;
+          }
+    }
   });
   circle_index++;
 });
