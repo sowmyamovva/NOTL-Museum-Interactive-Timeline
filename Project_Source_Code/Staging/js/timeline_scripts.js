@@ -1,6 +1,6 @@
 
 const arrayColumn = (arr, n) => arr.map(x => x[n]);
-var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","11,000 years ago","0"],
+var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","<1500","0"],
                     ["2","EurContactA","EurContactB","1500",null,"1500s","0"],
                     ["3","FortNiagaraA","FortNiagaraB","1764",null,"1764","0"],
                     ["4","WhyNiagaraA","WhyNiagaraB","1790",null,"1790","0"],
@@ -268,21 +268,9 @@ circles2.forEach((circle) => {
       div.style.display="none";
     }
   
-
     // div.style.top = `${cy}px`;
     // div.style.left = `${cx+400}px`; //715
-    var c = cx
     // Odd numbered Image   BUG FIXES
-    // if (div.querySelector('img').naturalWidth > 400){ // Check to see if we're dealing with small image
-    //   div.style.left = `${circle.getBoundingClientRect().left -180}px`;
-    // }
-    
-    
-    // BUG FIXES
-
-    var hi = "";
-
-
   
     document.body.appendChild(div);
   });
@@ -292,11 +280,15 @@ circles2.forEach((circle) => {
   // The following code is to ensure the cards move with scroll. will have to add similar code
   // for document so it is consistent with scroll up and down.
   document.getElementById("timeline_container").addEventListener("scroll", () => {
-    // Odd numbered Image   BUG FIXES
-    var event_id = parseInt(circle.dataset.eventid,10)
-    if (event_id % 2 !==0){ 
-        div.style.top = `${cy+400}px`;
 
+    //   BUG FIXES
+    /* Here, we keep track of the event_id so that we know whether we are at an enen or odd numbered image.
+     * This way, we can alternate the y coordinate of each Image
+     */
+    var event_id = parseInt(circle.dataset.eventid,10)
+    // We want to center the dive based on how big the images are.
+    if (event_id % 2 !==0){  // Odd Numbered Image
+        div.style.top = `${cy+400}px`;
         if (div.querySelector('img').naturalWidth < 400){ // Check to see if we're dealing with small image
             div.style.left = `${circle.getBoundingClientRect().left -85}px`;
         }
