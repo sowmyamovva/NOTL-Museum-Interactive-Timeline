@@ -13,6 +13,7 @@
   border: 1px solid black;
 }
 .scroll-container {
+  overflow-y: hidden;  /*Disable Vertical scroll*/
   overflow-x: scroll;
   white-space: nowrap;
 }
@@ -27,6 +28,7 @@
   overflow-y: none;
 }
 .scroll-container::-webkit-scrollbar {
+  display: none; /*hide the nav bar*/
   width: 0px !important;
 }
 .scroll-container:hover::-webkit-scrollbar {
@@ -281,7 +283,7 @@ div.overlay {
 
 .outer-container{
     margin: 50px 20px;
-    height: 70vh;
+    height: 80vh; 
     border: 0.5px solid black;
     padding: 5px;
 }
@@ -343,7 +345,7 @@ animation: moveup 1s linear forwards;
 }
 .expandend-div{
 
-position: relative;
+position: fixed;
 
 bottom: 35vh;
 
@@ -361,7 +363,7 @@ animation-delay: 0.2s;
 
 transform: translateY(-78px);
 
-z-index: 11;
+z-index: 9999; /*Position sub timeline in front of all other content*/
 
 }
 .close {
