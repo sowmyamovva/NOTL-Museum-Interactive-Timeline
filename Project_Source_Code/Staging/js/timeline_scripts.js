@@ -272,7 +272,13 @@ circles2.forEach((circle) => {
     // div.style.top = `${cy}px`;
     // div.style.left = `${cx+400}px`; //715
     var c = cx
-
+    // Odd numbered Image   BUG FIXES
+    // if (div.querySelector('img').naturalWidth > 400){ // Check to see if we're dealing with small image
+    //   div.style.left = `${circle.getBoundingClientRect().left -180}px`;
+    // }
+    
+    
+    // BUG FIXES
 
     var hi = "";
 
@@ -289,9 +295,9 @@ circles2.forEach((circle) => {
     // Odd numbered Image   BUG FIXES
     var event_id = parseInt(circle.dataset.eventid,10)
     if (event_id % 2 !==0){ 
-        div.style.top = `${cy+375}px`;
+        div.style.top = `${cy+400}px`;
 
-        if (div.scrollWidth < 300){ // Check to see if we're dealing with small image
+        if (div.querySelector('img').naturalWidth < 400){ // Check to see if we're dealing with small image
             div.style.left = `${circle.getBoundingClientRect().left -85}px`;
         }
         else{ // We're dealing with bigger image
@@ -299,8 +305,8 @@ circles2.forEach((circle) => {
             }
     }
     else{ // Even Numbered Image
-        div.style.top = `${cy+25}px`;
-        if (div.scrollWidth < 300){ // Check to see if we're dealing with small image
+        div.style.top = `${cy+50}px`;
+        if (div.querySelector('img').naturalWidth < 400 ){ // Check to see if we're dealing with small image
             div.style.left = `${circle.getBoundingClientRect().left -85}px`;
         }
         else{ // We're dealing with bigger image

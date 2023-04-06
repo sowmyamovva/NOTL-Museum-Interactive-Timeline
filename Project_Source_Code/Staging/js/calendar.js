@@ -1,5 +1,5 @@
 // Define an array of dates to assign to the events
-var dates = ['2023-03-01', '2023-03-05', '2023-03-10', '2023-03-15'];
+var dates = ['2023-04-01', '2023-04-05', '2023-04-10', '2023-04-15'];
 
 // eventName, calendarName, eventColor (possible colors include only blue, yellow, green, and orange)
 
@@ -25,9 +25,22 @@ var myEvent = [ "Exhibit 1: 1812, Exhibit 1, blue",
           self.openDay(current);
         }, 500);
       }
+
+      // Add toggle button
+      var toggleButton = createElement('button', 'toggle-button');
+      toggleButton.innerText = 'Toggle Calendar';
+      toggleButton.addEventListener('click', function() {
+        self.el.classList.toggle('hide-calendar');
+      });
+      this.header.appendChild(toggleButton);
+
+      // Hide calendar initially
+      this.el.classList.add('hide-calendar');
     }
   
+
     Calendar.prototype.draw = function() {
+      var self = this; // Add this line
       //Create Header
       this.drawHeader();
   
@@ -36,31 +49,44 @@ var myEvent = [ "Exhibit 1: 1812, Exhibit 1, blue",
   
       this.drawLegend();
     }
-  
-    Calendar.prototype.drawHeader = function() {
-      var self = this;
-      if(!this.header) {
-        //Create the header elements
-        this.header = createElement('div', 'header');
-        this.header.className = 'header';
-  
-        this.title = createElement('h1');
-  
-        var right = createElement('div', 'right');
-        right.addEventListener('click', function() { self.nextMonth(); });
-  
-        var left = createElement('div', 'left');
-        left.addEventListener('click', function() { self.prevMonth(); });
-  
-        //Append the Elements
-        this.header.appendChild(this.title); 
-        this.header.appendChild(right);
-        this.header.appendChild(left);
-        this.el.appendChild(this.header);
+    
+    // Calendar.prototype.toggleCalendar = function() {
+    //   this.el.classList.display = 'none';
+    // }
+      
+
+      Calendar.prototype.drawHeader = function() {
+        var self = this;
+        if(!this.header) {
+          //Create the header elements
+          this.header = createElement('div', 'header');
+          this.header.className = 'header';
+      
+      
+          this.title = createElement('h1');
+
+
+          var right = createElement('div', 'right');
+          right.addEventListener('click', function() { self.nextMonth(); });
+      
+          var left = createElement('div', 'left');
+          left.addEventListener('click', function() { self.prevMonth(); });
+      
+          //Append the Elements
+          // this.header.appendChild(this.toggleButton);
+          this.header.appendChild(this.title); 
+          this.header.appendChild(right);
+          this.header.appendChild(left);
+          this.el.appendChild(this.header);
+        }
+      
+        this.title.innerHTML = this.current.format('MMMM YYYY');
       }
-  
-      this.title.innerHTML = this.current.format('MMMM YYYY');
-    }
+      
+
+
+
+    
   // This is where the the vents are added to a specific day
     Calendar.prototype.drawMonth = function() {
       var self = this;
@@ -337,7 +363,12 @@ var myEvent = [ "Exhibit 1: 1812, Exhibit 1, blue",
       }
       return ele;
     }
+
+
+
   }();
+
+  
   // Experimental
   // This function will map the myEvents data to a calendar's eventName, Calendar, and color.
   !function() {
@@ -353,10 +384,31 @@ var myEvent = [ "Exhibit 1: 1812, Exhibit 1, blue",
     function addDate(ev) {
       
     }
+
+
   
     var calendar = new Calendar('#calendar', data);
-  
   }();
+
+  function toggleCalendar() {
+    var calendar = document.getElementById("calendar");
+    if (calendar.style.display === "none") {
+      calendar.style.display = "block";
+      calendar.style.position = 'absolute';
+    } else {
+      calendar.style.display = "none";
+    }
+  }
+  
+
+
+
+
+
+
+
+
+
 //   !function() {
 //     var data = [
 //       { eventName: 'Lunch Meeting w/ Mark', calendar: 'Work', color: 'orange' },

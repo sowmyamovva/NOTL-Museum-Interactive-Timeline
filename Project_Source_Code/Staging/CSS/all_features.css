@@ -28,6 +28,7 @@
   overflow-y: none;
 }
 .scroll-container::-webkit-scrollbar {
+  display: none;    /* ADDED */
   width: 0px !important;
 }
 .scroll-container:hover::-webkit-scrollbar {
@@ -347,7 +348,7 @@ animation: moveup 1s linear forwards;
 }
 .expandend-div{
 
-position: relative;
+position: fixed;
 
 bottom: 35vh;
 
@@ -365,7 +366,7 @@ animation-delay: 0.2s;
 
 transform: translateY(-78px);
 
-z-index: 11;
+z-index: 9999;
 
 }
 .close {

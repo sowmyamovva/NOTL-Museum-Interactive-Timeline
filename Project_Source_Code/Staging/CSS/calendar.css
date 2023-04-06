@@ -26,6 +26,7 @@
       margin: 0 auto;
       height: 570px;
       overflow: hidden;
+      z-index: 999999; /*Added*/
     }
     
     .header {
@@ -381,4 +382,8 @@
     }
     @keyframes fadeOutShink  {
       to { opacity: 0; padding: 0px; height: 0px; }
+    }
+    /* Togglable */
+    .hide-calendar {
+      display: none;
     }
