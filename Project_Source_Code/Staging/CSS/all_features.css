@@ -1,0 +1,434 @@
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.event_name {
+  position: absolute;
+  background-color: white;
+ /* padding: 5px;*/
+  border: 1px solid black;
+  z-index: 999;
+}
+.scroll-container {
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.scroll-content {
+  display: inline-block;
+  height: 60vh;
+}
+
+.scroll-container:hover {
+ /* overflow-x: auto;*/
+  overflow-y: none;
+}
+.scroll-container::-webkit-scrollbar {
+  width: 0px !important;
+}
+.scroll-container:hover::-webkit-scrollbar {
+
+  display: none;
+}
+.hidden {
+    display:none !important;
+}
+.left_arrow{
+    max-height: fit-content;
+    max-width: fit-content;
+    margin: 0px;
+    z-index: 4;
+    position: relative;
+    padding: 3px 4px 0px 4px;
+    top: -58vh;
+    left:2%;
+    background: dimgray;
+    border-radius: 5%;
+}
+.right_arrow{
+    max-height: fit-content;
+    max-width: fit-content;
+    margin: 0px;
+    z-index: 5;
+    position: relative;
+    padding: 3px 4px 0px 4px;
+    top: -58vh;
+    left:95%;
+    background: dimgray;
+    border-radius: 5%;
+}
+/*
+before this
+*/
+
+body {
+   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif !important;
+  background-color: #242424 !important;
+}
+
+.event-label time {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+#timeline {
+  position: relative; /**/
+  top: 300px;
+  height: 200px;
+  width: 2000px;
+  /* Set the width of the timeline to a large value */
+  position: relative;
+}
+
+.event:hover {
+  cursor: pointer;
+}
+
+.event-label {
+  position: absolute; /*BUG FIXED Vertical Scroll was fixed before which moved image as user scrolled vertically*/
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* background-color: black; */
+  color: white;
+  /* border: 1px solid black; */
+  padding: 5px;
+  display: none;
+}
+.filter-bar {
+  background-color: #94b8b4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.range-filter label,
+.select-filter label {
+  color: #fff;
+  margin-right: 10px;
+  font-size:20px;
+}
+
+.range-filter input[type="number"] {
+  width: 80px;
+  background-color: #3c3c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  /* padding: 5px; */
+  margin-right: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+.select-filter select {
+  background-color: #3c3c3c;
+   color: #fff;
+    border: none;
+  border-radius: 5px;
+  /* padding: 5px; */
+  margin-right: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+  }
+#filter-button {
+ background-color: #3c3c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#filter-button:hover {
+ background-color: #242424;
+}
+
+#timeline_box::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+
+div.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  opacity: 0.8;
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+.dynamic-timeline {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background-color: white;
+  z-index: 10000;
+  display: none;
+}
+
+.selected_circle{
+   r: 28;
+   fill:url(#e0YvEuspUTQ2-stroke);
+   stroke: white;
+   stroke-width: 5;
+}
+
+.unselected_circle {
+   r: 24;
+   fill:white;
+   stroke: #242424;
+   stroke-width: 5;
+  
+}
+
+.flip-card {
+  position: absolute;
+  background-color: transparent;
+  perspective: 1000px;
+  width: 100%;
+  height: 100%;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+
+.flip-card-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+
+.flip-card-front {
+  z-index: 2;
+   transform: rotateY(0deg);  
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Experimental Flip */
+.flip-container {
+  position: relative;
+  perspective: 1000px;
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+}
+
+.flipper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.6s ease;
+}
+
+.flip-container:hover .flipper,
+.flip-container.hover .flipper {
+  transform: rotateY(180deg);
+}
+
+.front, .back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.front {
+  z-index: 2;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+
+.show-back {
+  transform: rotateY(180deg);
+}
+
+.outer-container{
+    margin: 50px 20px;
+    height: 70vh;
+    border: 0.5px solid black;
+    padding: 5px;
+}
+.circle-label {
+  font-size: 30px;
+  fill: #ffffff;
+  text-anchor: middle;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+  width: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+.arrow_sub{
+width:100%;
+}
+.arrow_sub{
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+   
+    animation-delay: 0.5s;
+    animation-duration: 0.5s;
+    animation-name: iconMove;
+    animation-fill-mode: both;
+    /*filter: drop-shadow(0px 1px 3px black);*/
+}
+@keyframes iconAnimation{
+    0%{
+        
+        fill:white;
+    }
+
+    100%{
+    stroke-dashoffset: 0;
+    }
+}
+@keyframes iconMove{
+    100%{
+        transform: translateX(0%);
+    }
+}
+.icon-active {
+    animation: iconAnimation 2s linear forwards;
+    fill:black;
+ 
+}
+.div-active{
+animation: moveup 1s linear forwards;
+}
+.expandend-div{
+
+position: relative;
+
+bottom: 35vh;
+
+height: 350px;
+
+background:#3c3c3c;
+
+opacity:0;
+
+overflow:hidden;
+
+width:80%;
+
+animation-delay: 0.2s;
+
+transform: translateY(-78px);
+
+z-index: 11;
+
+}
+.close {
+  position: absolute;
+  top: 2px;
+  right: 7px;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+@keyframes expand{
+100%{
+opacity:1;
+}
+}
+.grid{
+display:flex;
+    justify-content: space-evenly;
+}
+.grid > div{
+/* background:white; */
+padding:0;
+}
+
+.main-div{
+width:100%;
+text-align: -webkit-center;
+}
+@keyframes moveup{
+0%{
+transform:translateY(50px);
+opacity:0;
+}
+100%{
+transform:translateY(-50px);
+opacity:1;
+}
+} 
+@keyframes scaleIn{
+0% {
+    transform: scale(.5, .5);
+    opacity: .5;
+}
+100% {
+    transform: scale(2.5, 2.5);
+    opacity: 0;
+}
+} 
+.click_active
+{
+    display: block;
+    position: absolute;
+    background: white;
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    /* top: -70.75rem; */
+    left: 106px;
+    margin: 0;
+    box-shadow: 2px 2px 4px #888;
+    opacity: 0;
+    animation: scaleIn 4s infinite cubic-bezier(.36, .11, .89, .32);
+    z-index: 11;
+}

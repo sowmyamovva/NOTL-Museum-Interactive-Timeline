@@ -2,10 +2,10 @@
 <html>
   <head>
     <!-- <link rel="stylesheet" href="../CSS/integrated_timeline.css" /> -->
-    <link rel="stylesheet" href="/CSS/experimental.css" />
-    <link rel="stylesheet" href="/CSS/embed_video.css" />
-    <link rel="stylesheet" href="/CSS/text-to-speech.css" />
-    <link rel="stylesheet" href="/CSS/calendar.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/experimental.css" />  <!--"/CSS/experimental.css"-->
+    <link rel="stylesheet" type="text/css" href="/CSS/embed_video.css" />  <!--"/CSS/embed_video.css"-->
+    <link rel="stylesheet" type="text/css" href="/CSS/text-to-speech.css" /> <!--"/CSS/text-to-speech.css"-->
+    <link rel="stylesheet" type="text/css" href="/CSS/calendar.css" /> <!--"/CSS/calendar.css"-->
   </head>
   <body>
   <section>
@@ -46,19 +46,48 @@
 
 
   <div id="calendar"></div>
-  <div class="addSpace"><div id = "video-container"></div></div>
+  <div class="addSpace"><div id = "video-container">
+  </div>
+  <!-- Editable content -->
+  <div id="editable" contenteditable="false" style="color:black">This is an editable div.</div>
+  <button onclick="enableEdit()">Edit</button>
+  <div id="editButtons" style="display:none;">
+    <button onclick="toggleRecognition()">Toggle Speech Recognition</button>
+    <div id="result"></div>
+    <button onclick="saveChanges()">Save</button>
+    <button onclick="cancelEdit()">Cancel</button>
+  </div>
 
+  
+  
 
-
-<script src="/js/experimental.js"></script> 
-<script src="/js/embed_video.js"></script>
-<script src="/js/text-to-speech.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
-<script src="/js/calendar.js"></script>
+<script src="/js/experimental.js"></script> <!--"/js/experimental.js"-->
+<script src="/js/embed_video.js"></script> <!--"/js/embed_video.js"-->
+<script src="/js/text-to-speech.js"></script> <!--"/js/text-to-speech.js"-->
+<!-- <script src="/js/speech-to-speech.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script> 
+<script src="/js/calendar.js"></script> <!--"/js/calendar.js"-->
+<script src="/js/editableText.js"></script> <!--"/js/editableText.js"-->
 
 
 
 </body>
 
 </html>
+<!-- 
+CSS Liveserver
+"http://localhost:5500/Project_Source_Code/Staging/CSS/experimental.css"
+"http://localhost:5500/Project_Source_Code/Staging/CSS/embed_video.css"
+"http://localhost:5500/Project_Source_Code/Staging/CSS/text-to-speech.css"
+"http://localhost:5500/Project_Source_Code/Staging/CSS/calendar.css"
+
+Scripts Kive Server
+"http://localhost:5500/Project_Source_Code/Staging/js/experimental.js"
+"http://localhost:5500/Project_Source_Code/Staging/js/embed_video.js"
+"http://localhost:5500/Project_Source_Code/Staging/js/text-to-speech.js"
+"https://code.jquery.com/jquery-3.6.0.min.js"
+"//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"
+"http://localhost:5500/Project_Source_Code/Staging/js/calendar.js"
+"http://localhost:5500/Project_Source_Code/Staging/js/editableText.js"
+ -->

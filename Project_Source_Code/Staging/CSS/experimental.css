@@ -114,7 +114,7 @@ body {
 }
 
 .event-label {
-  position: absolute;
+  position: fixed;
   top: -30px;
   left: 50%;
   transform: translateX(-50%);
@@ -349,4 +349,16 @@ body {
   width: 2000px;
   height: 2000px;
   background-color:beige;
+}
+
+/* For editable content */
+.transparent {
+  background-color:#fff;
+  /* background-color: transparent; */
+}
+
+#editable {
+  position:relative;
+  height: 200px;
+  width: 300px;
 }
