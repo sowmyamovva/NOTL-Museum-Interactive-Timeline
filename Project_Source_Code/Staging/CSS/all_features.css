@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 .event_name {
-  position: fixed;
+  position: absolute; 
   background-color: white;
  /* padding: 5px;*/
   border: 1px solid black;
@@ -30,6 +30,7 @@
   width: 0px !important;
 }
 .scroll-container:hover::-webkit-scrollbar {
+ display: none;
   /*display: none;*/
 }
 .hidden {
