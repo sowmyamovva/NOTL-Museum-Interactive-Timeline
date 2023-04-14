@@ -1,5 +1,5 @@
 
-  *,
+*,
 *::before,
 *::after {
   margin: 0;
@@ -7,13 +7,14 @@
   box-sizing: border-box;
 }
 .event_name {
-  position: absolute; 
+  position: absolute;
   background-color: white;
  /* padding: 5px;*/
   border: 1px solid black;
+  z-index: 999;
 }
 .scroll-container {
-  overflow-y: hidden;  /*Disable Vertical scroll*/
+  overflow-y: hidden; /*ADDED*/
   overflow-x: scroll;
   white-space: nowrap;
 }
@@ -28,12 +29,12 @@
   overflow-y: none;
 }
 .scroll-container::-webkit-scrollbar {
-  display: none; /*hide the nav bar*/
+  display: none;    /* ADDED */
   width: 0px !important;
 }
 .scroll-container:hover::-webkit-scrollbar {
- display: none;
-  /*display: none;*/
+
+  display: none;
 }
 .hidden {
     display:none !important;
@@ -83,10 +84,10 @@ body {
 }
 
 #timeline {
- position: relative;
- top:200px;
- height: 650px;
- width: 10000px;
+  position: relative; 
+  top: 200px; /*150*/
+  height: 650px; /*Added*/
+  width: 10000px;
 }
 
 .event:hover {
@@ -94,7 +95,7 @@ body {
 }
 
 .event-label {
-  position: absolute;
+  position: absolute; /*BUG FIXED Vertical Scroll was fixed before which moved image as user scrolled vertically*/
   top: -30px;
   left: 50%;
   transform: translateX(-50%);
@@ -240,6 +241,7 @@ div.overlay {
 
 /* Experimental Flip */
 .flip-container {
+  position: relative;
   perspective: 1000px;
   height: 100%;
   width: 100%;
@@ -283,7 +285,7 @@ div.overlay {
 
 .outer-container{
     margin: 50px 20px;
-    height: 80vh; 
+    height: 80vh;  /*ADDED*/
     border: 0.5px solid black;
     padding: 5px;
 }
@@ -345,9 +347,9 @@ animation: moveup 1s linear forwards;
 }
 .expandend-div{
 
-position: fixed;
+position: fixed; /*ADDED*/
 
-bottom: 35vh;
+top: 60vh;
 
 height: 350px;
 
@@ -363,7 +365,7 @@ animation-delay: 0.2s;
 
 transform: translateY(-78px);
 
-z-index: 9999; /*Position sub timeline in front of all other content*/
+z-index: 9999; /*ADDED*/
 
 }
 .close {
