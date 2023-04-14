@@ -157,6 +157,7 @@ CloseCon($conn);
 <div id="calendar">
   <button id="close-button">X</button>
 </div>
+<div class="addSpace"><div id = "video-container"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
