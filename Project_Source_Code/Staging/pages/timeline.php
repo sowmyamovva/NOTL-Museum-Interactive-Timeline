@@ -256,6 +256,8 @@ for (let i = 0; i < years_all_info.length; i++) {
       pathOnDiv(( years_all_info[i][3]+"_"+years_all_info[i][4]), pos, years_all_info[i][5] , years_all_info[i][6], years_all_info[i][0]);
     }
       }
+  create_circles();
+  
 // Get all the circles in the timeline
 const circles_year = document.querySelectorAll('.first-circle');
 
@@ -479,32 +481,34 @@ circles2.forEach((circle) => {
      * This way, we can alternate the y coordinate of each Image
      */
     var event_id = parseInt(circle.dataset.eventid,10)
+    var leftSmallOffset = 70; // Offsets the big images to the left
+    var leftBigOffset = 150; // Offsets the big images to the left
     // We want to center the dive based on how big the images are.
     if (event_id % 2 !==1){  // Odd Numbered Image
-        div.style.top = `${cy-40}px`; // bottom image
+        div.style.top = `${cy}px`;
         if (div.querySelector('img').naturalWidth < 400){ // Check to see if we're dealing with small image
-            div.style.left = `${circle.getBoundingClientRect().left -85}px`;
+            div.style.left = `${circle.getBoundingClientRect().left - leftSmallOffset}px`;
         }
         else{ // We're dealing with bigger image
-            div.style.left = `${circle.getBoundingClientRect().left -150}px`;
+            div.style.left = `${circle.getBoundingClientRect().left -leftBigOffset}px`;
             }
     }
     else{ // Even Numbered Image
-      div.style.top = `${cy+300}px`; // top image
+      div.style.top = `${cy+400}px`;
         if (div.querySelector('img').naturalWidth < 400 ){ // Check to see if we're dealing with small image
-            div.style.left = `${circle.getBoundingClientRect().left -85}px`;
+            div.style.left = `${circle.getBoundingClientRect().left -leftSmallOffset}px`;
         }
-        else{ // We're dealing with bigger image so poisition it accordingly
-            div.style.left = `${circle.getBoundingClientRect().left -150}px`;
-        }
+        else{ // We're dealing with bigger image
+            div.style.left = `${circle.getBoundingClientRect().left -leftBigOffset}px`;
+            }
     }
     //Reformats first div to be uniform with the rest of the bottom divs.
     if (event_id == 1){
-      div.style.top = `${cy+275}px`; // modified bottom image because it was not lining up properly 
+      div.style.top = `${cy+375}px`;
       if (div.querySelector('img').naturalWidth < 400){ // Check to see if we're dealing with small image
           div.style.left = `${circle.getBoundingClientRect().left -85}px`;
       }
-      else{ // We're dealing with bigger image so poisition it accordingly
+      else{ // We're dealing with bigger image
           div.style.left = `${circle.getBoundingClientRect().left -150}px`;
           }
     }
@@ -592,6 +596,18 @@ firstLine.addEventListener('click', (event) => {
 
 
   } 
+    // This is used to close all the circles that are currently open on the timeline closeCircle by selecing a subtimeline
+    circles2.forEach((circle) => {
+    // div.classList.add("event_name");
+    var cid = circle.dataset.eventid;
+    var c_div = document.getElementById('circle_'+cid);
+    if(circle.classList.contains('selected_circle')){
+      circle.classList.remove('selected_circle');
+      circle.classList.add('unselected_circle');
+      c_div.style.display="none";
+    }
+  });
+  
 });
 
 
