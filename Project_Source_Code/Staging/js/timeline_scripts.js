@@ -7,7 +7,20 @@ var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","<1500","0"],
                     ["5","UsRevolutionA","UsRevolutionB","1791",null,"1791","0"],
                     ["6","WarA","WarB","1812",null,"1812","1"],
                     ["7","RebuildA","RebuildB","1815",null,"1815","0"],
-                    ["8","ShippingA","ShippingB","1831",null,"1831","0"]];
+                    ["8","ShippingA","ShippingB","1831",null,"1831","0"],
+                    ["9,","ShippingA","ShippingB","1832",null,"1832","0"],
+                    ["10","ShippingA","ShippingB","1833",null,"1833","0"],
+                    ["11","ShippingA","ShippingB","1834",null,"1834","0"],
+                    ["12","ShippingA","ShippingB","1835",null,"1835","0"],
+                    ["13","ShippingA","ShippingB","1836",null,"1836","0"],
+                    ["14","ShippingA","ShippingB","1837",null,"1837","0"],
+                    ["15","ShippingA","ShippingB","1838",null,"1838","0"],
+                    ["16","ShippingA","ShippingB","1839",null,"1839","0"],
+                    ["17","ShippingA","ShippingB","1840",null,"1840","0"],
+                    ["18","ShippingA","ShippingB","1941",null,"1941","0"],
+                    ["19","ShippingA","ShippingB","1942",null,"1942","0"],
+                    ["20","ShippingA","ShippingB","1943",null,"1943","0"],
+                    ["21","ShippingA","ShippingB","2023",null,"2023","0"]];
 var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSubK","WarSubB,WarSubD,WarSubF,WarSubH,WarSubJ,WarSubL","6"]];
   
  /* { // COMMENTED OUT 
@@ -41,6 +54,7 @@ function process_sub_images(front,back,title){
     return year_tooltip;
 }
 
+
   // This collects all titles available and  makes them into an option under the select
 for (let i = 0; i < years_all_info.length; i++) {
   //console.log("here");
@@ -50,11 +64,66 @@ for (let i = 0; i < years_all_info.length; i++) {
     .insertAdjacentHTML("beforeend", option);
 }
 
+  //CREATE CIRCLES ON TIMELINE
   // This iterates over every event we have and called pathondiv to make a circle element for it.
-for (let i = 0; i < years_all_info.length; i++) {
-  pathOnDiv(( years_all_info[i][3]+"_"+years_all_info[i][4]), i / (years_all_info.length - 1), years_all_info[i][5] , years_all_info[i][6], years_all_info[i][0]);
-}
 
+function create_circles(){
+  var pos = 0;
+  var position = []
+  var year1 = 0;
+  var year2 = 0;
+
+
+  // Preprocess Lines
+  position[0] = 0
+  for (let i = 0; i < years_all_info.length; i++) {
+
+    if (i != 0){    
+      year1 = years_all_info[i-1][3];
+      year2 = years_all_info[i][3];
+      if (Math.abs(year1 - year2) > 2000) // If distance is bigger than 2000 reduce it to a fixed large value for normalization
+        position[i] = 3;
+      else if (Math.abs(Math.abs(year1-year2)<300 && Math.abs(year1-year2)>=200)) {// If distance is bigger than 2000 reduce it to a fixed large value for normalization
+        position[i] = 2;
+        }
+      else if (Math.abs(year1-year2)<200 && Math.abs(year1-year2)>=50){
+        position[i] = 1.6;
+      }
+      else if (Math.abs(year1-year2)<50 && Math.abs(year1-year2)>=20){
+        position[i] = 1.4;
+      }
+      else if (Math.abs(year1-year2)<20 && Math.abs(year1-year2)>=5){
+        position[i] = 1.2;
+      }
+      else{
+        position[i] = 1
+      }
+    }
+  }
+
+  console.log("");
+  const sum = position.reduce((acc, curr) => acc + curr, 0); // calculate the sum of all the values
+  position = position.map((val) => val / sum); // normalize each value by dividing by the sum
+
+  console.log("");
+
+
+  for (let i = 0; i < years_all_info.length; i++) {
+     // pos = i / (years_all_info.length - 1);
+    pos += position[i];
+
+    console.log("");
+    pathOnDiv(( years_all_info[i][3]+"_"+years_all_info[i][4]), pos, years_all_info[i][5] , years_all_info[i][6], years_all_info[i][0]);
+    // pathOnDiv(( years_all_info[i][3]+"_"+years_all_info[i][4]), i / (years_all_info.length - 1), years_all_info[i][5] , years_all_info[i][6], years_all_info[i][0]);
+
+  }
+  // TL.setAttribute('width', width*scaleWidth);
+  // path.setAttribute('x2',((width-100)*(scaleWidth)));
+  // TL.setAttribute("viewBox", "0 0 "+ width*scaleWidth+ " 500");
+  console.log("")
+  }
+ 
+  create_circles();
 // Get all the circles in the timeline
 const circles_year = document.querySelectorAll('.first-circle');
 
@@ -84,7 +153,7 @@ var cnt = 0;
 function pathOnDiv(text, pos, title,sub,id) {
   var path = document.getElementById("mypath");
   var pathLength = path.getTotalLength();
-  var loc = path.getPointAtLength(pos * (pathLength - 10));
+  var loc = path.getPointAtLength(pos * (pathLength));
   var point =
     "<circle id=" + text +" cx='" + (loc.x + 8) + "' cy='" +  loc.y +
     "'  class=' unselected_circle event first-circle' data-year='" +
@@ -193,7 +262,6 @@ filterButton.addEventListener("click", () => {
   });
 });
 
-  
 //The following is the title filter functionality
 var filterSelect = document.querySelector("#filter_title");
 const circles_title = document.querySelectorAll(".first-circle");
@@ -203,6 +271,18 @@ filterSelect.addEventListener("change", function() {
    // console.log(selectedValue + " and " + circle.getAttribute("data-title"));
    
    var card_id = "circle_"+index;
+
+   // Experimental
+  //  console.log("");  
+  //  if (
+  //   selectedValue == "all" || circle.getAttribute("data-title") == selectedValue) {
+  //     const newCircle = circle.cloneNode(true);
+  //     var c_div = document.getElementById('#'+card_id);
+  //   }
+
+
+
+   // Filter on timeline, buggy
    console.log("card_id "+card_id);
     if (
       selectedValue === "all" || circle.getAttribute("data-title") == selectedValue ) 
@@ -261,7 +341,7 @@ circles2.forEach((circle) => {
     circle.classList.add('selected_circle');
     div.style.display="block";
     }
-    else
+    else // circle is selected
     {
       circle.classList.remove('selected_circle');
       circle.classList.add('unselected_circle');
@@ -270,10 +350,11 @@ circles2.forEach((circle) => {
   
     // div.style.top = `${cy}px`;
     // div.style.left = `${cx+400}px`; //715
-    // Odd numbered Image   BUG FIXES
   
     document.body.appendChild(div);
   });
+
+
 
 
 
@@ -286,33 +367,44 @@ circles2.forEach((circle) => {
      * This way, we can alternate the y coordinate of each Image
      */
     var event_id = parseInt(circle.dataset.eventid,10)
+    var leftSmallOffset = 70; // Offsets the big images to the left
+    var leftBigOffset = 150; // Offsets the big images to the left
     // We want to center the dive based on how big the images are.
-    if (event_id % 2 !==0){  // Odd Numbered Image
-        div.style.top = `${cy+400}px`;
+    if (event_id % 2 !==1){  // Odd Numbered Image
+        div.style.top = `${cy}px`;
         if (div.querySelector('img').naturalWidth < 400){ // Check to see if we're dealing with small image
-            div.style.left = `${circle.getBoundingClientRect().left -85}px`;
+            div.style.left = `${circle.getBoundingClientRect().left - leftSmallOffset}px`;
         }
         else{ // We're dealing with bigger image
-            div.style.left = `${circle.getBoundingClientRect().left -150}px`;
+            div.style.left = `${circle.getBoundingClientRect().left -leftBigOffset}px`;
             }
     }
     else{ // Even Numbered Image
-        div.style.top = `${cy+50}px`;
+      div.style.top = `${cy+400}px`;
         if (div.querySelector('img').naturalWidth < 400 ){ // Check to see if we're dealing with small image
-            div.style.left = `${circle.getBoundingClientRect().left -85}px`;
+            div.style.left = `${circle.getBoundingClientRect().left -leftSmallOffset}px`;
         }
         else{ // We're dealing with bigger image
-            div.style.left = `${circle.getBoundingClientRect().left -150}px`;
+            div.style.left = `${circle.getBoundingClientRect().left -leftBigOffset}px`;
             }
+    }
+    //Reformats first div to be uniform with the rest of the bottom divs.
+    if (event_id == 1){
+      div.style.top = `${cy+375}px`;
+      if (div.querySelector('img').naturalWidth < 400){ // Check to see if we're dealing with small image
+          div.style.left = `${circle.getBoundingClientRect().left -85}px`;
+      }
+      else{ // We're dealing with bigger image
+          div.style.left = `${circle.getBoundingClientRect().left -150}px`;
+          }
     }
     // BUG FIXES
 
   });
-
   
   circle_index++;
 });
-
+// This boolean value tells us if we have content already contained within the subetimeline overlay
 var overlayPopulated = false; // BUG FIX
 
   // The following is for sub-timeline
@@ -362,12 +454,13 @@ firstLine.addEventListener('click', (event) => {
     // right before that we need to add code to clear out all elements from the sub_events_container element.
     const sub_events_container = document.querySelector("#sub_events_container");
 
+    // If sub-timeline already contains content, do not add it again.
     if (!overlayPopulated) {  /*BUG FIXES*/
     // populate the overlay with front_images and back_images
-    for (let i = 0; i < front_images.length; i++) {
-        var grid_elements = process_sub_images(front_images[i],back_images[i],("Before "+circleElemAfter.getAttribute("data-title")));
-        sub_events_container.insertAdjacentHTML('beforeend',grid_elements);
-    }
+      for (let i = 0; i < front_images.length; i++) {
+          var grid_elements = process_sub_images(front_images[i],back_images[i],("Before "+circleElemAfter.getAttribute("data-title")));
+          sub_events_container.insertAdjacentHTML('beforeend',grid_elements);
+      }
     overlayPopulated = true;
     }
 
@@ -390,7 +483,18 @@ firstLine.addEventListener('click', (event) => {
     }
 
 
-  } 
+  }
+  // This is used to close all the circles that are currently open on the timeline closeCircle
+  circles2.forEach((circle) => {
+    // div.classList.add("event_name");
+    var cid = circle.dataset.eventid;
+    var c_div = document.getElementById('circle_'+cid);
+    if(circle.classList.contains('selected_circle')){
+      circle.classList.remove('selected_circle');
+      circle.classList.add('unselected_circle');
+      c_div.style.display="none";
+    }
+  });
 });
 
 
@@ -410,6 +514,7 @@ function off() {
 // This is when a user clicks on timeline to view sub-timeline, the code has to find the circle before
   // and after to add the line-indicator for the subtimeline in the right position
 function findCircleBeforeX(x) {
+  
   //console.log("findCircleBeforeX");
   const circles = document.querySelectorAll('.first-circle');
   let circleBefore = null;
@@ -425,7 +530,6 @@ function findCircleBeforeX(x) {
       // console.log(circle.cx.baseVal.value);
     }
   });
-
   return circleBefore;
 }
 
@@ -451,4 +555,35 @@ const circleX = circle.getBoundingClientRect().left - event.target.getBoundingCl
   });
   return circleAfter;
 }
+
+// VIDEO EMBEDMENT
+
+// HTML string
+// User will be able to supply an embedded video by simply right clicking the video and copying the embedded video 
+const videoHtml = '<iframe width="554" height="309" src="https://www.youtube.com/embed/bkUTrn_qeyA" title="The Battle of Lundy&#39;s Lane (July 1814)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+
+// create an iframe element
+const iframe = document.createElement('iframe');
+
+// extract attribute values from HTML string
+const parser = new DOMParser();
+const parsedHtml = parser.parseFromString(videoHtml, 'text/html');
+const videoSrc = parsedHtml.querySelector('iframe').getAttribute('src');
+const videoWidth = parsedHtml.querySelector('iframe').getAttribute('width');
+const videoHeight = parsedHtml.querySelector('iframe').getAttribute('height');
+const videoTitle = parsedHtml.querySelector('iframe').getAttribute('title');
+const videoAllow = parsedHtml.querySelector('iframe').getAttribute('allow');
+const videoAllowFullscreen = parsedHtml.querySelector('iframe').getAttribute('allowfullscreen');
+
+// set the iframe source and attributes
+iframe.src = videoSrc;
+iframe.width = videoWidth;
+iframe.height = videoHeight;
+iframe.title = videoTitle;
+iframe.allow = videoAllow;
+iframe.allowFullscreen = videoAllowFullscreen;
+
+// add the iframe element to the DOM
+const video_container = document.getElementById('video-container');
+video_container.appendChild(iframe);
 

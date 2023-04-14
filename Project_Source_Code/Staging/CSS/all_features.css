@@ -14,6 +14,7 @@
   z-index: 999;
 }
 .scroll-container {
+  overflow-y: hidden; /*ADDED*/
   overflow-x: scroll;
   white-space: nowrap;
 }
@@ -83,10 +84,10 @@ body {
 }
 
 #timeline {
-  position: relative; /**/
-  top: 300px;
-  height: 200px;
-  width: 2000px;
+  position: relative; 
+  top: 200px; /*150*/
+  height: 650px; /*Added*/
+  width: 10000px;
   /* Set the width of the timeline to a large value */
   position: relative;
 }
@@ -286,7 +287,7 @@ div.overlay {
 
 .outer-container{
     margin: 50px 20px;
-    height: 70vh;
+    height: 80vh;  /*ADDED*/
     border: 0.5px solid black;
     padding: 5px;
 }
@@ -348,9 +349,9 @@ animation: moveup 1s linear forwards;
 }
 .expandend-div{
 
-position: fixed;
+position: fixed; /*ADDED*/
 
-bottom: 35vh;
+top: 60vh;
 
 height: 350px;
 
@@ -366,7 +367,7 @@ animation-delay: 0.2s;
 
 transform: translateY(-78px);
 
-z-index: 9999;
+z-index: 9999; /*ADDED*/
 
 }
 .close {
@@ -432,4 +433,33 @@ opacity:1;
     opacity: 0;
     animation: scaleIn 4s infinite cubic-bezier(.36, .11, .89, .32);
     z-index: 11;
+}
+
+/* Added Space */
+.addSpace{
+  width: 2000px;
+  height: 2000px;
+  background-color:rgb(0, 0, 0);
+}
+
+/* VIDEO EMBEDMENT */
+/* set the max width of the video container */
+#video-container {
+  position: relative;
+  top: 100px;
+  left: 100px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* set the aspect ratio of the video */
+#video-container iframe {
+  display: block;
+  width: 100%;
+  max-height: 100%;
+  /* padding-bottom: 56.25%; */
+}
+
+#video-container iframe {
+  border: solid;
 }
