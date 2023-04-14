@@ -215,11 +215,46 @@ for (let i = 0; i < years_all_info.length; i++) {
     .insertAdjacentHTML("beforeend", option);
 }
 
-  // This iterates over every event we have and called pathondiv to make a circle element for it.
-for (let i = 0; i < years_all_info.length; i++) {
-  pathOnDiv(( years_all_info[i][3]+"_"+years_all_info[i][4]), i / (years_all_info.length - 1), years_all_info[i][5] , years_all_info[i][6], years_all_info[i][0]);
-}
-
+  
+  function create_circles(){
+    var pos = 0;
+    var position = []
+    var year1 = 0;
+    var year2 = 0;
+   // Preprocess Lines
+  position[0] = 0
+  for (let i = 0; i < years_all_info.length; i++) {
+    if (i != 0){    
+      year1 = years_all_info[i-1][3];
+      year2 = years_all_info[i][3];
+      if (Math.abs(year1 - year2) > 2000) // If distance is bigger than 2000 reduce it to a fixed large value for normalization
+        position[i] = 3;
+      else if (Math.abs(Math.abs(year1-year2)<300 && Math.abs(year1-year2)>=200)) {// If distance is bigger than 2000 reduce it to a fixed large value for normalization
+        position[i] = 2;
+        }
+      else if (Math.abs(year1-year2)<200 && Math.abs(year1-year2)>=50){
+        position[i] = 1.6;
+      }
+      else if (Math.abs(year1-year2)<50 && Math.abs(year1-year2)>=20){
+        position[i] = 1.4;
+      }
+      else if (Math.abs(year1-year2)<20 && Math.abs(year1-year2)>=5){
+        position[i] = 1.2;
+      }
+      else{
+        position[i] = 1
+      }
+    }
+  }
+   // Normalize values between 0 and 1 
+  const sum = position.reduce((acc, curr) => acc + curr, 0); // calculate the sum of all the values
+  position = position.map((val) => val / sum); // normalize each value by dividing by the sum
+  // This iterates over every event we have and called pathondiv to make a circle element for it.  
+    for (let i = 0; i < years_all_info.length; i++) {
+      pos += position[i]; // Keep adding distance to the previous distance
+      pathOnDiv(( years_all_info[i][3]+"_"+years_all_info[i][4]), pos, years_all_info[i][5] , years_all_info[i][6], years_all_info[i][0]);
+    }
+      }
 // Get all the circles in the timeline
 const circles_year = document.querySelectorAll('.first-circle');
 
