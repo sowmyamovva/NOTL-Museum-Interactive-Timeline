@@ -14,7 +14,7 @@ app.use(express.static(__dirname)); // + '/Staging'
 
 
 app.get('',(req, res)=> {
-    res.sendFile(__dirname + '/pages/timeline_repair.html');// timeline_repair
+    res.sendFile(__dirname + '/pages/timeline.html');// timeline_repair
 })
 // horizontal_example   // experimental
 

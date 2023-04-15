@@ -1,32 +1,184 @@
+<?php
+//echo getcwd() . "\n";
+include 'db.php';
+$conn = OpenCon();
+//echo "Connected Successfully";
 
-const arrayColumn = (arr, n) => arr.map(x => x[n]);
-var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","<1500","0"],
-                    ["2","EurContactA","EurContactB","1500",null,"1500s","0"],
-                    ["3","FortNiagaraA","FortNiagaraB","1764",null,"1764","0"],
-                    ["4","WhyNiagaraA","WhyNiagaraB","1790",null,"1790","0"],
-                    ["5","UsRevolutionA","UsRevolutionB","1791",null,"1791","0"],
-                    ["6","WarA","WarB","1812",null,"1812","1"],
-                    ["7","RebuildA","RebuildB","1815",null,"1815","0"],
-                    ["8","ShippingA","ShippingB","1831",null,"1831","0"],
-                    ["9,","ShippingA","ShippingB","1832",null,"1832","0"],
-                    ["10","ShippingA","ShippingB","1833",null,"1833","0"],
-                    ["11","ShippingA","ShippingB","1834",null,"1834","0"],
-                    ["12","ShippingA","ShippingB","1835",null,"1835","0"],
-                    ["13","ShippingA","ShippingB","1836",null,"1836","0"],
-                    ["14","ShippingA","ShippingB","1837",null,"1837","0"],
-                    ["15","ShippingA","ShippingB","1838",null,"1838","0"],
-                    ["16","ShippingA","ShippingB","1839",null,"1839","0"],
-                    ["17","ShippingA","ShippingB","1840",null,"1840","0"],
-                    ["18","ShippingA","ShippingB","1941",null,"1941","0"],
-                    ["19","ShippingA","ShippingB","1942",null,"1942","0"],
-                    ["20","ShippingA","ShippingB","1943",null,"1943","0"],
-                    ["21","ShippingA","ShippingB","2023",null,"2023","0"]];
-var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSubK","WarSubB,WarSubD,WarSubF,WarSubH,WarSubJ,WarSubL","6"]];
-  
- /* { // COMMENTED OUT 
+$sql = "SELECT id, image_front, image_back, date,date_title,date_marker,sub_events FROM events";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  $cnt1 = 0;
+  $cnt2 = 0;
+  $year_info = array(array());
+  while($row = $result->fetch_assoc()) {
+      $cnt2 = 0;
+      $year_info[$cnt1][$cnt2++] = $row["id"];
+      $year_info[$cnt1][$cnt2++] = $row["image_front"];
+      $year_info[$cnt1][$cnt2++] = $row["image_back"];
+      $year_info[$cnt1][$cnt2++] = $row["date"];
+      $year_info[$cnt1][$cnt2++] = $row["date_marker"];
+      $year_info[$cnt1][$cnt2++] = $row["date_title"];
+       $year_info[$cnt1][$cnt2++] = $row["sub_events"];
+     $cnt1++;
+  }
+} 
+
+$sql2 = "SELECT id, image_front, image_back, event_id FROM sub_events";
+$results = $conn->query($sql2);
+
+if ($results->num_rows > 0) {
+  // output data of each row
+  $cnt1 = 0;
+  $cnt2 = 0;
+  $sub_info = array(array());
+  $event_ids= array();
+  while($row = $results->fetch_assoc()) {
+     if(in_array($row["event_id"], $event_ids))
+     {
+        
+      $index = array_search($row["event_id"], $event_ids);
+      $sub_info[$index][0] = $sub_info[$index][0].",".$row["id"];
+      $sub_info[$index][1] = $sub_info[$index][1].",".$row["image_front"];
+      $sub_info[$index][2] = $sub_info[$index][2].",".$row["image_back"];
+     }
+    else{
+      $cnt2 = 0;
+      $sub_info[$cnt1][$cnt2++] = $row["id"];
+      $sub_info[$cnt1][$cnt2++] = $row["image_front"];
+      $sub_info[$cnt1][$cnt2++] = $row["image_back"];
+      $sub_info[$cnt1][$cnt2++] = $row["event_id"];
+      $event_ids[$cnt1] = $row["event_id"];
+     $cnt1++;
+    }
+  }
+} 
+CloseCon($conn);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="../CSS/all_features.css"> -->
+  <link rel="stylesheet" href="calendar.css">
+</head>
+<body>
+  <div class = "outer-container">
+
+<div class="filter-bar">
+    <div class="select-filter" id="filter">
+    <select id="filter_title">
+      <option value="all">All Titles</option>
+    </select>
+   </div>
+    <div class="range-filter">
+    <label for="from-year">From:</label>
+    <input type="number" id="from-year" name="from-year" min="0" max="2010" value="0" step="10">
+    <label for="to-year">To:</label>
+    <input type="number" id="to-year" name="to-year" min="0" max="2010" value="2010">
+    <button id="filter-button">Filter</button>
+    </div>
+  </div>
+
+<div id="timeline_container" class="scroll-container">
+
+  <div id="timeline_box" class="scroll-content">
+
+    <svg id="timeline" cache-id="16de89faabdb48d1a0a46f23dde4f4b1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"  x="0px" y="0px">
+      <defs>
+        <linearGradient id="e0YvEuspUTQ2-stroke" x1="0" y1="150" x2="300" y2="150" spreadMethod="pad" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 0)">
+          <!-- <stop id="e0YvEuspUTQ2-stroke-0" offset="0%" stop-color="#fc259b" />
+          <stop id="e0YvEuspUTQ2-stroke-1" offset="100%" stop-color="#f85e08" /> -->
+          <stop id="e0YvEuspUTQ2-stroke-0" offset="0%" stop-color="#94b8b4" />
+          <stop id="e0YvEuspUTQ2-stroke-1" offset="100%" stop-color="#ac80b0" />
+        </linearGradient>
+      </defs>
+
+     <line id="mypath" x1="-1600" y1="180" x2="2000" y2="180" fill="#1c278a" stroke="url(#e0YvEuspUTQ2-stroke)" stroke-width="13" />
+    
+        <g id ="sub_timeline" class="arrow_sub">
+            <style type="text/css">
+                .st0{fill:none;stroke:whitesmoke;stroke-miterlimit:10;stroke-width: 5;z-index: 11;}
+                .st1{ r: 15 !important;
+                    fill:url(#e0YvEuspUTQ2-stroke);
+                    stroke: white;
+                    stroke-width: 3;}
+            </style>
+          <!--The following html code is the code for the line that shows up to indicate sub timeline -->
+            <line id="sub_line1" class="st0" x1="186" y1="180" x2="185.5" y2="340"/>
+            <circle id ="sub_circle" class="st1 hidden" cx = "186" cy = "340" />
+            <!-- <line id="sub_line2" class="st0" x1="8.5" y1="340" x2="181.5" y2="340"/>
+            <line id="sub_line3" class="st0" x1="362.5" y1="340" x2="181.5" y2="340"/>
+            <line id="sub_line4" class="st0" x1="8.5" y1="380" x2="8.5" y2="340"/>
+            <line id="sub_line5" class="st0" x1="362.5" y1="380" x2="362.5" y2="340"/> -->
+        </g>
+        
+    </svg>
+
+  </div>
+</div>
+
+</div>
+  <!-- The signifiers -->
+<div class="left_arrow hidden" id = "left_arrow">
+    <i class="material-icons" style='font-size:30px;color:white'>chevron_left</i>
+  </div>
+<div class = "right_arrow hidden" id = "right_arrow"  >
+  <i class="material-icons" style='font-size:30px;color:white'>chevron_right</i>
+</div>
+<!-- <script src='all_features.js'></script> -->
+
+<!-- The element that holds the sub-timeline -->
+<div class="main-div">
+    <?xml version="1.0" encoding="utf-8"?>
+
+    <div class="expandend-div hidden">
+        <h1 id = "sub_heading">heading</h1>
+        <div class="grid" id="sub_events_container">
+          
+        </div>
+        
+    <button class="close" onclick="off()">x</button>
+    </div>
+    
+</div>
+<!-- The overlay for when the subtimeline appears. -->
+<div class = "overlay hidden" id ="overlay" onclick="off()">
+    <div>
+
+    </div>
+</div>
+<button id="show-div-button">Show Div Block</button>
+<div id="calendar">
+  <button id="close-button">X</button>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+<script src='calendar.js'></script> 
+<script>
+
+    </script>
+<script>
+// const arrayColumn = (arr, n) => arr.map(x => x[n]);
+// var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","11,000 years ago","0"],
+//                     ["2","EurContactA","EurContactB","1500",null,"1500s","0"],
+//                     ["3","FortNiagaraA","FortNiagaraB","1764",null,"1764","0"],
+//                     ["4","WhyNiagaraA","WhyNiagaraB","1790",null,"1790","0"],
+//                     ["5","UsRevolutionA","UsRevolutionB","1791",null,"1791","0"],
+//                     ["6","WarA","WarB","1812",null,"1812","1"],
+//                     ["7","RebuildA","RebuildB","1815",null,"1815","0"],
+//                     ["8","ShippingA","ShippingB","1831",null,"1831","0"]];
+// var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSubK","WarSubB,WarSubD,WarSubF,WarSubH,WarSubJ,WarSubL","6"]];
   const arrayColumn = (arr, n) => arr.map(x => x[n]);
   var years_all_info = <?php echo json_encode($year_info); ?>;
-  var sub_events = <?php echo json_encode($sub_info); ?>; }*/
+  var sub_events = <?php echo json_encode($sub_info); ?>;
 
 
 // To change the the card that shows up on clicking circles on teh subtimeline make edits here
@@ -54,7 +206,6 @@ function process_sub_images(front,back,title){
     return year_tooltip;
 }
 
-
   // This collects all titles available and  makes them into an option under the select
 for (let i = 0; i < years_all_info.length; i++) {
   //console.log("here");
@@ -64,63 +215,11 @@ for (let i = 0; i < years_all_info.length; i++) {
     .insertAdjacentHTML("beforeend", option);
 }
 
-  //CREATE CIRCLES ON TIMELINE
   // This iterates over every event we have and called pathondiv to make a circle element for it.
+for (let i = 0; i < years_all_info.length; i++) {
+  pathOnDiv(( years_all_info[i][3]+"_"+years_all_info[i][4]), i / (years_all_info.length - 1), years_all_info[i][5] , years_all_info[i][6], years_all_info[i][0]);
+}
 
-function create_circles(){
-  var pos = 0;
-  var position = []
-  var year1 = 0;
-  var year2 = 0;
-
-
-  // Preprocess Lines
-  position[0] = 0
-  for (let i = 0; i < years_all_info.length; i++) {
-
-    if (i != 0){    
-      year1 = years_all_info[i-1][3];
-      year2 = years_all_info[i][3];
-      if (Math.abs(year1 - year2) > 2000) // If distance is bigger than 2000 reduce it to a fixed large value for normalization
-        position[i] = 3;
-      else if (Math.abs(Math.abs(year1-year2)<300 && Math.abs(year1-year2)>=200)) {// If distance is bigger than 2000 reduce it to a fixed large value for normalization
-        position[i] = 2;
-        }
-      else if (Math.abs(year1-year2)<200 && Math.abs(year1-year2)>=50){
-        position[i] = 1.6;
-      }
-      else if (Math.abs(year1-year2)<50 && Math.abs(year1-year2)>=20){
-        position[i] = 1.4;
-      }
-      else if (Math.abs(year1-year2)<20 && Math.abs(year1-year2)>=5){
-        position[i] = 1.2;
-      }
-      else{
-        position[i] = 1
-      }
-    }
-  }
-
-  console.log("");
-  const sum = position.reduce((acc, curr) => acc + curr, 0); // calculate the sum of all the values
-  position = position.map((val) => val / sum); // normalize each value by dividing by the sum
-
-  console.log("");
-
-
-  for (let i = 0; i < years_all_info.length; i++) {
-     // pos = i / (years_all_info.length - 1);
-    pos += position[i]; // Keep adding distance to the previous distance
-    pathOnDiv(( years_all_info[i][3]+"_"+years_all_info[i][4]), pos, years_all_info[i][5] , years_all_info[i][6], years_all_info[i][0]);
-    // pathOnDiv(( years_all_info[i][3]+"_"+years_all_info[i][4]), i / (years_all_info.length - 1), years_all_info[i][5] , years_all_info[i][6], years_all_info[i][0]);
-  }
-  // TL.setAttribute('width', width*scaleWidth);
-  // path.setAttribute('x2',((width-100)*(scaleWidth)));
-  // TL.setAttribute("viewBox", "0 0 "+ width*scaleWidth+ " 500");
-  console.log("")
-  }
- 
-  create_circles();
 // Get all the circles in the timeline
 const circles_year = document.querySelectorAll('.first-circle');
 
@@ -150,7 +249,7 @@ var cnt = 0;
 function pathOnDiv(text, pos, title,sub,id) {
   var path = document.getElementById("mypath");
   var pathLength = path.getTotalLength();
-  var loc = path.getPointAtLength(pos * (pathLength));
+  var loc = path.getPointAtLength(pos * (pathLength - 10));
   var point =
     "<circle id=" + text +" cx='" + (loc.x + 8) + "' cy='" +  loc.y +
     "'  class=' unselected_circle event first-circle' data-year='" +
@@ -259,6 +358,7 @@ filterButton.addEventListener("click", () => {
   });
 });
 
+  
 //The following is the title filter functionality
 var filterSelect = document.querySelector("#filter_title");
 const circles_title = document.querySelectorAll(".first-circle");
@@ -268,18 +368,6 @@ filterSelect.addEventListener("change", function() {
    // console.log(selectedValue + " and " + circle.getAttribute("data-title"));
    
    var card_id = "circle_"+index;
-
-   // Experimental
-  //  console.log("");  
-  //  if (
-  //   selectedValue == "all" || circle.getAttribute("data-title") == selectedValue) {
-  //     const newCircle = circle.cloneNode(true);
-  //     var c_div = document.getElementById('#'+card_id);
-  //   }
-
-
-
-   // Filter on timeline, buggy
    console.log("card_id "+card_id);
     if (
       selectedValue === "all" || circle.getAttribute("data-title") == selectedValue ) 
@@ -307,9 +395,7 @@ var circle_index = 0;
 var circles2 = document.querySelectorAll(".first-circle");
 //console.log(circles2);
 
-
-const timeline_box = document.getElementById('timeline_box');
-
+  
   // The following code is for what a circle does on click
 circles2.forEach((circle) => {
 
@@ -323,10 +409,6 @@ circles2.forEach((circle) => {
   // var img = document.createElement("IMG");
   //   img.src = "clubs_ace.svg";
   //   div.appendChild(img);
-
-  const cx = parseFloat(circle.getAttribute('cx'));
-  const cy = parseFloat(circle.getAttribute('cy'));
-
   circle.addEventListener("mousedown", () => {
   
     //secondLine.classList.add('hidden');
@@ -338,72 +420,65 @@ circles2.forEach((circle) => {
     circle.classList.add('selected_circle');
     div.style.display="block";
     }
-    else // circle is selected
+    else
     {
       circle.classList.remove('selected_circle');
       circle.classList.add('unselected_circle');
       div.style.display="none";
     }
-  
-    // div.style.top = `${cy}px`;
-    // div.style.left = `${cx+400}px`; //715
+    div.style.top = `${circle.getBoundingClientRect().top + 70}px`;
+    div.style.left = `${circle.getBoundingClientRect().left +10}px`;
   
     document.body.appendChild(div);
   });
-
-
-
-
 
   // The following code is to ensure the cards move with scroll. will have to add similar code
   // for document so it is consistent with scroll up and down.
   document.getElementById("timeline_container").addEventListener("scroll", () => {
 
-    //   BUG FIXES
+    //div.style.top = `${circle.getBoundingClientRect().top + 70}px`;
+    //div.style.left = `${circle.getBoundingClientRect().left +10}px`;
+    
     /* Here, we keep track of the event_id so that we know whether we are at an enen or odd numbered image.
      * This way, we can alternate the y coordinate of each Image
      */
     var event_id = parseInt(circle.dataset.eventid,10)
-    var leftSmallOffset = 70; // Offsets the big images to the left
-    var leftBigOffset = 150; // Offsets the big images to the left
     // We want to center the dive based on how big the images are.
     if (event_id % 2 !==1){  // Odd Numbered Image
-        div.style.top = `${cy}px`;
+        div.style.top = `${cy-40}px`; // bottom image
         if (div.querySelector('img').naturalWidth < 400){ // Check to see if we're dealing with small image
-            div.style.left = `${circle.getBoundingClientRect().left - leftSmallOffset}px`;
+            div.style.left = `${circle.getBoundingClientRect().left -85}px`;
         }
         else{ // We're dealing with bigger image
-            div.style.left = `${circle.getBoundingClientRect().left -leftBigOffset}px`;
+            div.style.left = `${circle.getBoundingClientRect().left -150}px`;
             }
     }
     else{ // Even Numbered Image
-      div.style.top = `${cy+400}px`;
+      div.style.top = `${cy+300}px`; // top image
         if (div.querySelector('img').naturalWidth < 400 ){ // Check to see if we're dealing with small image
-            div.style.left = `${circle.getBoundingClientRect().left -leftSmallOffset}px`;
+            div.style.left = `${circle.getBoundingClientRect().left -85}px`;
         }
-        else{ // We're dealing with bigger image
-            div.style.left = `${circle.getBoundingClientRect().left -leftBigOffset}px`;
-            }
+        else{ // We're dealing with bigger image so poisition it accordingly
+            div.style.left = `${circle.getBoundingClientRect().left -150}px`;
+        }
     }
     //Reformats first div to be uniform with the rest of the bottom divs.
     if (event_id == 1){
-      div.style.top = `${cy+375}px`;
+      div.style.top = `${cy+275}px`; // modified bottom image because it was not lining up properly 
       if (div.querySelector('img').naturalWidth < 400){ // Check to see if we're dealing with small image
           div.style.left = `${circle.getBoundingClientRect().left -85}px`;
       }
-      else{ // We're dealing with bigger image
+      else{ // We're dealing with bigger image so poisition it accordingly
           div.style.left = `${circle.getBoundingClientRect().left -150}px`;
           }
     }
-    // BUG FIXES
-
   });
-  
   circle_index++;
 });
-// This boolean value tells us if we have content already contained within the subetimeline overlay
-var overlayPopulated = false; // BUG FIX
 
+// This boolean value tells us if we have content already contained within the subetimeline overlay
+var overlayPopulated = false;
+  
   // The following is for sub-timeline
 firstLine.addEventListener('click', (event) => {
        
@@ -439,6 +514,7 @@ firstLine.addEventListener('click', (event) => {
     // var sub_line5 = document.querySelector('#sub_line5');
     // sub_line5.setAttribute('x1', (centerX+offset));
     // sub_line5.setAttribute('x2', (centerX+offset));
+
     var event_id = circleElemAfter.getAttribute("data-eventid");
     // console.log(circleElemAfter);
     var ids =arrayColumn(sub_events, 3);
@@ -450,17 +526,16 @@ firstLine.addEventListener('click', (event) => {
     //AFter setting all values in place only then show the subtimeline. Here we are using insertAdjacentHTML.
     // right before that we need to add code to clear out all elements from the sub_events_container element.
     const sub_events_container = document.querySelector("#sub_events_container");
-
+    
     // If sub-timeline already contains content, do not add it again.
-    if (!overlayPopulated) {  /*BUG FIXES*/
-    // populate the overlay with front_images and back_images
+    if (!overlayPopulated) {
       for (let i = 0; i < front_images.length; i++) {
           var grid_elements = process_sub_images(front_images[i],back_images[i],("Before "+circleElemAfter.getAttribute("data-title")));
           sub_events_container.insertAdjacentHTML('beforeend',grid_elements);
       }
-    overlayPopulated = true;
+      overlayPopulated = true;
     }
-
+    
     var sub_events_heading = circleElemBefore.getAttribute("data-title")+" - "+circleElemAfter.getAttribute("data-title");
     document.querySelector("#sub_heading").innerHTML = sub_events_heading;
     var over = document.querySelector(".overlay");
@@ -480,18 +555,7 @@ firstLine.addEventListener('click', (event) => {
     }
 
 
-  }
-  // This is used to close all the circles that are currently open on the timeline closeCircle
-  circles2.forEach((circle) => {
-    // div.classList.add("event_name");
-    var cid = circle.dataset.eventid;
-    var c_div = document.getElementById('circle_'+cid);
-    if(circle.classList.contains('selected_circle')){
-      circle.classList.remove('selected_circle');
-      circle.classList.add('unselected_circle');
-      c_div.style.display="none";
-    }
-  });
+  } 
 });
 
 
@@ -511,7 +575,6 @@ function off() {
 // This is when a user clicks on timeline to view sub-timeline, the code has to find the circle before
   // and after to add the line-indicator for the subtimeline in the right position
 function findCircleBeforeX(x) {
-  
   //console.log("findCircleBeforeX");
   const circles = document.querySelectorAll('.first-circle');
   let circleBefore = null;
@@ -527,6 +590,7 @@ function findCircleBeforeX(x) {
       // console.log(circle.cx.baseVal.value);
     }
   });
+
   return circleBefore;
 }
 
@@ -540,7 +604,7 @@ function findCircleAfterX(x) {
   // Iterate over all the circles and find the one with the closest X coordinate that is greater than the clicked X
   circles.forEach(function(circle) {
 
-const circleX = circle.getBoundingClientRect().left - event.target.getBoundingClientRect().left + circle.r.baseVal.value;
+    const circleX = circle.getBoundingClientRect().left - event.target.getBoundingClientRect().left + circle.r.baseVal.value;
     // console.log(circleX);
     // console.log(x);
     if (circleX > x && check) {
@@ -553,34 +617,8 @@ const circleX = circle.getBoundingClientRect().left - event.target.getBoundingCl
   return circleAfter;
 }
 
-// VIDEO EMBEDMENT
+</script>
+</body>
+</html>
 
-// HTML string
-// User will be able to supply an embedded video by simply right clicking the video and copying the embedded video 
-const videoHtml = '<iframe width="554" height="309" src="https://www.youtube.com/embed/bkUTrn_qeyA" title="The Battle of Lundy&#39;s Lane (July 1814)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
-
-// create an iframe element
-const iframe = document.createElement('iframe');
-
-// extract attribute values from HTML string
-const parser = new DOMParser();
-const parsedHtml = parser.parseFromString(videoHtml, 'text/html');
-const videoSrc = parsedHtml.querySelector('iframe').getAttribute('src');
-const videoWidth = parsedHtml.querySelector('iframe').getAttribute('width');
-const videoHeight = parsedHtml.querySelector('iframe').getAttribute('height');
-const videoTitle = parsedHtml.querySelector('iframe').getAttribute('title');
-const videoAllow = parsedHtml.querySelector('iframe').getAttribute('allow');
-const videoAllowFullscreen = parsedHtml.querySelector('iframe').getAttribute('allowfullscreen');
-
-// set the iframe source and attributes
-iframe.src = videoSrc;
-iframe.width = videoWidth;
-iframe.height = videoHeight;
-iframe.title = videoTitle;
-iframe.allow = videoAllow;
-iframe.allowFullscreen = videoAllowFullscreen;
-
-// add the iframe element to the DOM
-const video_container = document.getElementById('video-container');
-video_container.appendChild(iframe);
 
