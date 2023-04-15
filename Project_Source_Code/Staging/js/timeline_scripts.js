@@ -23,19 +23,25 @@ var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","<1500","0"],
                     ["21","ShippingA","ShippingB","2023",null,"2023","0"]];
 var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSubK","WarSubB,WarSubD,WarSubF,WarSubH,WarSubJ,WarSubL","6"]];
   
- /* { // COMMENTED OUT 
+// Stacking example
+//var year_tooltip = "<img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1730s' title='Information on "+years_all_info[year_index][5] +"' class='overlay2 back-image' onclick='swapImages()'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"' class='overlay2 front-image' onclick='swapImages()'>";
+
+ /* { // COMMENTED OUT PHP
   const arrayColumn = (arr, n) => arr.map(x => x[n]);
   var years_all_info = <?php echo json_encode($year_info); ?>;
   var sub_events = <?php echo json_encode($sub_info); ?>; }*/
 
 
-// To change the the card that shows up on clicking circles on teh subtimeline make edits here
+// To change the card that shows up on clicking circles on teh subtimeline make edits here
 function process_images(year_index){
     var time ="";
     if (years_all_info[year_index][4] !=null)
     {
         time = ( years_all_info[year_index][3]+" "+years_all_info[year_index][4]) ;
     }
+
+    // stacked images format
+    // var year_tooltip = "<img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1730s' title='Information on "+years_all_info[year_index][5] +"' class='overlay2 back-image' onclick='swapImages()'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"' class='overlay2 front-image' onclick='swapImages()'>";
 
     var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div>";
 
@@ -557,6 +563,7 @@ const circleX = circle.getBoundingClientRect().left - event.target.getBoundingCl
 
 // HTML string
 // User will be able to supply an embedded video by simply right clicking the video and copying the embedded video 
+
 const videoHtml = '<iframe width="554" height="309" src="https://www.youtube.com/embed/bkUTrn_qeyA" title="The Battle of Lundy&#39;s Lane (July 1814)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
 
 // create an iframe element
@@ -584,3 +591,34 @@ iframe.allowFullscreen = videoAllowFullscreen;
 const video_container = document.getElementById('video-container');
 video_container.appendChild(iframe);
 
+
+// Stack images Swapping function
+function swapImages() {
+  const backImage = document.querySelector(".back-image");
+  const frontImage = document.querySelector(".front-image");
+
+  if (frontImage.style.zIndex === "1") {
+    frontImage.style.zIndex = "2";
+    backImage.style.zIndex = "1";
+  } else {
+    frontImage.style.zIndex = "1";
+    backImage.style.zIndex = "2";
+  }
+}
+
+// This function is used to create stacked images and append them to a container
+// It takes in a list of lists and processes them in the same format as the years_all_info list
+function stackerParser(years_all_info) { 
+  var img1 = "https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[0][1]+".jpg?raw=true"
+  var img2 = "https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[0][2]+".jpg?raw=true"
+  var title1 = years_all_info[0][5];
+  var title2 = years_all_info[0][4];
+
+  var htmlString = "<img style='max-height:260px;' src='" + img2 + "' alt='1730s' title='Information on " + title1 + "' class='overlay2 back-image' onclick='swapImages()'>" +
+    "<img style='max-height:260px;' src='" + img1 + "' alt='1730s' title='" + years_all_info[3] + "_" + title2 + "' class='overlay2 front-image' onclick='swapImages()'>";
+  document.querySelector(".stacked-container").innerHTML = htmlString;
+}
+stackerParser(years_all_info);
+
+// "<img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1730s' title='Information on "+years_all_info[year_index][5] +"' class='overlay2 back-image' onclick='swapImages()'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"' class='overlay2 front-image' onclick='swapImages()'>";
+//var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","<1500","0"],
