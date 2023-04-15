@@ -597,3 +597,17 @@ function swapImages() {
     backImage.style.zIndex = "2";
   }
 }
+
+// This function is used to create stacked images and append them to a container
+// It takes in a list of lists and processes them in the same format as the years_all_info list
+function stackerParser(years_all_info) { 
+  var img1 = "https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[0][1]+".jpg?raw=true"
+  var img2 = "https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[0][2]+".jpg?raw=true"
+  var title1 = years_all_info[0][5];
+  var title2 = years_all_info[0][4];
+
+  var htmlString = "<img style='max-height:260px;' src='" + img2 + "' alt='1730s' title='Information on " + title1 + "' class='overlay2 back-image' onclick='swapImages()'>" +
+    "<img style='max-height:260px;' src='" + img1 + "' alt='1730s' title='" + years_all_info[3] + "_" + title2 + "' class='overlay2 front-image' onclick='swapImages()'>";
+  document.querySelector(".stacked-container").innerHTML = htmlString;
+}
+stackerParser(years_all_info);
