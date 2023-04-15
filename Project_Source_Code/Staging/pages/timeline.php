@@ -154,7 +154,11 @@ CloseCon($conn);
 
     </div>
 </div>
-<div class="addSpace"><div id = "video-container"></div>
+<!--This section is currently used by the stacked container and video container-->
+<div class="addSpace">
+  <div class = stacked-container>
+</div>
+<div id = "video-container"></div>
 
 <!-- <button id="show-div-button">Show Div Block</button>
   <button id="close-button">X</button>
