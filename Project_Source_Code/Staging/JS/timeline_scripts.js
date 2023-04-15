@@ -584,3 +584,16 @@ iframe.allowFullscreen = videoAllowFullscreen;
 const video_container = document.getElementById('video-container');
 video_container.appendChild(iframe);
 
+// Stack images Swapping function
+function swapImages() {
+  const backImage = document.querySelector(".back-image");
+  const frontImage = document.querySelector(".front-image");
+
+  if (frontImage.style.zIndex === "1") {
+    frontImage.style.zIndex = "2";
+    backImage.style.zIndex = "1";
+  } else {
+    frontImage.style.zIndex = "1";
+    backImage.style.zIndex = "2";
+  }
+}
