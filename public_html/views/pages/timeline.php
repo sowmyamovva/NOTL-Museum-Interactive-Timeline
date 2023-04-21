@@ -1,45 +1,30 @@
 <?php
-//echo getcwd() . "\n";
-require_once '../../config/config.php';
-$config = new Config();
-$connection = $config->getConnection();
+require_once '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/controllers/ContentController.php';
+$controller = new ContentController();
+$events = $controller->getEvents();
+$sub_events = $controller->getSubEvents();
+$cnt1 = 0;
+$cnt2 = 0;
+$year_info = array(array());
+foreach ($events as $row)
+{
+    $cnt2 = 0;
+    $year_info[$cnt1][$cnt2++] = $row["id"];
+    $year_info[$cnt1][$cnt2++] = $row["image_front"];
+    $year_info[$cnt1][$cnt2++] = $row["image_back"];
+    $year_info[$cnt1][$cnt2++] = $row["date"];
+    $year_info[$cnt1][$cnt2++] = $row["date_marker"];
+    $year_info[$cnt1][$cnt2++] = $row["date_title"];
+    $year_info[$cnt1][$cnt2++] = $row["sub_events"];
+    $cnt1++;
+}
 
-        $query = "SELECT id, image_front, image_back, date,date_title,date_marker,sub_events FROM events";
-        $result = mysqli_query($connection, $query);
-// // $conn = OpenCon();
-// // //echo "Connected Successfully";
-
-// // $sql = "SELECT id, image_front, image_back, date,date_title,date_marker,sub_events FROM events";
-// // $result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-  // output data of each row
-  $cnt1 = 0;
-  $cnt2 = 0;
-  $year_info = array(array());
-  while($row = $result->fetch_assoc()) {
-      $cnt2 = 0;
-      $year_info[$cnt1][$cnt2++] = $row["id"];
-      $year_info[$cnt1][$cnt2++] = $row["image_front"];
-      $year_info[$cnt1][$cnt2++] = $row["image_back"];
-      $year_info[$cnt1][$cnt2++] = $row["date"];
-      $year_info[$cnt1][$cnt2++] = $row["date_marker"];
-      $year_info[$cnt1][$cnt2++] = $row["date_title"];
-       $year_info[$cnt1][$cnt2++] = $row["sub_events"];
-     $cnt1++;
-  }
-} 
-
-$sql2 = "SELECT id, image_front, image_back, event_id FROM sub_events";
-$results = mysqli_query($connection, $sql2);
-
-if ($results->num_rows > 0) {
-  // output data of each row
   $cnt1 = 0;
   $cnt2 = 0;
   $sub_info = array(array());
   $event_ids= array();
-  while($row = $results->fetch_assoc()) {
+  foreach($sub_events as $row) 
+  {
      if(in_array($row["event_id"], $event_ids))
      {
         
@@ -58,11 +43,14 @@ if ($results->num_rows > 0) {
      $cnt1++;
     }
   }
-} 
-// CloseCon($conn);
-include '../../includes/header.php';
+
+require_once '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/config/config.php';
+$config = new Config();
+$connection = $config->getConnection();
+
+include '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/includes/header.php';
 ?>
-<link rel="stylesheet" href="../../assets/CSS/all_features.css" /> 
+<link rel="stylesheet" href="https://badger-timeline.infinityfreeapp.com/public_html/assets/CSS/all_features.css" /> 
 <body>
  <div class = "outer-container">
 
@@ -151,11 +139,12 @@ include '../../includes/header.php';
     </div>
 </div>
 
-<script>
+<h1>Events</h1>
+  <div id="eventscontainer"></div>
 
-    </script>
 <script>
-
+//  var trial_events = <?php //echo json_encode($events); ?>;
+//  var trial_sub_events = <?php // echo json_encode($sub_events); ?>;
   const arrayColumn = (arr, n) => arr.map(x => x[n]);
   var years_all_info = <?php echo json_encode($year_info); ?>;
   var sub_events = <?php echo json_encode($sub_info); ?>;
@@ -168,7 +157,7 @@ function process_images(year_index){
         time = ( years_all_info[year_index][3]+" "+years_all_info[year_index][4]) ;
     }
 
-    var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px; max-width:min-content;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div class='back'><img style ='max-height:260px;max-width:min-content;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div>";
+    var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px; max-width:min-content;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+"?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div class='back'><img style ='max-height:260px;max-width:min-content;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+"?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div>";
 
     var year_info = ' <div id="label" class="event-label" style=" display: block;height: 300px; white-space: normal; "><time>' +time + '</time>' + year_tooltip + '</div>';
 
@@ -528,11 +517,43 @@ function findCircleAfterX(x) {
 }
 
 </script>
+
 <?php 
 include '../../includes/footer.php'; 
 ?>
+<script id = "search_timeline">
+
+
+    var eventsContainer = document.getElementById('eventscontainer');
+console.log(trial_events);
+    for (var i = 0; i < trial_events.length; i++) {
+    // must add a more_info section
+      var event = trial_events[i];
+      var eventDiv = document.createElement('div');
+      eventDiv.setAttribute('id', 'event-' + event.date_title);
+      eventDiv.setAttribute('class', 'event_more_info');
+      eventDiv.innerHTML = '<h2>' + event.date_title + '</h2><p>' + event.date + ' ' + event.date_marker + '</p>';
+      eventsContainer.appendChild(eventDiv);
+    }
+
+    // Check if there is a search parameter in the URL
+    var params = new URLSearchParams(window.location.search);
+    var searchedValue = params.get('search');
+    if (searchedValue) {
+      // Scroll to the corresponding div
+      scrollToDiv('event-' + searchedValue);
+    }
+
+    function scrollToDiv(divId) {
+        var element = document.getElementById(divId);
+        console.log(element);
+        if (element) 
+        {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+</script>
 </body>
 </html>
-
 
 
