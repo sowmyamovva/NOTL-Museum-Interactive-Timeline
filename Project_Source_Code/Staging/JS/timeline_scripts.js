@@ -22,7 +22,13 @@ var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","<1500","0"],
                     ["20","ShippingA","ShippingB","1943",null,"1943","0"],
                     ["21","ShippingA","ShippingB","2023",null,"2023","0"]];
 var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSubK","WarSubB,WarSubD,WarSubF,WarSubH,WarSubJ,WarSubL","6"]];
-  
+ 
+// This dictionary is used to determine which circle has an additional overlay. It also contains the additional info.
+ var additional_info = {"1":"Relavant content to Indigenous people around 9000 BC",
+                        "2":"Relevant content to European contact around 1500",
+                        "5":"Relevant content to USRevolution  around 1791",
+                        "6":"Relevant content to WarA and WarB contact around 1812",
+                      }
  /* { // COMMENTED OUT 
   const arrayColumn = (arr, n) => arr.map(x => x[n]);
   var years_all_info = <?php echo json_encode($year_info); ?>;
@@ -37,7 +43,7 @@ function process_images(year_index){
         time = ( years_all_info[year_index][3]+" "+years_all_info[year_index][4]) ;
     }
 
-    var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div>";
+    var year_tooltip = "<div class='flip-container'><div class='flipper'><div id = "+years_all_info[year_index][0]+"A class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div id = "+years_all_info[year_index][0]+"B class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div></div>"; //put overlay3 here if you want it to be relative to the timeline
 
     var year_info = ' <div id="label" class="event-label" style=" display: block;height: 300px; white-space: normal; "><time>' +time + '</time>' + year_tooltip + '</div>';
 
@@ -351,7 +357,10 @@ circles2.forEach((circle) => {
     document.body.appendChild(div);
   });
 
-
+    // Get the circle id so that we can get the specific image that we want to add additional info to
+    var cid = circle.dataset.eventid;
+    const myImage = document.getElementById(cid+"B"); // The back image we're adding buttons to
+    extra_info(div, cid, myImage); // add additional info overlay
 
 
 
@@ -627,8 +636,9 @@ speakButtons.forEach((speakButton, index) => {
 
 /* This function is used to add an overlay button onto an image container that contains additional info.
  * Once the button is pressed, an overlay will appear below the timeline container.
- * Params: c_div: The circle div, cid: The circle ID*/
-function extra_info (c_div, cid) {
+ * Params: c_div: The circle div, cid: The circle ID, backImage: The back image we are adding the button to.
+ */
+function extra_info (c_div, cid, backImage) {
 // Check to see if circle has additional info
   if (!(cid in additional_info)){ // if circle does not have any additional info then don't add any buttons to it.
     return;
@@ -668,6 +678,20 @@ function extra_info (c_div, cid) {
       const content = document.createElement('div');
       content.classList.add('overlay-content');
 
+      // Create the speak button element or update the existing one
+      let speakButton = overlay.querySelector('#speak-button');
+      if (!speakButton) {
+        speakButton = document.createElement('button');
+        speakButton.id = 'speak-button';
+        speakButton.textContent = 'Speak';
+        content.appendChild(speakButton);
+      }
+      speakButton.addEventListener("click", () => {
+        const msg = new SpeechSynthesisUtterance();
+        msg.text = text.textContent;
+        window.speechSynthesis.speak(msg);
+      });
+
       content.appendChild(text);
       content.appendChild(img);
       overlay.appendChild(content);
@@ -688,14 +712,10 @@ function extra_info (c_div, cid) {
   button.style.position = "absolute";
   button.style.left = "0px";
   button.style.top = "0px";
-
-   if (cid != 1) { // Because the first circle's div is slightly off
-     button.style.transform = "translate(-8%, -69%)";
-   } else {
-     button.style.transform = "translate(-70%, 15%)";
-   }
+  button.style.color = "lightcoral";
+  button.style.backgroundColor = "aqua";
   button.style.fontSize = "24px";
 
-  // Append the button to the image container div
-  c_div.appendChild(button);
-}
+  // Append the button to the back image
+  backImage.appendChild(button);
+} // extra_info
