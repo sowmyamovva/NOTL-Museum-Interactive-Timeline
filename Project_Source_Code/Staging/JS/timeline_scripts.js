@@ -623,3 +623,79 @@ speakButtons.forEach((speakButton, index) => {
     window.speechSynthesis.speak(msg);
   });
 });
+
+
+/* This function is used to add an overlay button onto an image container that contains additional info.
+ * Once the button is pressed, an overlay will appear below the timeline container.
+ * Params: c_div: The circle div, cid: The circle ID*/
+function extra_info (c_div, cid) {
+// Check to see if circle has additional info
+  if (!(cid in additional_info)){ // if circle does not have any additional info then don't add any buttons to it.
+    return;
+  }
+
+  // Check if button already exists in div
+  if (c_div.querySelector('button') !== null) {
+    return; // Exit function if button already exists
+  }
+  
+  // Create a new button element
+  const button = document.createElement("button");
+
+  // Set the button text
+  button.innerHTML = "...";
+
+  // Set any other properties or attributes for the button as needed
+  button.setAttribute("class", "my-button" + cid);
+
+  // Set the button click event handler
+  button.onclick = function() {
+    // ADD EXTRA INFO OVERLAY
+    if (cid in additional_info) { // Check to see if there is additional info for circle
+      const overlay = document.getElementById("overlay3");
+      const text = document.createElement("p");
+      text.textContent = additional_info[cid];
+      const img = document.createElement("img");
+      img.src = "https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/" + years_all_info[cid - 1][1] + ".jpg?raw=true";
+
+      // Check if overlay content already exists and remove it if it does
+      const existingContent = overlay.querySelector('.overlay-content');
+      if (existingContent) {
+        overlay.removeChild(existingContent);
+      }
+
+      // Create a new div element to hold the overlay content
+      const content = document.createElement('div');
+      content.classList.add('overlay-content');
+
+      content.appendChild(text);
+      content.appendChild(img);
+      overlay.appendChild(content);
+
+      // Show the overlay when the button is clicked
+      overlay.style.display = "block";
+
+      // Hide the overlay when clicked outside the content area
+      overlay.addEventListener("click", function(e) {
+        if (e.target === overlay) {
+          overlay.style.display = "none";
+        }
+      });
+    }
+  };
+
+  // Button CSS
+  button.style.position = "absolute";
+  button.style.left = "0px";
+  button.style.top = "0px";
+
+   if (cid != 1) { // Because the first circle's div is slightly off
+     button.style.transform = "translate(-8%, -69%)";
+   } else {
+     button.style.transform = "translate(-70%, 15%)";
+   }
+  button.style.fontSize = "24px";
+
+  // Append the button to the image container div
+  c_div.appendChild(button);
+}
