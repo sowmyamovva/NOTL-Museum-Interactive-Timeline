@@ -154,6 +154,9 @@ CloseCon($conn);
 
     </div>
 </div>
+<!--  This space will contain the additional info overlay from the timeline  -->
+  <div class="addSpace"></div>
+<div id="overlay3"></div>
 <!--This section is currently used by the stacked container, video container, and text-to=speech example.-->
 <div class="addSpace">
   
