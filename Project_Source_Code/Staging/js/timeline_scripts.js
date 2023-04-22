@@ -22,7 +22,12 @@ var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","<1500","0"],
                     ["20","ShippingA","ShippingB","1943",null,"1943","0"],
                     ["21","ShippingA","ShippingB","2023",null,"2023","0"]];
 var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSubK","WarSubB,WarSubD,WarSubF,WarSubH,WarSubJ,WarSubL","6"]];
-  
+
+ var additional_info = {"1":"Relavant content to Indigenous people around 9000 BC",
+                        "2":"Relevant content to European contact around 1500",
+                        "5":"Relevant content to USRevolution  around 1791",
+                        "6":"Relevant content to WarA and WarB contact around 1812",
+                      }
 // Stacking example
 //var year_tooltip = "<img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1730s' title='Information on "+years_all_info[year_index][5] +"' class='overlay2 back-image' onclick='swapImages()'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"' class='overlay2 front-image' onclick='swapImages()'>";
 
@@ -35,15 +40,17 @@ var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSub
 // To change the card that shows up on clicking circles on teh subtimeline make edits here
 function process_images(year_index){
     var time ="";
-    if (years_all_info[year_index][4] !=null)
-    {
+    if (years_all_info[year_index][4] !=null){
         time = ( years_all_info[year_index][3]+" "+years_all_info[year_index][4]) ;
     }
 
     // stacked images format
     // var year_tooltip = "<img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1730s' title='Information on "+years_all_info[year_index][5] +"' class='overlay2 back-image' onclick='swapImages()'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"' class='overlay2 front-image' onclick='swapImages()'>";
 
-    var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div>";
+    //image with button
+    var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div></div>"; //put overlay3 here if you want it to be relative to the timeline
+
+    // var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div>";
 
     var year_info = ' <div id="label" class="event-label" style=" display: block;height: 300px; white-space: normal; "><time>' +time + '</time>' + year_tooltip + '</div>';
 
@@ -275,13 +282,6 @@ filterSelect.addEventListener("change", function() {
    
    var card_id = "circle_"+index;
 
-   // Experimental
-  //  console.log("");  
-  //  if (
-  //   selectedValue == "all" || circle.getAttribute("data-title") == selectedValue) {
-  //     const newCircle = circle.cloneNode(true);
-  //     var c_div = document.getElementById('#'+card_id);
-  //   }
 
 
 
@@ -315,8 +315,8 @@ var circles2 = document.querySelectorAll(".first-circle");
 
 
 const timeline_box = document.getElementById('timeline_box');
-
-  // The following code is for what a circle does on click
+var isOpen = false;
+  // The following code is for what a circle does on click  (CIRCLE CLICK) (ccl)
 circles2.forEach((circle) => {
 
   const div = document.createElement("div");
@@ -355,6 +355,8 @@ circles2.forEach((circle) => {
     // div.style.left = `${cx+400}px`; //715
   
     document.body.appendChild(div);
+    var cid = circle.dataset.eventid;
+    extra_info(div, cid);
   });
 
 
@@ -622,3 +624,102 @@ stackerParser(years_all_info);
 
 // "<img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1730s' title='Information on "+years_all_info[year_index][5] +"' class='overlay2 back-image' onclick='swapImages()'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"' class='overlay2 front-image' onclick='swapImages()'>";
 //var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","<1500","0"],
+
+
+
+// Add button to images
+function extra_info (c_div, cid) {
+// Check to see if circle has additional info
+  if (!(cid in additional_info)){ // if circle does not have any additional info then don't add any buttons to it.
+    return;
+  }
+
+  // Check if button already exists in div
+  if (c_div.querySelector('button') !== null) {
+    return; // Exit function if button already exists
+  }
+  
+  // Create a new button element
+  const button = document.createElement("button");
+
+  // Set the button text
+  button.innerHTML = "...";
+
+  // Set any other properties or attributes for the button as needed
+  button.setAttribute("class", "my-button" + cid);
+
+  // Set the button click event handler
+  button.onclick = function() {
+    // ADD EXTRA INFO OVERLAY
+    if (cid in additional_info) { // Check to see if there is additional info for circle
+      const overlay = document.getElementById("overlay3");
+      const text = document.createElement("p");
+      text.textContent = additional_info[cid];
+      const img = document.createElement("img");
+      img.src = "https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/" + years_all_info[cid - 1][1] + ".jpg?raw=true";
+
+      // Check if overlay content already exists and remove it
+      const existingContent = overlay.querySelector('.overlay-content');
+      if (existingContent) {
+        overlay.removeChild(existingContent);
+      }
+
+      // Create a new div element to hold the overlay content
+      const content = document.createElement('div');
+      content.classList.add('overlay-content');
+
+      // Create the speak button element or update the existing one
+      let speakButton = overlay.querySelector('#speak-button');
+      if (!speakButton) {
+        speakButton = document.createElement('button');
+        speakButton.id = 'speak-button';
+        speakButton.textContent = 'Speak';
+        content.appendChild(speakButton);
+      }
+      speakButton.addEventListener("click", () => {
+        const msg = new SpeechSynthesisUtterance();
+        msg.text = text.textContent;
+        window.speechSynthesis.speak(msg);
+      });
+
+      content.appendChild(text);
+      content.appendChild(img);
+      overlay.appendChild(content);
+
+      // Show the overlay when the button is clicked
+      overlay.style.display = "block";
+
+      // Hide the overlay when clicked outside the content area
+      overlay.addEventListener("click", function(e) {
+        if (e.target === overlay) {
+          overlay.style.display = "none";
+        }
+      });
+    }
+  };
+
+  // Set the button position and size
+  button.style.position = "relative";
+  button.style.left = "50%";
+  button.style.top = "50%";
+  if (cid != 1) { // Because the first circle's div is slightly off
+    button.style.transform = "translate(-8%, -68%)";
+  } else {
+    button.style.transform = "translate(-70%, 15%)";
+  }
+  button.style.fontSize = "24px";
+
+  // Append the button to the image container div
+  c_div.appendChild(button);
+}
+
+
+// Text-To-Speech
+const speakButton = document.getElementById("speak-button2");
+const textToSpeak = document.getElementById("text-to-speak2");
+
+speakButton.addEventListener("click", () => {
+  const msg = new SpeechSynthesisUtterance();
+  msg.text = textToSpeak.textContent;
+  window.speechSynthesis.speak(msg);
+});

@@ -8,9 +8,9 @@
 }
 .event_name {
   position: absolute;
-  background-color: white;
+  background-color: #242424; 
  /* padding: 5px;*/
-  border: 1px solid black;
+  /* border: 1px solid black; */
   z-index: 999;
 }
 .scroll-container {
@@ -421,17 +421,7 @@ opacity:1;
   border: solid;
 }
 
-/* Stacking */
-/* .image-container {
-  position: relative;
-}
-
-.image {
-  position: relative;
-  top: 0;
-  left: 0;
-} */
-
+/* STACKING */
 .stacked-container{
   position: relative;
   top: 100px;
@@ -460,4 +450,52 @@ opacity:1;
   /* height: 80%; */
   /* z-index: 10; */
   background-color: transparent;
+}
+
+.image-container {
+  position: relative;
+}
+
+.image-container button {
+  position: relative;
+  top: -5px;
+  left: 0px;
+  font-size: x-large;
+  /* transform: translate(-50%, -50%); */
+  z-index: 99999999;
+}
+
+/* timeline extro info overlay */
+#overlay3 {
+  display: none;
+  position: absolute;
+  top: 1000px;
+  left: 500px;
+  width: 1000px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 9998;
+}
+
+#overlay3 p {
+  position: absolute;
+  /* top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  color: white;
+  font-size: 24px;
+  text-align: center;
+}
+
+#overlay3 img {
+  position: absolute;
+  left: -500px;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+}
+
+.button speak-button2{
+  position: relative;
+  left: -100px;
 }
