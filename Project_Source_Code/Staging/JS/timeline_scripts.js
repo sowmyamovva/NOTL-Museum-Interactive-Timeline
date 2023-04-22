@@ -611,3 +611,15 @@ function stackerParser(years_all_info) {
   document.querySelector(".stacked-container").innerHTML = htmlString;
 }
 stackerParser(years_all_info);
+
+// Text-To-Speech JS
+const speakButtons = document.querySelectorAll(".speak-button");
+const textToSpeaks = document.querySelectorAll(".text-to-speak2");
+
+speakButtons.forEach((speakButton, index) => {
+  speakButton.addEventListener("click", () => {
+    const msg = new SpeechSynthesisUtterance();
+    msg.text = textToSpeaks[index].textContent;
+    window.speechSynthesis.speak(msg);
+  });
+});
