@@ -154,10 +154,15 @@ CloseCon($conn);
 
     </div>
 </div>
-<!--This section is currently used by the stacked container and video container-->
+<!--This section is currently used by the stacked container, video container, and text-to=speech example.-->
 <div class="addSpace">
-  <div class = stacked-container>
-</div>
+  
+  <!-- Text-to-speech Example -->
+    <button class="speak-button">T2S</button>
+      <p class="text-to-speak2"> This is an example of how to use the text-to-speak function.</p>
+  
+    <div class = stacked-container>
+  </div>
 <div id = "video-container"></div>
 
 <!-- <button id="show-div-button">Show Div Block</button>
