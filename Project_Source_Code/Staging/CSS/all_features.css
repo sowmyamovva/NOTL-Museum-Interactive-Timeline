@@ -500,3 +500,30 @@ opacity:1;
   height: 25px;
 }
 
+/* timeline additional info overlay */
+#overlay3 {
+  display: none;
+  position: absolute;
+  top: 1000px;
+  left: 500px;
+  width: 1000px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 9998;
+}
+
+#overlay3 p {
+  position: absolute;
+  /* top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  color: white;
+  font-size: 24px;
+  text-align: center;
+}
+
+#overlay3 img {
+  position: absolute;
+  left: -500px;
+  color: white;
+}
