@@ -23,7 +23,11 @@
     include '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/includes/header.php';
 ?>
 <?php
-
+// Load database configuration
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+// echo "we are here";
+// require('/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/config/config.php');
 $db = new Config();
 $connection = $db->getConnection();
 // Check if date is set
@@ -46,6 +50,8 @@ if (isset($_POST['date'])) {
         $row["sub_events"] = $r["sub_events"];
         $row["information"] = $r["information"];
         $row["more_information"] = $r["more_information"];
+        $row["event_title"] = $r["event_title"];
+        $row["category"] = $r["category"];
         $add_button = 0;
     }
 
@@ -133,8 +139,20 @@ if (isset($_POST['date'])) {
             <label>Date Marker:</label>
             <input type="text" name="date_marker" value="<?php echo $row['date_marker']; ?>"><br>
 
-            <label>Sub-events:</label>
+            <label>Sub-events(Mark as 0 if you don't want the sub  events to show up for this event.):</label>
             <input type="text" name="sub_events" value="<?php echo $row['sub_events']; ?>"><br>
+            <label>event_title:</label>
+            <input type="text" name="event_title" value="<?php echo $row['event_title']; ?>" required><br>
+            <label for="category">Select the category:</label>
+            <select id="category" name="category">
+            <option value="Indigenous_History" <?php if($row['category'] == "Indigenous_History"){echo" selected";} ?>>Indigenous History</option>
+            <option value="European_Settlers" <?php if($row['category'] == "European_Settlers"){echo" selected";} ?>>European Settlers</option>
+            <option value="War" <?php if($row['category'] == "War"){echo" selected";} ?>>War</option>
+            <option value="Transportation" <?php if($row['category'] == "Transportation"){echo" selected";} ?>>Transportation</option>
+            <option value="Fishing" <?php if($row['category'] == "Fishing"){echo" selected";} ?>>Fishing</option>
+            <option value="Historical_Figures" <?php if($row['category'] == "Historical_Figures"){echo" selected";} ?>>Historical Figures</option>
+            </select><br>
+            <input type="submit" name="remove_event" value="Remove Event">
 
             <?php $sub_event_index = 0; if ( $row['sub_events'] == 1): ?>
             <h2>Sub-Events:</h2>
