@@ -9,17 +9,33 @@
    
 <?php
     // start session
-    session_start();
+     $guest = true;
+    if (session_status() == PHP_SESSION_NONE) 
+    {
+        session_start();
+    }
+    if (isset($_POST['logout'])) 
+    {
+        require_once '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/controllers/UserController.php';
+        $controller = new UserController();
+        $controller->logout();
+        // $url = "https://badger-timeline.infinityfreeapp.com/public_html";
+        // header("Location: $url");
+    }
+    $url = "https://badger-timeline.infinityfreeapp.com/public_html";
+    // header("Location: $url");
     // check if user is logged in
     if (isset($_SESSION["user_id"])) {
         $user_id = $_SESSION["user_id"];
         require_once '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/models/UserModel.php';
         $model = new UserModel(0,0, 0,0,0);
-        $user = $model->findById($user_id);
-        $username = $user['username'];
-        session_write_close();
+        $user_header = $model->findById($user_id);
+        $username = $user_header['username'];
+        $guest = false;
+        // session_write_close();
     } else {
         $username = "Guest";
+        // session_write_close();
     }
 ?>
 
@@ -52,8 +68,8 @@
             <!--<li> <a href="../users/signup.php">Login</a> </li> -->
              <?php if ($username == "Guest") { ?>
                 <form class="form-inline my-2 my-lg-0">
-                    <a href="https://badger-timeline.infinityfreeapp.com/public_html/views/user/login" class="btn btn-outline-primary my-2 my-sm-0">Log In</a>
-                    <a href="https://badger-timeline.infinityfreeapp.com/public_html/views/user/signup" class="btn btn-outline-primary my-2 my-sm-0 ml-2">Sign Up</a>
+                    <a href="https://badger-timeline.infinityfreeapp.com/public_html/views/user/account" class="btn btn-outline-primary my-2 my-sm-0">Log In</a>
+                   <!-- <a href="https://badger-timeline.infinityfreeapp.com/public_html/views/user/signup" class="btn btn-outline-primary my-2 my-sm-0 ml-2">Sign Up</a>-->
                 </form>
             <?php }
              else{ 
@@ -61,7 +77,7 @@
                 ?>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="https://badger-timeline.infinityfreeapp.com/public_html/views/user/profile" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="oi oi-person"></span>
                             <?php echo $username; ?>
                             
@@ -89,12 +105,12 @@
             </form>-->
             
             <div class="search-box">
-            <form action="https://badger-timeline.infinityfreeapp.com/public_html/views/pages/timeline" method="get">
+            <form action="https://badger-timeline.infinityfreeapp.com/public_html/views/pages/timeline" method="get" class="SearchBar">
                 <input type="text" name="search" placeholder="Search"  list="suggestions">
                 <datalist id="suggestions">
                 <!-- JavaScrip-populate options here -->
                 </datalist>
-                 <button style="position: relative; right: 2%" type="submit">Search</button>
+                 <button style="position: relative; right: 2%" type="submit"><img  src="https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Project_Source_Code/SearchMag.png?raw=true"></button>
             </form>
             </div>
         </ul>
@@ -111,20 +127,8 @@ $events = $controller->getEvents();
   var datalist = document.querySelector('#suggestions');
   trial_events.forEach(function(event) {
     var option = document.createElement('option');
-    option.value =event.date_title;
+    option.value =event.date_title+" "+event.event_title;
     datalist.appendChild(option);
   });
 
 </script>
-<?php
-        // handle logout
-        if (isset($_POST['logout'])) {
-             
-            require_once '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/controllers/UserController.php';
-            $controller = new UserController();
-            $controller->logout();
-            // $url = "https://badger-timeline.infinityfreeapp.com/public_html";
-            // header("Location: $url");
-            exit();
-        }
-    ?>
