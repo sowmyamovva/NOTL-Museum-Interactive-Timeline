@@ -7,11 +7,12 @@
 
 | **Team Members**  | **Role** | **Student ID** |
 | ------------- | ------------- | ------------- |
-| Sowmya Movva    | Scrum Master  / Developer  | 6299937 |
-| Tyvon Factor-Gaymon   | Product Owner / Developer | 6580310 |
-| Rimpy Saha  |  Product Owner / Developer | 6600258 |
-| Peter Fung  | Developer / Tester | 6509830 |
-| George Gramatikov |  Developer / Tester | 6281778 |
+| Sowmya Movva    | Scrum Master  | 6299937 |
+| Rimpy Saha  |  Product Owner | 6600258 |
+| Tyvon Factor-Gaymon   | Product Owner | 6580310 |
+| George Gramatikov |  Tester | 6281778 |
+| Peter Fung  | Tester | 6509830 |
+
 
 
 ### **Overview**: 
@@ -53,8 +54,6 @@ Client meetings will be conducted on an as-needed basis with one member of the d
 | Mar 29 - Apr 4  |  Sprint 9 |  |
 | Apr 5 - Apr 18 | Testing | Final Report & Presentation |   
      
-### **All Documentation**:
-<a href="https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/tree/main/Documentation%20Folder">Documents</a>
   
   
 

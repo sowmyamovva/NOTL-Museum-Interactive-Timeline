@@ -6,46 +6,56 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-DW5cX/mKzsRbfLb5jb5BVZXOj/Qbsxw1dTXZrxbh8HqpW0bK9g40abDewMvOQ2LWxjN0pm/eSHdncHrZk8Wakg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<!-- Custom CSS -->
-	<link rel="stylesheet" href="sheet.css">
+	<link rel="stylesheet" href="form.css">
 </head>
 <body>
     <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <form>
-              <h2>Login</h2>
+        <div class="row justify-content-center">
+          <div class="col-lg-6 custom-login">
+            <h4 class="logtext">Login</h4>
+            <form class="logform">
               <div class="form-group">
-                <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+                <input type="email" class="form-control" id="inputEmail" placeholder="Username">
+                <i class="fas fa-envelope"></i>
               </div>
               <div class="form-group">
                 <input type="password" class="form-control" id="inputPassword" placeholder="Password">
               </div>
-              <button type="submit" class="btn btn-primary">Sign in</button>
+              <button type="submit" class="btn btn-secondary">Sign in</button>
+              <p>Or log in with:</p>
+              <a href="/Images/google-icon.png" class="mx-3"><i class="fab fa-facebook-f fa-2x"></i></a>
+              <a href="#" class="mx-3"><i class="fab fa-google fa-2x"></i></a>
+              <a href="#" class="mx-3"><i class="fab fa-twitter fa-2x"></i></a>
             </form>
           </div>
-          <div class="col-md-6">
-            <form>
-              <h2>Sign Up</h2>
+          <div class="col-lg-6 custom-signup">  
+            <h4>Sign Up</h4>
+            <form class = "signform">
               <div class="form-group">
-                <input type="text" class="form-control" id="inputName" placeholder="Enter name">
+                <input type="text" class="form-control" id="inputName" placeholder="Full Name">
               </div>
               <div class="form-group">
-                <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
               </div>
               <div class="form-group">
-                <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                <input type="email" class="form-control" id="inputEmail" placeholder="Username">
               </div>
               <div class="form-group">
                 <input type="password" class="form-control" id="inputPassword" placeholder="Password">
               </div>
-              <button type="submit" class="btn btn-primary">Sign up</button>
+              <div class="form-group">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Re-type Password">
+              </div>
+              <button type="submit" class="btn btn-secondary">Sign up</button>
             </form>
-          </div>
-        </div>
+       </div>
       </div>
-	<!-- Login Form goes here -->
+    </div>
+
+	<!-- add bootstrap js files -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNSbHZN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 </html>
