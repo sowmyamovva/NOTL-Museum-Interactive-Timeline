@@ -23,6 +23,7 @@ var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","<1500","0"],
                     ["21","ShippingA","ShippingB","2023",null,"2023","0"]];
 var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSubK","WarSubB,WarSubD,WarSubF,WarSubH,WarSubJ,WarSubL","6"]];
 
+// This dictionary is used to determine which circle has an additional overlay. It also contains the additional info.
  var additional_info = {"1":"Relavant content to Indigenous people around 9000 BC",
                         "2":"Relevant content to European contact around 1500",
                         "5":"Relevant content to USRevolution  around 1791",
@@ -48,7 +49,7 @@ function process_images(year_index){
     // var year_tooltip = "<img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1730s' title='Information on "+years_all_info[year_index][5] +"' class='overlay2 back-image' onclick='swapImages()'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"' class='overlay2 front-image' onclick='swapImages()'>";
 
     //image with button
-    var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div></div>"; //put overlay3 here if you want it to be relative to the timeline
+    var year_tooltip = "<div class='flip-container'><div class='flipper'><div id = "+years_all_info[year_index][0]+"A class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div id = "+years_all_info[year_index][0]+"B class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div></div>"; //put overlay3 here if you want it to be relative to the timeline
 
     // var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div>";
 
@@ -351,12 +352,12 @@ circles2.forEach((circle) => {
       div.style.display="none";
     }
   
-    // div.style.top = `${cy}px`;
-    // div.style.left = `${cx+400}px`; //715
-  
     document.body.appendChild(div);
+
+    // Get the circle id so that we can get the specific image that we want to add additional info to
     var cid = circle.dataset.eventid;
-    extra_info(div, cid);
+    const myImage = document.getElementById(cid+"B"); // The back image we're adding buttons to
+    extra_info(div, cid, myImage); // add additional info overlay
   });
 
 
@@ -367,7 +368,6 @@ circles2.forEach((circle) => {
   // for document so it is consistent with scroll up and down.
   document.getElementById("timeline_container").addEventListener("scroll", () => {
 
-    //   BUG FIXES
     /* Here, we keep track of the event_id so that we know whether we are at an enen or odd numbered image.
      * This way, we can alternate the y coordinate of each Image
      */
@@ -426,7 +426,7 @@ firstLine.addEventListener('click', (event) => {
   /* console.log(circleBefore.cx.baseVal.value + " here " + circleAfter.cx.baseVal.value) */
   if (circleBefore != 0 && circleAfter != 0 && flag == 1) {
     const centerX = (circleBefore + circleAfter) / 2;
-    var offset =800;
+    var offset = 800;
     var sub_line1 = document.querySelector('#sub_line1');
     sub_line1.setAttribute('x1', centerX);
     sub_line1.setAttribute('x2', centerX);
@@ -627,8 +627,11 @@ stackerParser(years_all_info);
 
 
 
-// Add button to images
-function extra_info (c_div, cid) {
+/* This function is used to add an overlay button onto an image container that contains additional info.
+ * Once the button is pressed, an overlay will appear below the timeline container.
+ * Params: c_div: The circle div, cid: The circle ID, backImage: The back image we are adding the button to.
+ */
+function extra_info (c_div, cid, backImage) {
 // Check to see if circle has additional info
   if (!(cid in additional_info)){ // if circle does not have any additional info then don't add any buttons to it.
     return;
@@ -658,7 +661,7 @@ function extra_info (c_div, cid) {
       const img = document.createElement("img");
       img.src = "https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/" + years_all_info[cid - 1][1] + ".jpg?raw=true";
 
-      // Check if overlay content already exists and remove it
+      // Check if overlay content already exists and remove it if it does
       const existingContent = overlay.querySelector('.overlay-content');
       if (existingContent) {
         overlay.removeChild(existingContent);
@@ -698,28 +701,27 @@ function extra_info (c_div, cid) {
     }
   };
 
-  // Set the button position and size
-  button.style.position = "relative";
-  button.style.left = "50%";
-  button.style.top = "50%";
-  if (cid != 1) { // Because the first circle's div is slightly off
-    button.style.transform = "translate(-8%, -68%)";
-  } else {
-    button.style.transform = "translate(-70%, 15%)";
-  }
+  // Button CSS
+  button.style.position = "absolute";
+  button.style.left = "0px";
+  button.style.top = "0px";
+  button.style.color = "lightcoral";
+  button.style.backgroundColor = "aqua";
   button.style.fontSize = "24px";
 
-  // Append the button to the image container div
-  c_div.appendChild(button);
-}
+  // Append the button to the back image
+  backImage.appendChild(button);
+} // extra_info
 
 
-// Text-To-Speech
-const speakButton = document.getElementById("speak-button2");
-const textToSpeak = document.getElementById("text-to-speak2");
+// Text-To-Speech JS
+const speakButtons = document.querySelectorAll(".speak-button");
+const textToSpeaks = document.querySelectorAll(".text-to-speak2");
 
-speakButton.addEventListener("click", () => {
-  const msg = new SpeechSynthesisUtterance();
-  msg.text = textToSpeak.textContent;
-  window.speechSynthesis.speak(msg);
+speakButtons.forEach((speakButton, index) => {
+  speakButton.addEventListener("click", () => {
+    const msg = new SpeechSynthesisUtterance();
+    msg.text = textToSpeaks[index].textContent;
+    window.speechSynthesis.speak(msg);
+  });
 });

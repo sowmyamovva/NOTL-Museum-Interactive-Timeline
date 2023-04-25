@@ -8,6 +8,7 @@ var myEvent = [ "Exhibit 1: 1812, Exhibit 1, blue",
                 "Exhibit 3: Niagara Falls, Exhibit 3, green",
                 "Exhibit 4: Native, Exhibit 4, orange"]
 
+var 
 
 !function() {
 
@@ -280,12 +281,12 @@ var myEvent = [ "Exhibit 1: 1812, Exhibit 1, blue",
       //Remove any events in the current details element
       var currentWrapper = ele.querySelector('.events');
       var wrapper = createElement('div', 'events in' + (currentWrapper ? ' new' : ''));
-  
+      wrapper.style.height = "125px";
       events.forEach(function(ev) {
         var div = createElement('div', 'event');
         var square = createElement('div', 'event-category ' + ev.color);
         var span = createElement('span', '', ev.eventName);
-  
+        
         div.appendChild(square);
         div.appendChild(span);
         wrapper.appendChild(div);
@@ -293,10 +294,15 @@ var myEvent = [ "Exhibit 1: 1812, Exhibit 1, blue",
   
       if(!events.length) {
         var div = createElement('div', 'event empty');
-        var span = createElement('span', '', 'No Events');
-  
+        var span = createElement('span', '');
+        span.innerHTML = "Times&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attendees<br>1:00 PM - 2:00 PM<br>2:00 PM - 3:00 PM<br>3:00 PM - 4:00 PM<br>4:00 PM - 5:00 PM"
+        // Add booking button and bookings
+        var booking_button = createElement('button','cButton','Book Viewing');
+        
+        
         div.appendChild(span);
         wrapper.appendChild(div);
+        div.append(booking_button);
       }
   
       if(currentWrapper) {

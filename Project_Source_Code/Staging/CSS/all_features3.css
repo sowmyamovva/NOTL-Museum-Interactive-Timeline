@@ -7,10 +7,10 @@
   box-sizing: border-box;
 }
 .event_name {
-  position: relative;
+  position: absolute;
   background-color: white;
  /* padding: 5px;*/
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 .scroll-container {
   overflow-x: scroll;
@@ -95,6 +95,7 @@ body {
 .event-label {
   position: absolute;
   bottom: 120vh;
+  top: 50%;
   left: 50%;
   transform: translateX(-50%);
   /* background-color: black; */

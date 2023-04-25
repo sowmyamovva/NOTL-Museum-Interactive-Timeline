@@ -173,7 +173,7 @@
     .details {
       position: relative;
       width: 420px;
-      height: 75px;
+       height: 125px;  /*Originally 75px*/
       background: rgba(164, 164, 164, 1);
       margin-top: 5px;
       border-radius: 4px;
