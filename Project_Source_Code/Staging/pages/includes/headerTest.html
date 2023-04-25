@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <!-- styles -->
+    <link rel="stylesheet" href="style.css" /> 
+    <style>
+        /* Styles for larger screens */
+        .nav-header {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-header h2 {
+            margin-right: auto;
+        }
+
+        .nav-toggle {
+            display: none;
+        }
+
+        .links {
+            display: flex;
+            align-items: center;
+        }
+
+        .links li {
+            margin-left: 20px;
+        }
+
+        .logo {
+            width: 60px; /* Set the width of the logo */
+            margin-right: 20px; /* Add some margin between the logo and the menu */
+        }
+
+        .SearchBar {
+            display: flex;
+            align-items: center; /* Align items vertically in the center */
+        }
+
+        .SearchBar input[type="text"] {
+             flex-grow: 1; /* Allow the input to grow and take up remaining space */
+             padding: 10px; /* Add padding to the input for spacing */
+             border: none; /* Remove border to style as desired */
+        }
+
+        .SearchBar button {
+             flex-shrink: 0; /* Prevent the button from shrinking and maintain its size */
+             padding: 10px; /* Add padding to the button for spacing */
+             background: none; /* Remove background to style as desired */
+             border: none; /* Remove border to style as desired */
+             cursor: pointer; /* Add cursor pointer for interactivity */
+        }
+
+        /* Styles for smaller screens */
+        @media screen and (max-width: 768px) {
+            .nav-header {
+                justify-content: space-between;
+            }
+
+            .nav-toggle {
+                display: block;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 24px;
+                margin-left: 10px;
+            }
+
+            .links {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: 10px;
+            }
+
+            .links li {
+                margin: 5px 0;
+            }
+
+            .links.show {
+                display: flex;
+            }
+
+            .SearchBar button {
+                font-size: 24px;
+            }
+
+            .logo {
+                margin-right: 10px; /* Reduce the margin between the logo and the menu */
+            }
+        }
+    </style>
+    <title>Homepage</title> 
+</head>
+<body>
+    <nav>
+        <div class="nav-center">
+            <!-- nav header -->
+            <div class="nav-header">
+                <img src="./logo.svg" class="logo" alt="logo" /> <!-- Add your logo here -->
+                <h2>NOTL</h2>
+                <button class="nav-toggle"> <i class="fas fa-bars"></i> </button>
+            </div>
+            <!-- links -->
+            <ul class="links">
+                <li> <a href="index.html">Home</a> </li>
+                <li> <a href="about.html">Services</a> </li>
+                <li> <a href="projects.html">Visit Us</a> </li>
+                <li> <a href="Login.html">Login</a> </li>
+            </ul>
+            <!----Searchbar goes here ----->
+            <ul class="container">
+                <form action="" class="SearchBar">
+                    <input type="text" placeholder="Search" name="notlsearch">
+                    <button type="submit"><img src="/Users/sowmyamovva/Desktop/SearchMag.png"></button>
+                </form>
+            </ul>
+        </div>
+    </nav>
+
+    <script>
+        const navToggle = document.querySelector(".nav-toggle");
+        const links = document.querySelector(".links");
+
+        navToggle.addEventListener("click", () => {
+            links.classList.toggle("show");
+        });
+    </script>
+</body>
+</html>
