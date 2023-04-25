@@ -32,27 +32,42 @@
         }
 
         .logo {
-            width: 60px; /* Set the width of the logo */
-            margin-right: 20px; /* Add some margin between the logo and the menu */
+            width: 60px; 
+            margin-right: 20px;
         }
 
         .SearchBar {
             display: flex;
-            align-items: center; /* Align items vertically in the center */
+            align-items: center; 
         }
 
         .SearchBar input[type="text"] {
-             flex-grow: 1; /* Allow the input to grow and take up remaining space */
-             padding: 10px; /* Add padding to the input for spacing */
-             border: none; /* Remove border to style as desired */
+             flex-grow: 1; 
+             padding: 10px; 
+             border: none; 
         }
 
         .SearchBar button {
-             flex-shrink: 0; /* Prevent the button from shrinking and maintain its size */
-             padding: 10px; /* Add padding to the button for spacing */
-             background: none; /* Remove background to style as desired */
-             border: none; /* Remove border to style as desired */
-             cursor: pointer; /* Add cursor pointer for interactivity */
+             flex-shrink: 0; 
+             padding: 10px; 
+             background: none; 
+             border: none; 
+             cursor: pointer; 
+        }
+
+        .dropbtn {
+            cursor: pointer;
+            font-size: 18px; /* icon size */
+        }
+
+        /* user profile icon on hover */
+        .dropbtn:hover {
+            color: #007bff; /* icon colour*/
+        }
+
+        /* hiding the user profile icon by default */
+        #userDropdown {
+            display: none;
         }
 
         /* Styles for smaller screens */
@@ -85,12 +100,16 @@
                 display: flex;
             }
 
-            .SearchBar button {
-                font-size: 24px;
+            .SearchBar {
+                display: none; /* Hide the search bar for screens with max-width of 767px */
+             }
+            .
+            SearchBar button {
+                display: none;
             }
 
             .logo {
-                margin-right: 10px; /* Reduce the margin between the logo and the menu */
+                margin-right: 10px; 
             }
         }
     </style>
@@ -107,10 +126,19 @@
             </div>
             <!-- links -->
             <ul class="links">
-                <li> <a href="index.html">Home</a> </li>
+                <li> <a href="Home.html">Home</a> </li>
                 <li> <a href="about.html">Services</a> </li>
-                <li> <a href="projects.html">Visit Us</a> </li>
-                <li> <a href="Login.html">Login</a> </li>
+                <li> <a href="timeline.html">Timeline</a> </li>
+                <nav>
+                      <li id="userDropdown" class="dropdown">
+                        <a href="#" class="dropbtn"><i class="fas fa-user"></i></a>
+                        <div class="dropdown-content">
+                          <a href="#">Profile</a>
+                          <a href="#">Logout</a>
+                          <a href="#">Settings</a>
+                        </div>
+                      </li>
+                    </ul>
             </ul>
             <!----Searchbar goes here ----->
             <ul class="container">
@@ -129,6 +157,14 @@
         navToggle.addEventListener("click", () => {
             links.classList.toggle("show");
         });
+
+        var isLoggedIn = true; // Replace with your logic to check if the user is logged in
+        var userDropdown = document.getElementById("userDropdown");
+            if (isLoggedIn) {
+                userDropdown.style.display = "block"; // Show the user profile icon
+            } else {
+            userDropdown.style.display = "none"; // Hide the user profile icon
+        }
     </script>
 </body>
 </html>
