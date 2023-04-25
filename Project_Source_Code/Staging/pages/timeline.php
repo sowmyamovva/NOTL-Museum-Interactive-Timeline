@@ -113,6 +113,9 @@ var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","<1500","0"],
                     ["19","ShippingA","ShippingB","1942",null,"1942","0"],
                     ["20","ShippingA","ShippingB","1943",null,"1943","0"],
                     ["21","ShippingA","ShippingB","2023",null,"2023","0"]];
+ 
+   var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSubK","WarSubB,WarSubD,WarSubF,WarSubH,WarSubJ,WarSubL","6"]];
+
 //  var trial_events = <?php //echo json_encode($events); ?>;
 //  var trial_sub_events = <?php // echo json_encode($sub_events); ?>;
   const arrayColumn = (arr, n) => arr.map(x => x[n]);
@@ -140,7 +143,7 @@ var year_tooltip = "<div class='flip-container'><div class='flipper'><div id = "
 
 function process_sub_images(front,back,title){
 
-    var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+front+".jpg?raw=true' alt='1730s'  title='"+title+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+back+"?raw=true' alt='1753s'  title='"+title+"'></div></div></div>";
+    var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+front+".jpg?raw=true' alt='1730s'  title='"+title+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+back+".jpg?raw=true' alt='1753s'  title='"+title+"'></div></div></div>";
 
     var year_info = ' <div id="label" class="event-label" style=" display: block;height: 300px; white-space: normal; ">' + year_tooltip + '</div>';
 
