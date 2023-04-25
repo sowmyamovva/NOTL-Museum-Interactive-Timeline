@@ -159,16 +159,43 @@ body {
 	background-image: url('/Images/paper.jpg'); /* Add a semi-transparent background color to make the text readable */
   }
 
+  .title-section {
+  padding-top: 1.5rem;
+  text-align: center;
+  padding-left: 80px;
+  padding-right: 80px;
+  }
+
+  .figureTitle {
+    text-align: left;
+    padding-left: 50px; /* Add left padding */
+    padding-right: 50px; /* Add right padding */
+  }
+
   .row-circa {
     display: flex;
     flex-wrap: wrap;
-	width: 100%;
+	  width: 100%;
     padding-right: 20px;
     padding-left: 20px;
-	padding-top: 75px;
-	padding-bottom: 75px;
+	  padding-top: 95px;
+	  padding-bottom: 75px;
     margin-right: auto;
     margin-left: auto;
+    
+}
+
+.row-divider {
+  padding-left: 50px; /* Add left padding */
+  padding-right: 50px; /* Add right padding */
+}
+
+.event-header {
+  text-align: left; /* Set text alignment to left */
+}
+
+.divider-text {
+  text-align: left; /* Set text alignment to left */
 }
 
   .col-lg-4 {
@@ -186,9 +213,6 @@ body {
   background-color: #0c0c0c;
 }
 
-.btn :hover {
-      background-color:#a09d9d;
-  }
 
   .col-lg-12 {
     text-align:center;
