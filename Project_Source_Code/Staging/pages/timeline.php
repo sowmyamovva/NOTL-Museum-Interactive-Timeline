@@ -1,73 +1,5 @@
-<?php
-//echo getcwd() . "\n";
-include 'db.php';
-$conn = OpenCon();
-//echo "Connected Successfully";
-
-$sql = "SELECT id, image_front, image_back, date,date_title,date_marker,sub_events FROM events";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-  // output data of each row
-  $cnt1 = 0;
-  $cnt2 = 0;
-  $year_info = array(array());
-  while($row = $result->fetch_assoc()) {
-      $cnt2 = 0;
-      $year_info[$cnt1][$cnt2++] = $row["id"];
-      $year_info[$cnt1][$cnt2++] = $row["image_front"];
-      $year_info[$cnt1][$cnt2++] = $row["image_back"];
-      $year_info[$cnt1][$cnt2++] = $row["date"];
-      $year_info[$cnt1][$cnt2++] = $row["date_marker"];
-      $year_info[$cnt1][$cnt2++] = $row["date_title"];
-       $year_info[$cnt1][$cnt2++] = $row["sub_events"];
-     $cnt1++;
-  }
-} 
-
-$sql2 = "SELECT id, image_front, image_back, event_id FROM sub_events";
-$results = $conn->query($sql2);
-
-if ($results->num_rows > 0) {
-  // output data of each row
-  $cnt1 = 0;
-  $cnt2 = 0;
-  $sub_info = array(array());
-  $event_ids= array();
-  while($row = $results->fetch_assoc()) {
-     if(in_array($row["event_id"], $event_ids))
-     {
-        
-      $index = array_search($row["event_id"], $event_ids);
-      $sub_info[$index][0] = $sub_info[$index][0].",".$row["id"];
-      $sub_info[$index][1] = $sub_info[$index][1].",".$row["image_front"];
-      $sub_info[$index][2] = $sub_info[$index][2].",".$row["image_back"];
-     }
-    else{
-      $cnt2 = 0;
-      $sub_info[$cnt1][$cnt2++] = $row["id"];
-      $sub_info[$cnt1][$cnt2++] = $row["image_front"];
-      $sub_info[$cnt1][$cnt2++] = $row["image_back"];
-      $sub_info[$cnt1][$cnt2++] = $row["event_id"];
-      $event_ids[$cnt1] = $row["event_id"];
-     $cnt1++;
-    }
-  }
-} 
-CloseCon($conn);
-?>
-
-
-<!DOCTYPE html>
 <html>
-
-<head>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://badger-timeline.infinityfreeapp.com/public_html/assets/CSS/all_features.css" /> 
-  <link rel="stylesheet" href="/CSS/all_features3.css" /> 
-</head>
-
+<link rel="stylesheet" href="/CSS/all_features3.css" /> 
 <body>
  <div class = "outer-container">
 
@@ -439,10 +371,9 @@ circles2.forEach((circle) => {
   
   var year_tooltip = process_images(circle_index);
   div.innerHTML = year_tooltip;
-  div.id = "circle_"+years_all_info[circle_index][0];
+  div.id = "circle_"+years_all_info[circle_index][0]; //circle id
   div.classList.add("event_name");
-  div.style.width = "300px";
-
+  // div.style.width = "300px";
   
   // Circle Position in regards to the timline
   const cx = parseFloat(circle.getAttribute('cx'));
@@ -453,23 +384,35 @@ circles2.forEach((circle) => {
   const top_val = parseInt(getComputedStyle(c_timeline).getPropertyValue('top')); //top value of timeline
 
   // Position Divs relevant to timeline
-  const leftSmallOffset = 230; // Offsets the small images to the left
-  const leftBigOffset = 280; // Offsets the big images to the left
-  const topOddOffset = 1000; // Offsets the odd images to be below timeline
-  const topEvenOffset = 600; // Offsets the even images to be above timeline
+  const leftSmallOffset = 85; // Offsets the small images to the left
+  const leftBigOffset = 130; // Offsets the big images to the left      
+  const topOddOffset = 300; // Offsets the odd images to be below timeline 1000
+  const topEvenOffset = -100; // Offsets the even images to be above timeline 600
 
-  // Div Images
+  // Div get image
   const event_id = parseInt(circle.dataset.eventid, 10);
-  
 
- 
 
   circle.addEventListener("mousedown", () => {
 
-    document.body.appendChild(div); 
-    // The image that is used to determine how to center it to its corresponding circle based on size
-    const d_img = document.getElementById(event_id+'A'); 
-    const d_width = d_img.scrollWidth
+  // Create a new DOMParser object
+  const parser = new DOMParser();
+  // Parse the HTML string as an HTML document
+  const doc = parser.parseFromString(year_tooltip, "text/html");
+  // Get the image element and its source path
+  const img2 = doc.querySelector("img");
+  const img = document.createElement('img');
+  img.src = img2.getAttribute("src");
+  // Wait for the image to load and render
+  // Get the image width
+  const imgWidth = img.naturalWidth;
+  const imgHeight = img.naturalHeight;
+  img.remove();
+
+    // const event_id = parseInt(circle.dataset.eventid, 10);
+
+
+
 
     console.log(circle);
     console.log(div);
@@ -486,13 +429,14 @@ circles2.forEach((circle) => {
       div.style.display="none";
     }
 
+
     // This controls the vertical positioning of all images
 
 
-    // We want to center the dive based on how big the images are.
+    // We want to center the div based on how big the images are.
     if (event_id % 2 == 1){  // Odd Numbered Image
         div.style.top = `${top_val+topOddOffset}px`; //`${circle.getBoundingClientRect().top}px`; // 350
-        if (d_img.scrollWidth < 210){ // Check to see if we're dealing with small image
+        if (imgWidth < imgHeight){ // Check to see if we're dealing with small image
             div.style.left = `${circle.getBoundingClientRect().left - leftSmallOffset}px`;
         }
         else{ // We're dealing with bigger image
@@ -501,7 +445,7 @@ circles2.forEach((circle) => {
     }
     else{ // Even Numbered Image
       div.style.top = `${top_val+topEvenOffset}px`; //`${cy+400}px`;
-        if (d_img.scrollWidth < 210 ){ // Check to see if we're dealing with small image
+        if (imgWidth < imgHeight){ // Check to see if we're dealing with small image
             div.style.left = `${circle.getBoundingClientRect().left - leftSmallOffset}px`;
         }
         else{ // We're dealing with bigger image
@@ -510,8 +454,8 @@ circles2.forEach((circle) => {
     }
     //Reformats first div to be uniform with the rest of the bottom divs.
     if (event_id == 1){
-      div.style.top = `${top_val+topOddOffset - 11}px`; //`${cy+700}px`;
-      if (d_img.scrollWidth < 210){ // Check to see if we're dealing with small image
+      div.style.top = `${top_val+topOddOffset - 30}px`; //`${cy+700}px`;
+      if (imgWidth < imgHeight){ // Check to see if we're dealing with small image
           div.style.left = `${circle.getBoundingClientRect().left - leftSmallOffset}px`;
       }
       else{ // We're dealing with bigger image
@@ -523,22 +467,31 @@ circles2.forEach((circle) => {
     // div.style.top = `${circle.getBoundingClientRect().top + 70}px`;
     // div.style.left = `${circle.getBoundingClientRect().left +10}px`;
 
-    // document.body.appendChild(div);
     // console.log("hi");
-
+    document.body.appendChild(div); 
+    // div.style.width = "0px";
+    
+    const d_img = document.getElementById(event_id+'A'); 
+    // Add buttons to the div
     var cid = circle.dataset.eventid;
     const myImage = document.getElementById(cid+"B"); // The back image we're adding buttons to
     extra_info(div, cid, myImage);
   });
 
   document.getElementById("timeline_container").addEventListener("scroll", () => {
-
     // div.style.top = `${circle.getBoundingClientRect().top + 70}px`;
     // div.style.left = `${circle.getBoundingClientRect().left +10}px`;
-    
-    // The image that is used to determine how to center it to its corresponding circle based on size
+
+    // Check to see if we are moving a div
     const d_img = document.getElementById(event_id+'A'); 
-    const d_width = d_img.scrollWidth
+    if (d_img == null){
+      return;
+    }
+    console.log("");
+    // The image that is used to determine how to center it to its corresponding circle based on size
+    // const d_img = document.getElementById(event_id+'A'); 
+    const d_width = d_img.scrollWidth;
+
     /* Here, we keep track of the event_id so that we know whether we are at an enen or odd numbered image.
      * This way, we can alternate the y coordinate of each Image
      */
@@ -546,7 +499,7 @@ circles2.forEach((circle) => {
     // We want to center the dive based on how big the images are.
     if (event_id % 2 ==1){  // Odd Numbered Image
         div.style.top = `${top_val + topOddOffset}px`;
-        if (d_img.scrollWidth < 210){ // Check to see if we're dealing with small image
+        if (d_width < 210){ // Check to see if we're dealing with small image
             div.style.left = `${circle.getBoundingClientRect().left - leftSmallOffset}px`;
         }
         else{ // We're dealing with bigger image
@@ -555,7 +508,7 @@ circles2.forEach((circle) => {
     }
     else{ // Even Numbered Image
       div.style.top = `${top_val + topEvenOffset}px`;
-        if (d_img.scrollWidth < 210 ){ // Check to see if we're dealing with small image
+        if (d_width < 210 ){ // Check to see if we're dealing with small image
             div.style.left = `${circle.getBoundingClientRect().left -leftSmallOffset}px`;
         }
         else{ // We're dealing with bigger image
@@ -564,8 +517,8 @@ circles2.forEach((circle) => {
     }
     //Reformats first div to be uniform with the rest of the bottom divs.
     if (event_id == 1){
-      div.style.top = `${top_val + topOddOffset - 11}px`;
-      if (d_img.scrollWidth < 210){ // Check to see if we're dealing with small image
+      div.style.top = `${top_val + topOddOffset - 30}px`;
+      if (d_width < 210){ // Check to see if we're dealing with small image
           div.style.left = `${circle.getBoundingClientRect().left - leftSmallOffset}px`;
       }
       else{ // We're dealing with bigger image
@@ -862,6 +815,5 @@ console.log(trial_events);
 </script>
 </body>
 </html>
-
 
 
