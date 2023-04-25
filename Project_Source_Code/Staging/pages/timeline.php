@@ -1,5 +1,77 @@
+<?php
+//echo getcwd() . "\n";
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+require_once '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/controllers/ContentController.php';
+$controller = new ContentController();
+$events = $controller->getEvents();
+$sub_events = $controller->getSubEvents();
+$cnt1 = 0;
+$cnt2 = 0;
+$year_info = array(array());
+foreach ($events as $row)
+{
+    $cnt2 = 0;
+    $year_info[$cnt1][$cnt2++] = $row["id"];
+    $year_info[$cnt1][$cnt2++] = $row["image_front"];
+    $year_info[$cnt1][$cnt2++] = $row["image_back"];
+    $year_info[$cnt1][$cnt2++] = $row["date"];
+    $year_info[$cnt1][$cnt2++] = $row["date_marker"];
+    $year_info[$cnt1][$cnt2++] = $row["date_title"];
+    $year_info[$cnt1][$cnt2++] = $row["sub_events"];
+    $year_info[$cnt1][$cnt2++] = $row["information"];
+    $year_info[$cnt1][$cnt2++] = $row["more_information"];
+    $year_info[$cnt1][$cnt2++] = $row["event_title"];
+    $year_info[$cnt1][$cnt2++] = $row["category"];
+    $cnt1++;
+}
+  $cnt1 = 0;
+  $cnt2 = 0;
+  $sub_info = array(array());
+  $event_ids= array();
+  foreach($sub_events as $row) 
+  {
+     if(in_array($row["event_id"], $event_ids))
+     {
+        
+      $index = array_search($row["event_id"], $event_ids);
+      $sub_info[$index][0] = $sub_info[$index][0].",".$row["id"];
+      $sub_info[$index][1] = $sub_info[$index][1].",".$row["image_front"];
+      $sub_info[$index][2] = $sub_info[$index][2].",".$row["image_back"];
+     }
+    else{
+      $cnt2 = 0;
+      $sub_info[$cnt1][$cnt2++] = $row["id"];
+      $sub_info[$cnt1][$cnt2++] = $row["image_front"];
+      $sub_info[$cnt1][$cnt2++] = $row["image_back"];
+      $sub_info[$cnt1][$cnt2++] = $row["event_id"];
+      $event_ids[$cnt1] = $row["event_id"];
+     $cnt1++;
+    }
+  }
+// error_reporting(E_ALL);
+// ini_set('display_errors', '1');
+require_once '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/config/config.php';
+$config = new Config();
+$connection = $config->getConnection();
+// CloseCon($conn);
+include '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/includes/header.php';
+?>
+
+
+<!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="/CSS/all_features3.css" /> 
+
+<head>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <!-- <link rel="stylesheet" href="/CSS/all_features.css">-->
+ <!-- <link rel="stylesheet" href="/CSS/calendar.css">-->
+ <link rel="stylesheet" href="/CSS/all_features3.css" /> 
+</head>
+
+<!-- <link rel="stylesheet" href="/CSS/all_features.css" />  -->
+
 <body>
  <div class = "outer-container">
 
@@ -92,33 +164,43 @@
   <div id="eventscontainer"></div>
 
 <script>
-var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","<1500","0"],
-                    ["2","EurContactA","EurContactB","1500",null,"1500s","0"],
-                    ["3","FortNiagaraA","FortNiagaraB","1764",null,"1764","0"],
-                    ["4","WhyNiagaraA","WhyNiagaraB","1790",null,"1790","0"],
-                    ["5","UsRevolutionA","UsRevolutionB","1791",null,"1791","0"],
-                    ["6","WarA","WarB","1812",null,"1812","1"],
-                    ["7","RebuildA","RebuildB","1815",null,"1815","0"],
-                    ["8","ShippingA","ShippingB","1831",null,"1831","0"],
-                    ["9,","ShippingA","ShippingB","1832",null,"1832","0"],
-                    ["10","ShippingA","ShippingB","1833",null,"1833","0"],
-                    ["11","ShippingA","ShippingB","1834",null,"1834","0"],
-                    ["12","ShippingA","ShippingB","1835",null,"1835","0"],
-                    ["13","ShippingA","ShippingB","1836",null,"1836","0"],
-                    ["14","ShippingA","ShippingB","1837",null,"1837","0"],
-                    ["15","ShippingA","ShippingB","1838",null,"1838","0"],
-                    ["16","ShippingA","ShippingB","1839",null,"1839","0"],
-                    ["17","ShippingA","ShippingB","1840",null,"1840","0"],
-                    ["18","ShippingA","ShippingB","1941",null,"1941","0"],
-                    ["19","ShippingA","ShippingB","1942",null,"1942","0"],
-                    ["20","ShippingA","ShippingB","1943",null,"1943","0"],
-                    ["21","ShippingA","ShippingB","2023",null,"2023","0"]];
- 
-   var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSubK","WarSubB,WarSubD,WarSubF,WarSubH,WarSubJ,WarSubL","6"]];
+// var years_all_info =[["1","IndigenousA","IndigenousB","9000","BC","<1500","0"],
+//                     ["2","EurContactA","EurContactB","1500",null,"1500s","0"],
+//                     ["3","FortNiagaraA","FortNiagaraB","1764",null,"1764","0"],
+//                     ["4","WhyNiagaraA","WhyNiagaraB","1790",null,"1790","0"],
+//                     ["5","UsRevolutionA","UsRevolutionB","1791",null,"1791","0"],
+//                     ["6","WarA","WarB","1812",null,"1812","1"],
+//                     ["7","RebuildA","RebuildB","1815",null,"1815","0"],
+//                     ["8","ShippingA","ShippingB","1831",null,"1831","0"],
+//                     ["9","ShippingA","ShippingB","1832",null,"1832","0"],
+//                     ["10","ShippingA","ShippingB","1833",null,"1833","0"],
+//                     ["11","ShippingA","ShippingB","1834",null,"1834","0"],
+//                     ["12","ShippingA","ShippingB","1835",null,"1835","0"],
+//                     ["13","ShippingA","ShippingB","1836",null,"1836","0"],
+//                     ["14","ShippingA","ShippingB","1837",null,"1837","0"],
+//                     ["15","ShippingA","ShippingB","1838",null,"1838","0"],
+//                     ["16","ShippingA","ShippingB","1839",null,"1839","0"],
+//                     ["17","ShippingA","ShippingB","1840",null,"1840","0"],
+//                     ["18","ShippingA","ShippingB","1941",null,"1941","0"],
+//                     ["19","ShippingA","ShippingB","1942",null,"1942","0"],
+//                     ["20","ShippingA","ShippingB","1943",null,"1943","0"],
+//                     ["21","ShippingA","ShippingB","2023",null,"2023","0"]];
+
+//   var sub_events = [["1,2,3,4,5,6","WarSubA,WarSubC,WarSubE,WarSubG,WarSubI,WarSubK","WarSubB,WarSubD,WarSubF,WarSubH,WarSubJ,WarSubL","6"]];
 
 //  var trial_events = <?php //echo json_encode($events); ?>;
 //  var trial_sub_events = <?php // echo json_encode($sub_events); ?>;
-  const arrayColumn = (arr, n) => arr.map(x => x[n]);
+    const arrayColumn = (arr, n) => arr.map(x => x[n]);
+	var years_all_info = <?php echo json_encode($year_info); ?>;
+    var sub_events = <?php echo json_encode($sub_info); ?>;
+    var additional_info = {"11":"Relavant content to Indigenous people around 9000 BC",
+                        "12":"Relevant content to European contact around 1500",
+                        "15":"Relevant content to USRevolution  around 1791",
+                        "16":"Relevant content to WarA and WarB contact around 1812",
+                      };
+
+
+
 
  var additional_info = {"1":"Relavant content to Indigenous people around 9000 BC",
                         "2":"Relevant content to European contact around 1500",
@@ -135,7 +217,7 @@ function process_images(year_index){
 
     // var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px; max-width:min-content;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+"?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div class='back'><img style ='max-height:260px;max-width:min-content;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+"?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div>";
 //image with button
-var year_tooltip = "<div class='flip-container'><div class='flipper'><div id = "+years_all_info[year_index][0]+"A class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+".jpg?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div id = "+years_all_info[year_index][0]+"B class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+".jpg?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div></div>"; //put overlay3 here if you want it to be relative to the timeline
+var year_tooltip = "<div class='flip-container'><div class='flipper'><div id = "+years_all_info[year_index][0]+"A class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+"?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div id = "+years_all_info[year_index][0]+"B class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+"?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div></div>"; //put overlay3 here if you want it to be relative to the timeline
     var year_info = ' <div id="label" class="event-label" style=" display: block;height: 300px; white-space: normal; "><time>' +time + '</time>' + year_tooltip + '</div>';
 
     return year_info;
@@ -151,7 +233,6 @@ function process_sub_images(front,back,title){
 }
 var categories =["Indigenous_History","European_Settlers","War","Transportation","Fishing","Historical_Figures"];
 for (let i = 0; i < categories.length; i++) {
-  //console.log("here");
   let text = categories[i]; 
   var op_view = text.replace("_", " ");
   var option = " <option value=" + categories[i] + ">" + op_view  + "</option>";
@@ -387,17 +468,17 @@ circles2.forEach((circle) => {
   const top_val = parseInt(getComputedStyle(c_timeline).getPropertyValue('top')); //top value of timeline
 
   // Position Divs relevant to timeline
-  const leftSmallOffset = 85; // Offsets the small images to the left
-  const leftBigOffset = 130; // Offsets the big images to the left      
-  const topOddOffset = 300; // Offsets the odd images to be below timeline 1000
-  const topEvenOffset = -100; // Offsets the even images to be above timeline 600
+  const leftSmallOffset = 0; // Offsets the small images to the left
+  const leftBigOffset = 0; // Offsets the big images to the left      
+  const topEvenOffset = 400; // Offsets the odd images to be below timeline 1000
+  const topOddOffset = -20; // Offsets the even images to be above timeline 600
 
   // Div get image
   const event_id = parseInt(circle.dataset.eventid, 10);
 
-
+  // Circle is clicked here (ccl)
   circle.addEventListener("mousedown", () => {
-
+  // create parser so we can get the attributes from year_tooltip
   // Create a new DOMParser object
   const parser = new DOMParser();
   // Parse the HTML string as an HTML document
@@ -406,12 +487,29 @@ circles2.forEach((circle) => {
   const img2 = doc.querySelector("img");
   const img = document.createElement('img');
   img.src = img2.getAttribute("src");
-  // Wait for the image to load and render
+ 
   // Get the image width
   const imgWidth = img.naturalWidth;
   const imgHeight = img.naturalHeight;
-  img.remove();
+//   const front = doc.querySelector("front");
+ var containerDiv = doc.querySelector("#label .flip-container");
 
+ // Here we are checking the size of the image and changing the div size according to its dimensions
+  if (imgWidth > imgHeight){ // we are dealing with a big image
+ 
+  containerDiv.style.width = "300px"; // change the width to 500 pixels
+
+  // Update the div's innerHTML with the modified year_tooltip
+  div.innerHTML = doc.documentElement.innerHTML;
+  }
+  else{ // we are dealing with a small image
+  containerDiv.style.width = "200px"; // change the width to 500 pixels
+
+  // Update the div's innerHTML with the modified year_tooltip
+  div.innerHTML = doc.documentElement.innerHTML;
+  }
+  img.remove();
+ 
     // const event_id = parseInt(circle.dataset.eventid, 10);
 
 
@@ -470,10 +568,15 @@ circles2.forEach((circle) => {
     // div.style.top = `${circle.getBoundingClientRect().top + 70}px`;
     // div.style.left = `${circle.getBoundingClientRect().left +10}px`;
 
-    // console.log("hi");
     document.body.appendChild(div); 
-    // div.style.width = "0px";
-    
+    // div.style.width = "300px";
+
+    var my_img = div.querySelector("img");
+    // var my_img.width;
+    // var my_img.height;
+    console.log("");
+    // my_img.style.width = "300px";
+
     const d_img = document.getElementById(event_id+'A'); 
     // Add buttons to the div
     var cid = circle.dataset.eventid;
@@ -485,12 +588,12 @@ circles2.forEach((circle) => {
     // div.style.top = `${circle.getBoundingClientRect().top + 70}px`;
     // div.style.left = `${circle.getBoundingClientRect().left +10}px`;
 
+
     // Check to see if we are moving a div
     const d_img = document.getElementById(event_id+'A'); 
     if (d_img == null){
       return;
     }
-    console.log("");
     // The image that is used to determine how to center it to its corresponding circle based on size
     // const d_img = document.getElementById(event_id+'A'); 
     const d_width = d_img.scrollWidth;
@@ -528,8 +631,6 @@ circles2.forEach((circle) => {
           div.style.left = `${circle.getBoundingClientRect().left - leftBigOffset}px`;
           }
     }
-    console.log("");
-    // BUG FIXES
   });
   circle_index++;
 });
@@ -549,7 +650,7 @@ firstLine.addEventListener('click', (event) => {
   /* console.log(circleBefore.cx.baseVal.value + " here " + circleAfter.cx.baseVal.value) */
   if (circleBefore != 0 && circleAfter != 0 && flag == 1) {
     const centerX = (circleBefore + circleAfter) / 2;
-    var offset =800;
+    var offset = 800;
     var sub_line1 = document.querySelector('#sub_line1');
     sub_line1.setAttribute('x1', centerX);
     sub_line1.setAttribute('x2', centerX);
@@ -577,8 +678,8 @@ firstLine.addEventListener('click', (event) => {
     // console.log(ids);
     var index = ids.indexOf(event_id);
     // console.log(index);
-    var front_images = sub_events[index][1].split(",");
-    var back_images = sub_events[index][2].split(",");
+	     var front_images = arrayColumn(sub_events, 1);
+    var back_images = arrayColumn(sub_events, 2);
     const sub_events_container = document.querySelector("#sub_events_container");
      // If sub-timeline already contains content, do not add it again.
      if (!overlayPopulated) {  /*BUG FIXES*/
@@ -819,4 +920,6 @@ console.log(trial_events);
 </body>
 </html>
 
-
+<?php 
+include '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/includes/footer.php'; 
+?>
