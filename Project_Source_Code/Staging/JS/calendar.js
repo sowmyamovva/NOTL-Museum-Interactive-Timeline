@@ -9,6 +9,8 @@ var myEvent = [ "Exhibit 1: 1812, Exhibit 1, blue",
                 "Exhibit 4: Native, Exhibit 4, orange"]
 
 const cDict = { };
+const bookings = { };
+var bookingOverlay;
 
 !function() {
     // The current date
@@ -35,7 +37,7 @@ const cDict = { };
       toggleButton.addEventListener('click', function() {
         self.el.classList.toggle('hide-calendar');
       });
-      this.header.appendChild(toggleButton);
+      // this.header.appendChild(toggleButton);
 
       // Hide calendar initially
       this.el.classList.add('hide-calendar');
@@ -76,11 +78,43 @@ const cDict = { };
           left.addEventListener('click', function() { self.prevMonth(); });
       
           //Append the Elements
-          // this.header.appendChild(this.toggleButton);
           this.header.appendChild(this.title); 
           this.header.appendChild(right);
           this.header.appendChild(left);
+          var button = createElement('button','cButton','View Bookings');
+
+          button.style.top = '2px';
+          button.style.position = 'absolute';
+          button.style.left = '50px';
+          button.style.height = '40px';
+          this.header.append(button);
           this.el.appendChild(this.header);
+
+          // Create container for the overlay
+          var overlayContainer = createElement('div', 'overlay-container');
+          this.el.appendChild(overlayContainer);
+
+
+          var overlay = document.createElement('div');
+          overlay.className = 'bookings_overlay';
+          overlayContainer.appendChild(overlay);
+          overlay.style.display = 'none';
+          bookingOverlay = overlay; // set this so we can get it in other functions
+          // Add event listener to button
+          button.addEventListener('click', function() {
+            // Toggle 'active' class on button element
+            button.classList.toggle('active');
+
+            // Toggle bookings overlay on and off
+            var overlay = document.querySelector('.bookings_overlay');
+            if (overlay.style.display === 'none') {
+              overlay.style.display = 'block';
+            } else {
+              overlay.style.display = 'none';
+            }
+
+
+          });
         }
       
         this.title.innerHTML = this.current.format('MMMM YYYY');
@@ -303,7 +337,9 @@ const cDict = { };
 
         const key = month.toString()+day.toString();
         if (!(key in cDict)){ // If key doesn't exist in dict, create new one
-          cDict[key] = [0,0,0,0,0];
+          cDict[key] = [0,0,0,0,temp];
+          bookings[key] = [''];
+          bookingOverlay.style.overflow = 'auto';
         }
 
         var div = createElement('div', 'event empty');
@@ -328,33 +364,44 @@ const cDict = { };
         div.append(button_2);
         div.append(button_3);
         div.append(button_4);
-        
+
+        // const bookings = { };
+        // var bookingOverlay;
 
 // Add a click event listener to the parent div
 div.addEventListener('click', function(event) {
   // Check if the clicked element is a button
   if (event.target.tagName === 'BUTTON') {
+    var textElement = createElement('div', 'event-text');
+
     // Increment the count based on which button was clicked
     switch (event.target.id) {
       case 'button_1':
         if (within_limit(cDict[key][0])){
           cDict[key][0]+=1;
+          textElement.innerHTML = 'You have booked for the date ' + cDict[key][4] + ' for 1:00-2:00 PM.';
+          bookingOverlay.appendChild(textElement);
         }
         break;
       case 'button_2':
         if (within_limit(cDict[key][1])){
           cDict[key][1]+=1;
+          textElement.innerHTML = 'You have booked for the date ' + cDict[key][4] + ' for 2:00-3:00 PM.';
+          bookingOverlay.appendChild(textElement);
         }
         break;
-        
       case 'button_3':
         if (within_limit(cDict[key][2])){
           cDict[key][2]+=1;
+          textElement.innerHTML = 'You have booked for the date ' + cDict[key][4] + ' for 3:00-4:00 PM.';
+          bookingOverlay.appendChild(textElement);
         }
         break;
       case 'button_4':
         if (within_limit(cDict[key][3])){
           cDict[key][3]+=1;
+          textElement.innerHTML = 'You have booked for the date ' + cDict[key][4] + ' for 4:00-5:00 PM.';
+          bookingOverlay.appendChild(textElement);
         }
         break;
       default:
@@ -457,7 +504,6 @@ console.log("");
     }
 
 
-  
     var calendar = new Calendar('#calendar', data);
   }();
 
@@ -471,46 +517,3 @@ console.log("");
     }
   }
   
-
-
-
-
-
-
-
-
-
-//   !function() {
-//     var data = [
-//       { eventName: 'Lunch Meeting w/ Mark', calendar: 'Work', color: 'orange' },
-//       { eventName: 'Interview - Jr. Web Developer', calendar: 'Work', color: 'orange' },
-//       { eventName: 'Demo New App to the Board', calendar: 'Work', color: 'orange' },
-//       { eventName: 'Dinner w/ Marketing', calendar: 'Work', color: 'orange' },
-  
-//       { eventName: 'Game vs Portalnd', calendar: 'Sports', color: 'blue' },
-//       { eventName: 'Game vs Houston', calendar: 'Sports', color: 'blue' },
-//       { eventName: 'Game vs Denver', calendar: 'Sports', color: 'blue' },
-//       { eventName: 'Game vs San Degio', calendar: 'Sports', color: 'blue' },
-  
-//       { eventName: 'School Play', calendar: 'Kids', color: 'yellow' },
-//       { eventName: 'Parent/Teacher Conference', calendar: 'Kids', color: 'yellow' },
-//       { eventName: 'Pick up from Soccer Practice', calendar: 'Kids', color: 'yellow' },
-//       { eventName: 'Ice Cream Night', calendar: 'Kids', color: 'yellow' },
-  
-//       { eventName: 'Free Tamale Night', calendar: 'Other', color: 'green' },
-//       { eventName: 'Bowling Team', calendar: 'Other', color: 'green' },
-//       { eventName: 'Teach Kids to Code', calendar: 'Other', color: 'green' },
-//       { eventName: 'Startup Weekend', calendar: 'Other', color: 'green' }
-//     ];
-  
-//     function addDate(ev) {
-      
-//     }
-  
-//     var calendar = new Calendar('#calendar', data);
-  
-//   }();
-// eventName, calendarName, eventColor, date, endDate
-// var myEvent = "Exhibit, Work,blue,2023-03-28, 2023-03-29"
-
-// src: https://www.sliderrevolution.com/resources/html-calendar/
