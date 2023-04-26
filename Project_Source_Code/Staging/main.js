@@ -14,7 +14,7 @@ app.use(express.static(__dirname)); // + '/Staging'
 
 
 app.get('',(req, res)=> {
-    res.sendFile(__dirname + '/pages/current_timeline.html');// timeline   current_timeline.html
+    res.sendFile(__dirname + '/pages/timeline.html');// timeline   current_timeline.html
 })
 // horizontal_example   // experimental
 
