@@ -31,35 +31,116 @@
         }
         
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+        {
             
             require_once '../../controllers/UserController.php';
             $controller = new UserController();
             if(isset($_POST['login']))
             {
+                $email = $_POST['email'];
                 $result = $controller->login($_POST['email'], $_POST['password']);
 
-                print("back?");
-                if ($result == true) {
+                // print("back?");
+                if ($result == true && !is_int($result)) {
                 $url = "https://badger-timeline.infinityfreeapp.com/public_html";
                 echo "<script>window.location.replace('$url');</script>";
+                // echo "logged in";
                 exit;
 
-                echo '<p>login successful! You can now log in.</p>';
-                } else {
-                echo '<p>login failed. Please try again.</p>';
+                } 
+                else 
+                {
+                    if($result == 1)
+                    {
+                    
+                        $password_err =true;
+                    }
+                    else
+                    {
+                        $email ="";
+                        $email_err= true;
+                    }
                 }
             }
             if(isset($_POST['signup']))
             {
-                $result = $controller->register($_POST['username'], $_POST['email'], $_POST['password'],$_POST['confirm_password']);
-                
-                // print("back?");
-                // if ($result === true) {
-                //     echo '<p>Registration successful! You can now log in.</p>';
-                // } else {
-                //     echo '<p>Registration failed. Please try again.</p>';
-                // }
+                $email_s = $_POST['email'];
+                $username_s = $_POST['username'];
+                $password_s = $_POST['password'];
+                $confirm_password_s = $_POST['confirm_password'];
+                $password_error = "";
+                $confirm_password_error = "";
+                $email_error = "";
+                if($password_s == $confirm_password_s && strlen($username_s)>=1 && strlen($password_s)>=8 && filter_var($email_s, FILTER_VALIDATE_EMAIL))
+                {
+                    $result = $controller->register($_POST['username'], $_POST['email'], $_POST['password'],$_POST['confirm_password']);
+                    
+                    if ($result == true && !is_int($result))
+                    {
+                        $email = $_POST['email'];
+                        $result = $controller->login($_POST['email'], $_POST['password']);
+        
+                         // print("back?");
+                        if ($result == true && !is_int($result)) {
+                        $url = "https://badger-timeline.infinityfreeapp.com/public_html";
+                        echo "<script>window.location.replace('$url');</script>";
+                        // echo "logged in";
+                        exit;
+        
+                        } 
+                    }
+                    else 
+                    {
+                        $password_error = "";
+                        $confirm_password_error = "";
+                        $email_error = "";
+                        if($result == 1)
+                        {
+                        
+                            $password_error ="Password needs at least one special character";
+                        }
+                        else if($result == 2)
+                        {
+                             $password_error ="Password has non alphanumeric characters that are not special characters";
+                        }
+                        else if($result == 3)
+                        {
+                             $password_error ="Password needs at least 8 characters";
+                        }
+                        else if($result == 4)
+                        {
+                             $password_error ="Password needs at least 2 UpperCase";
+                        }
+                        else if($result == 5)
+                        {
+                             $email_error ="Email already exists";
+                        }
+                        else if($result == 6)
+                        {
+                             $confirm_password_error ="Confirm password does not match the password";
+                        }
+                    }
+                }
+                else if(strlen($username_s)<1)
+                {
+                     $username_error ="Please enter a username";
+                     $username_s="";
+                }
+                else if(!filter_var($email_s, FILTER_VALIDATE_EMAIL))
+                {
+                     $email_error ="Please enter a valid email";
+                     $email_s = "";
+                }
+                else if(strlen($password_s)<8)
+                {
+                     $password_error ="Password needs at least 8 characters";
+                }
+                else if($password_s != $confirm_password_s)
+                {
+                     $confirm_password_error ="Confirm password does not match the password";
+                }
+
             }
         }
     ?>
@@ -73,7 +154,7 @@
 
             <form method="POST" class="logform">
                 <div class="form-group">
-                    <input type="email" placeholder="Email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="" required> <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo (isset($email)) ? $email : ''; ?>" required> <i class="fas fa-envelope"></i>
                 </div>   
                 <div class="form-group">
                         <input type="password" placeholder="Password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="" required>
@@ -93,20 +174,20 @@
             <h4>Sign Up</h4>
             <form method="POST" class = "signform">
               <div class="form-group">
-                <input type="text" name="username" class="form-control" value="" placeholder="Username" required>
-                <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                <input type="text" name="username" class="form-control <?php echo (!empty($username_error)) ? 'is-invalid' : ''; ?>" value="<?php echo (isset($username_s)) ? $username_s : ''; ?>" placeholder="Username" required>
+                <span class="invalid-feedback"><?php echo $username_error; ?></span>
               </div>
               <div class="form-group">
-                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email">
-                <span class="invalid-feedback"><?php echo $email_err; ?></span>
+                <input type="email" name="email" class="form-control  <?php echo (!empty($email_error)) ? 'is-invalid' : ''; ?>" id="inputEmail" value="<?php echo (isset($email_s)) ? $email_s : ''; ?>" placeholder="Email" required>
+                <span class="invalid-feedback"><?php echo $email_error; ?></span>
               </div>
               <div class="form-group">
-                <input type="password" name="password" id = "password" class="form-control" id="inputPassword" placeholder="Password">
-                <span class="invalid-feedback"><?php echo $password_err; ?></span><span id = "restrictions"></span>
+                <input type="password" name="password" id = "password" class="form-control <?php echo (!empty($password_error)) ? 'is-invalid' : ''; ?>" id="inputPassword" placeholder="Password" required>
+                <span class="invalid-feedback"><?php echo $password_error; ?></span><span id = "restrictions"></span>
               </div>
               <div class="form-group">
-                <input type="password" name="confirm_password" id = "confirm_password" class="form-control" placeholder="Re-type Password">
-                <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span><span id = "equivalence"></span>
+                <input type="password" name="confirm_password" id = "confirm_password" class="form-control <?php echo (!empty($confirm_password_error)) ? 'is-invalid' : ''; ?>" placeholder="Re-type Password" required>
+                <span class="invalid-feedback"><?php echo $confirm_password_error; ?></span><span id = "equivalence"></span>
               </div>
               <button type="submit" id = "submitButton" name = "signup" class="btn btn-secondary">Sign up</button>
             </form>
