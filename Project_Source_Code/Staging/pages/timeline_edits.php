@@ -122,7 +122,7 @@ editButton.addEventListener('click', function() {
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
  <!-- <link rel="stylesheet" href="/CSS/all_features.css">-->
  <!-- <link rel="stylesheet" href="/CSS/calendar.css">-->
- <link rel="stylesheet" href="/CSS/all_features3.css" /> 
+ <link rel="stylesheet" href="CSS/timeline.css" /> 
 </head>
 
 <!-- <link rel="stylesheet" href="/CSS/all_features.css" />  -->
@@ -159,7 +159,7 @@ editButton.addEventListener('click', function() {
         </linearGradient>
       </defs>
 
-     <line id="mypath" x1="-1600" y1="180" x2="2000" y2="180" fill="#1c278a" stroke="url(#e0YvEuspUTQ2-stroke)" stroke-width="13" />
+     <line id="mypath" x1="-9700" y1="180" x2="10000" y2="180" fill="#1c278a" stroke="url(#e0YvEuspUTQ2-stroke)" stroke-width="13" />
     
         <g id ="sub_timeline" class="arrow_sub">
             <style type="text/css">
@@ -169,7 +169,7 @@ editButton.addEventListener('click', function() {
                     stroke: white;
                     stroke-width: 3;}
             </style>
-            <line id="sub_line1" class="st0" x1="186" y1="180" x2="185.5" y2="340"/>
+            <line id="sub_line1" class="st0" x1="186" y1="160" x2="185.5" y2="320"/>
             <circle id ="sub_circle" class="st1 hidden" cx = "186" cy = "340" />
             <!-- <line id="sub_line2" class="st0" x1="8.5" y1="340" x2="181.5" y2="340"/>
             <line id="sub_line3" class="st0" x1="362.5" y1="340" x2="181.5" y2="340"/>
@@ -183,11 +183,13 @@ editButton.addEventListener('click', function() {
 </div>
 
 </div>
-<div class="left_arrow hidden" id = "left_arrow">
-    <i class="material-icons" style='font-size:30px;color:white'>chevron_left</i>
+ <div class="scroll-btns">
+<div style="width: 40px; position: relative;top: -53vh;left:2vw; cursor:pointer;" id = "left_arrow">
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="chevron-double-left"><path d="M17,17a1,1,0,0,1-.71-.29l-4-4a1,1,0,0,1,0-1.41l4-4a1,1,0,0,1,1.41,1.41L14.41,12l3.29,3.29A1,1,0,0,1,17,17Z"></path><path d="M11,17a1,1,0,0,1-.71-.29l-4-4a1,1,0,0,1,0-1.41l4-4a1,1,0,0,1,1.41,1.41L8.41,12l3.29,3.29A1,1,0,0,1,11,17Z"></path></svg>
   </div>
-<div class = "right_arrow hidden" id = "right_arrow"  >
-  <i class="material-icons" style='font-size:30px;color:white'>chevron_right</i>
+<div style="width: 40px; position: relative;top: -58vh; left:93.5vw;cursor:pointer;" id = "right_arrow"  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="chevron-double-right"><path d="M7,17a1,1,0,0,1-.71-1.71L9.59,12,6.29,8.71A1,1,0,0,1,7.71,7.29l4,4a1,1,0,0,1,0,1.41l-4,4A1,1,0,0,1,7,17Z"></path><path d="M13,17a1,1,0,0,1-.71-1.71L15.59,12,12.29,8.71a1,1,0,0,1,1.41-1.41l4,4a1,1,0,0,1,0,1.41l-4,4A1,1,0,0,1,13,17Z"></path></svg>
+</div>
 </div>
 
 
@@ -257,11 +259,11 @@ editButton.addEventListener('click', function() {
 
 
 
- var additional_info = {"1":"Relavant content to Indigenous people around 9000 BC",
-                        "2":"Relevant content to European contact around 1500",
-                        "5":"Relevant content to USRevolution  around 1791",
-                        "6":"Relevant content to WarA and WarB contact around 1812",
-                      };
+ // var additional_info = {"1":"Relavant content to Indigenous people around 9000 BC",
+ //                        "2":"Relevant content to European contact around 1500",
+ //                        "5":"Relevant content to USRevolution  around 1791",
+ //                        "6":"Relevant content to WarA and WarB contact around 1812",
+ //                      };
 
 function process_images(year_index){
     var time ="";
@@ -310,7 +312,7 @@ for (let i = 0; i < categories.length; i++) {
     if (i != 0){    
       year1 = years_all_info[i-1][3];
       year2 = years_all_info[i][3];
-      if (Math.abs(year1 - year2) > 2000) // If distance is bigger than 2000 reduce it to a fixed large value for normalization
+      if (Math.abs(year1 - year2) > 1000) // If distance is bigger than 2000 reduce it to a fixed large value for normalization
         position[i] = 3;
       else if (Math.abs(Math.abs(year1-year2)<300 && Math.abs(year1-year2)>=200)) {// If distance is bigger than 2000 reduce it to a fixed large value for normalization
         position[i] = 2;
@@ -334,6 +336,7 @@ for (let i = 0; i < categories.length; i++) {
   position = position.map((val) => val / sum); // normalize each value by dividing by the sum
 
   for (let i = 0; i < years_all_info.length; i++) {
+    // if(position[i] - position[i-1]>700)
     pos += position[i]; // Keep adding distance to the previous distance
     pathOnDiv(( years_all_info[i][3]+"_"+years_all_info[i][4]), pos, years_all_info[i][5] , years_all_info[i][6], years_all_info[i][0], years_all_info[i][9], years_all_info[i][10]);
   }
@@ -387,21 +390,49 @@ function pathOnDiv(text, pos, title,sub,id,event_title,category) {
   //r="20" fill="white" stroke="#474e5d" stroke-width="3" stroke-r = "2"
   document.getElementById("timeline").insertAdjacentHTML("beforeend", point);
 }
-window.addEventListener("load", function() {
-  const container = document.querySelector("#timeline_box");
-  let prevX = 0;
 
-  container.addEventListener("mousemove", function(e) {
-    const x = e.clientX - container.offsetLeft;
-    if (x < prevX) {
-      container.scrollLeft -= 10;
-    } else if (x > prevX) {
-      container.scrollLeft += 10;
-    }
-    prevX = x;
+
+const scrollcontainer = document.getElementById('timeline_container');
+const scrollcontent = document.getElementById('timeline_box');
+const scrollLeft = document.getElementById('left_arrow');
+const scrollRight = document.getElementById('right_arrow');
+
+const scrollWidth = scrollcontent.scrollWidth - scrollcontainer.clientWidth;
+const scrollAmount = 0.88 * scrollcontainer.clientWidth;
+
+scrollLeft.addEventListener('click', () => {
+  scrollcontainer.scrollBy({
+    left: -scrollAmount,
+    behavior: 'smooth'
   });
-
 });
+
+scrollRight.addEventListener('click', () => {
+  scrollcontainer.scrollBy({
+    left: scrollAmount,
+    behavior: 'smooth'
+  });
+});
+
+
+
+
+
+// window.addEventListener("load", function() {
+//   const container = document.querySelector("#timeline_box");
+//   let prevX = 0;
+
+//   // container.addEventListener("mousemove", function(e) {
+//   //   const x = e.clientX - container.offsetLeft;
+//   //   if (x < prevX) {
+//   //     container.scrollLeft -= 10;
+//   //   } else if (x > prevX) {
+//   //     container.scrollLeft += 10;
+//   //   }
+//   //   prevX = x;
+//   // });
+
+// });
 
 const timeline = document.getElementById("timeline_box");
 const events = timeline.querySelectorAll(".first-circle");
@@ -419,22 +450,22 @@ container.addEventListener("mousemove", (e) => {
 
   
 
-  const hoverPos = e.pageX - container.offsetLeft;
+ //  const hoverPos = e.pageX - container.offsetLeft;
 
-  const hoverPercent = hoverPos / containerWidth;
+ //  const hoverPercent = hoverPos / containerWidth;
 
-  const scrollAmount = hoverPercent * (contentWidth - containerWidth);
+ //  const scrollAmount = hoverPercent * (contentWidth - containerWidth);
 
-  container.scrollLeft = scrollAmount;
- // console.log(left_arrow.classList);
-   if (scrollAmount - oldScrollX >= 10) {
-      left_arrow.classList.add("hidden");
-      right_arrow.classList.remove("hidden");
-    } else if (scrollAmount - oldScrollX <= -10) {
-       left_arrow.classList.remove("hidden");
-     right_arrow.classList.add("hidden");
-    }
-     oldScrollX = scrollAmount;
+ //  container.scrollLeft = scrollAmount;
+ // // console.log(left_arrow.classList);
+ //   if (scrollAmount - oldScrollX >= 10) {
+ //      left_arrow.classList.add("hidden");
+ //      right_arrow.classList.remove("hidden");
+ //    } else if (scrollAmount - oldScrollX <= -10) {
+ //       left_arrow.classList.remove("hidden");
+ //     right_arrow.classList.add("hidden");
+ //    }
+ //     oldScrollX = scrollAmount;
 });
 
 const filterButton = document.querySelector("#filter-button");
@@ -525,8 +556,8 @@ circles2.forEach((circle) => {
   // Position Divs relevant to timeline
   const leftSmallOffset = 0; // Offsets the small images to the left
   const leftBigOffset = 0; // Offsets the big images to the left      
-  const topEvenOffset = 400; // Offsets the odd images to be below timeline 1000
-  const topOddOffset = -20; // Offsets the even images to be above timeline 600
+  const topEvenOffset = 370; // Offsets the odd images to be below timeline 1000
+  const topOddOffset = -10; // Offsets the even images to be above timeline 600
 
   // Div get image
   const event_id = parseInt(circle.dataset.eventid, 10);
@@ -933,9 +964,6 @@ speakButtons.forEach((speakButton, index) => {
 });
 </script>
 
-<?php 
-include '../../includes/footer.php'; 
-?>
 <script id = "search_timeline">
 
 
