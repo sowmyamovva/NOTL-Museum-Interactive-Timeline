@@ -1,0 +1,6 @@
+This folder contains code testing the navigation bar of the timeline page
+Units that are tested include:
+    'home'
+    'Services'
+    'visit us'
+    'log in'
