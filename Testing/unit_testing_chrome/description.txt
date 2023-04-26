@@ -1,0 +1,2 @@
+This folder contains all unit level test cases done on the chrome browser. 
+****NOTE*****:test cases using chrome's incognito mode are not included in this folder
