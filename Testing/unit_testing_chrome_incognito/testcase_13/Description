@@ -1,0 +1,7 @@
+This folder contains testing code for the register feature on the login page while using chrome's incognito mode.
+units that are tested include:
+    username field
+    email field
+    password field
+    re-type password field
+    sign up button
