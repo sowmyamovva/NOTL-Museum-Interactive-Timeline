@@ -973,7 +973,6 @@ console.log(trial_events);
     }
 </script>
 </body>
-</html>
 
 <?php 
 include '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/includes/footer.php'; 
