@@ -1,0 +1,13 @@
+This folder contains code for testing all tests all parts of the filter function on the timeline while using a chrome's incognito mode.
+The units being tested include:
+    'FROM' input field
+    'TO' input field
+    'Filter' button
+    'Selection menu'
+        indigenious history
+        european settlers
+        fishing
+        war
+        historical figures
+        transportation
+        all categories
