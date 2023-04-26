@@ -1,0 +1,10 @@
+This folder contains testing code for the login feature on the login page while using chrome's incognito mode
+units that are tested include:
+    email field
+    password field
+    sign in button
+    verify email and reset your password link
+    facebook icon
+    google icon
+    twitter icon
+
