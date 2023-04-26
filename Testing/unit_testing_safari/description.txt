@@ -1,0 +1,2 @@
+This folder contains all unit level test cases done on the Safari browser. 
+If code for a test case isn't uploaded onto here, then it means that specific test case can only be done by hand.
