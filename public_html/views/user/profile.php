@@ -32,15 +32,50 @@
         if ($_SERVER['REQUEST_METHOD'] === 'POST') 
         {
            
-            if (isset($_POST['update'])) 
+            if (isset($_POST['update']) && strlen($_POST['username'])>=1) 
             {
                 require_once '../../controllers/UserController.php';
                 $controller = new UserController();
                 $check = $controller->updateUserProfile();
-                if($check)
+                if($check== true && !is_int($check))
                 {
-                    header('Location: /public_html/');
+                    $url = "https://badger-timeline.infinityfreeapp.com/public_html/views/user/profile";
+                    echo "<script>window.location.replace('$url');</script>";
+                    exit;
                 }
+                else 
+                {
+                    echo "<script> document.getElementById('edit_button').click(); </script>";
+                    $password_error = "";
+                    $email_error = "";
+                    if($result == 1)
+                    {
+                    
+                        $password_error ="Password needs at least one special character";
+                    }
+                    else if($result == 2)
+                    {
+                         $password_error ="Password has non alphanumeric characters that are not special characters";
+                    }
+                    else if($result == 3)
+                    {
+                         $password_error ="Password needs at least 8 characters";
+                    }
+                    else if($result == 4)
+                    {
+                         $password_error ="Password needs at least 2 UpperCase";
+                    }
+                    else if($result == 5)
+                    {
+                         $email_error ="Email already exists";
+                    }
+                }
+            }
+
+            else if(strlen($_POST['username'])<1)
+            {
+                echo "<script> document.getElementById('edit_button').click(); </script>";
+                $username_error ="Please enter a username";
             }
 
             // Check if the cancel button was clicked
@@ -58,18 +93,18 @@
         <form method="post" autocomplete ="off">
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" required>
-                <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                <input type="text" name="username" class="form-control <?php echo (!empty($username_error)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" required>
+                <span class="invalid-feedback"><?php echo $username_error; ?></span>
             </div>    
              <div class="form-group">
                 <label>Email</label>
-                <input type="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>" required>
-                <span class="invalid-feedback"><?php echo $email_err; ?></span>
+                <input type="email" name="email" class="form-control <?php echo (!empty($email_error)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>" required>
+                <span class="invalid-feedback"><?php echo $email_error; ?></span>
             </div>    
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="new_password" id = "password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="" required>
-                <span class="invalid-feedback"><?php echo $password_err; ?></span><span id = "restrictions"></span>
+                <input type="password" name="new_password" id = "password" class="form-control <?php echo (!empty($password_error)) ? 'is-invalid' : ''; ?>" value="" >
+                <span class="invalid-feedback"><?php echo $password_error; ?></span><span id = "restrictions"></span>
             </div>
             <div class="form-group">
                 <input id = "submitButton" type="submit" name = "update" class="btn btn-primary" value="Update">
@@ -81,7 +116,7 @@
         <div id = "read_only">
         <p>Name: <?php echo $username; ?></p>
         <p>Email: <?php echo $email; ?></p>
-        <button onclick="toggleEdit()">Edit</button>
+        <button onclick="toggleEdit()" id = "edit_button">Edit</button>
         </div>
     </div>    
 </body>
@@ -94,8 +129,11 @@ var hasValidLength = false;
 var hasSpecialChar = false;
 var hasAlphanumeric = false;
 
-submitButton.disabled = true;
 password.addEventListener("input", function() {
+    if(password.length>0)  
+    {
+        submitButton.disabled = true;
+    }
   let str = password.value;
   hasSpecialChar = str.match(/[^\w\s]/) !== null;
   for(let i = 0; i < str.length; i++) {
@@ -137,4 +175,4 @@ function toggleEdit() {
     edit_section.classList.toggle("hidden");
   }
 </script>
-</html>
+
