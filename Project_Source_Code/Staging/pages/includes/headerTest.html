@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <!-- styles -->
+    <link rel="stylesheet" href="style.css" /> 
+    <style>
+        /* Styles for larger screens */
+        .nav-header {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-header h2 {
+            margin-right: auto;
+        }
+
+        .nav-toggle {
+            display: none;
+        }
+
+        .links {
+            display: flex;
+            align-items: center;
+        }
+
+        .links li {
+            margin-left: 20px;
+        }
+
+        .logo {
+            width: 60px; 
+            margin-right: 20px;
+        }
+
+        .SearchBar {
+            display: flex;
+            align-items: center; 
+        }
+
+        .SearchBar input[type="text"] {
+             flex-grow: 1; 
+             padding: 10px; 
+             border: none; 
+        }
+
+        .SearchBar button {
+             flex-shrink: 0; 
+             padding: 10px; 
+             background: none; 
+             border: none; 
+             cursor: pointer; 
+        }
+
+        .dropbtn {
+            cursor: pointer;
+            font-size: 18px; /* icon size */
+        }
+
+        /* user profile icon on hover */
+        .dropbtn:hover {
+            color: #007bff; /* icon colour*/
+        }
+
+        /* hiding the user profile icon by default */
+        #userDropdown {
+            display: none;
+        }
+
+        /* Styles for smaller screens */
+        @media screen and (max-width: 768px) {
+            .nav-header {
+                justify-content: space-between;
+            }
+
+            .nav-toggle {
+                display: block;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 24px;
+                margin-left: 10px;
+            }
+
+            .links {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: 10px;
+            }
+
+            .links li {
+                margin: 5px 0;
+            }
+
+            .links.show {
+                display: flex;
+            }
+
+            .SearchBar {
+                display: none; /* Hide the search bar for screens with max-width of 767px */
+             }
+            .
+            SearchBar button {
+                display: none;
+            }
+
+            .logo {
+                margin-right: 10px; 
+            }
+        }
+    </style>
+    <title>Homepage</title> 
+</head>
+<body>
+    <nav>
+        <div class="nav-center">
+            <!-- nav header -->
+            <div class="nav-header">
+                <img src="./logo.svg" class="logo" alt="logo" /> <!-- Add your logo here -->
+                <h2>NOTL</h2>
+                <button class="nav-toggle"> <i class="fas fa-bars"></i> </button>
+            </div>
+            <!-- links -->
+            <ul class="links">
+                <li> <a href="Home.html">Home</a> </li>
+                <li> <a href="about.html">Services</a> </li>
+                <li> <a href="timeline.html">Timeline</a> </li>
+                <nav>
+                      <li id="userDropdown" class="dropdown">
+                        <a href="#" class="dropbtn"><i class="fas fa-user"></i></a>
+                        <div class="dropdown-content">
+                          <a href="#">Profile</a>
+                          <a href="#">Logout</a>
+                          <a href="#">Settings</a>
+                        </div>
+                      </li>
+                    </ul>
+            </ul>
+            <!----Searchbar goes here ----->
+            <ul class="container">
+                <form action="" class="SearchBar">
+                    <input type="text" placeholder="Search" name="notlsearch">
+                    <button type="submit"><img src="/Users/sowmyamovva/Desktop/SearchMag.png"></button>
+                </form>
+            </ul>
+        </div>
+    </nav>
+
+    <script>
+        const navToggle = document.querySelector(".nav-toggle");
+        const links = document.querySelector(".links");
+
+        navToggle.addEventListener("click", () => {
+            links.classList.toggle("show");
+        });
+
+        var isLoggedIn = true; // Replace with your logic to check if the user is logged in
+        var userDropdown = document.getElementById("userDropdown");
+            if (isLoggedIn) {
+                userDropdown.style.display = "block"; // Show the user profile icon
+            } else {
+            userDropdown.style.display = "none"; // Hide the user profile icon
+        }
+    </script>
+</body>
+</html>

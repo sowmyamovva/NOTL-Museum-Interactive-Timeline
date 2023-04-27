@@ -1,0 +1,6 @@
+is folder contains code testing the navigation bar of the timeline page using the Safari browser
+Units that are tested include:
+    'home'
+    'Services'
+    'visit us'
+    'log in'

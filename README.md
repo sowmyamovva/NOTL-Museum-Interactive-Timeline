@@ -28,7 +28,7 @@ An interactive timeline will be developed to allow visitors of the Niagara On Th
 ### **Specifications**:
   | **Type**  | **Application** |
   | ------------- | ------------- |
-  | Potential Web-Development Tools |  Ajax, CSS, HTML, JavaScript, PHP, Python |
+  | Potential Web-Development Tools |  Bootstrap, CSS, HTML, JavaScript, PHP, SVG|
   | Administrative Tools | Office 365, Trello, Zoom |
   | Project Management Tools | Trello, Taiga |
 

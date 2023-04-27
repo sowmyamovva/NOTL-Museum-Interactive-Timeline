@@ -1,0 +1,10 @@
+This folder contains testing code for the login on the login page.
+units that are tested include:
+    email field
+    password field
+    sign in button
+    verify email and reset your password link
+    facebook icon
+    google icon
+    twitter icon
+
