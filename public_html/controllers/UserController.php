@@ -165,11 +165,16 @@ class UserController {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Get the user's email address
         $email = $_POST['email'];
-
+        require_once '../../models/UserModel.php';
+        $userInfo = UserModel::findByEmail($email);
+        if(is_null($userInfo) )
+        {
+            return 0;
+        }
         // Validate the email address
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
         {
-            $error = 'Invalid email address';
+            return 0;
         } 
         else 
         {
@@ -215,13 +220,13 @@ class UserController {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'badgertech.notl@gmail.com';
-            $mail->Password = 'yahgkxynmeyohszd';
+            $mail->Username = 'notl.badgertech@gmail.com';
+            $mail->Password = 'ejxlpwnnjxrbsols';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
             // Set up email content
-            $mail->setFrom('badgertech.notl@gmail.com', 'BadgerTech');
+            $mail->setFrom('notl.badgertech@gmail.com', 'BadgerTech');
             $mail->addAddress($email);
             $mail->Subject = 'Reset Password Request';
             $mail->Subject = 'Verify your Login for Niagara on the Lake Museum - Staff';
