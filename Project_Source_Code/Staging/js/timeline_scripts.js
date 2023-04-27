@@ -199,7 +199,6 @@ window.addEventListener("load", function() {
     }
     prevX = x;
   });
-
 });
 
   
@@ -250,24 +249,31 @@ var circles = document.querySelectorAll(".first-circle");
 filterButton.addEventListener("click", () => {
   const fromYear = parseInt(document.querySelector("#from-year").value);
   const toYear = parseInt(document.querySelector("#to-year").value);
+  const firstCircle = 0;
+  const lastCircle = 0;
 
+  // Go through the circles in remove them if need be
   circles.forEach((circle,index) => {
     const year = parseInt(circle.dataset.year);
     var card_id = "circle_"+index;
     console.log("card_id "+card_id);
+    // if circle is greater than fromYear and less than toYear then don't remove them
     if (year >= fromYear && year <= toYear) {
+      if (firstCircle == 0){
+        firstCircle = index;
+      }
+      // lastCircle
+
       circle.style.display = "inline";
       document.getElementById(index).classList.remove("hidden");
-      if (document.getElementById(card_id) !==null)
-      {
+      if (document.getElementById(card_id) !==null){
         document.getElementById(card_id).classList.remove("hidden");
       }
-    } else {
+    } else { // Remove them
       circle.style.display = "none";
-       document.getElementById(index).classList.add("hidden");
-       if (document.getElementById(card_id) !==null)
-      {
-       document.getElementById(card_id).classList.add("hidden");
+      document.getElementById(index).classList.add("hidden");
+      if (document.getElementById(card_id) !==null){
+      document.getElementById(card_id).classList.add("hidden");
       }
     }
   });
@@ -356,8 +362,10 @@ circles2.forEach((circle) => {
 
     // Get the circle id so that we can get the specific image that we want to add additional info to
     var cid = circle.dataset.eventid;
-    const myImage = document.getElementById(cid+"B"); // The back image we're adding buttons to
-    extra_info(div, cid, myImage); // add additional info overlay
+    const frontImage = document.getElementById(cid+"A"); // The front image we're adding buttons to
+    const backImage = document.getElementById(cid+"B"); // The back image we're adding buttons to
+
+    extra_info(div, cid, frontImage, backImage); // add additional info overlay
   });
 
 
@@ -414,7 +422,7 @@ var overlayPopulated = false; // BUG FIX
 
   // The following is for sub-timeline
 firstLine.addEventListener('click', (event) => {
-       
+
 
   const clickedX = event.clientX - event.target.getBoundingClientRect().left;
   const circleBefore = (findCircleBeforeX(clickedX)).cx.baseVal.value;
@@ -631,7 +639,7 @@ stackerParser(years_all_info);
  * Once the button is pressed, an overlay will appear below the timeline container.
  * Params: c_div: The circle div, cid: The circle ID, backImage: The back image we are adding the button to.
  */
-function extra_info (c_div, cid, backImage) {
+function extra_info (c_div, cid, frontImage, backImage) {
 // Check to see if circle has additional info
   if (!(cid in additional_info)){ // if circle does not have any additional info then don't add any buttons to it.
     return;
@@ -708,9 +716,26 @@ function extra_info (c_div, cid, backImage) {
   button.style.color = "lightcoral";
   button.style.backgroundColor = "aqua";
   button.style.fontSize = "24px";
-
-  // Append the button to the back image
+  // button.style.opacity = 0;
+  button.style.zIndex = 999;
+  // Append the button to the front image
   backImage.appendChild(button);
+  
+
+  // Create dummy second button
+  // const button2 = document.createElement("button");
+  // button2.innerHTML = "...";
+  // button2.setAttribute("class", "my-button" + cid+"B");
+  // button2.style.position = "absolute";
+  // button2.style.left = "0px";
+  // button2.style.top = "0px";
+  // button2.style.color = "lightcoral";
+  // button2.style.backgroundColor = "aqua";
+  // button2.style.fontSize = "24px";
+
+  // // Append the button to the back image
+  // backImage.appendChild(button2);
+
 } // extra_info
 
 
