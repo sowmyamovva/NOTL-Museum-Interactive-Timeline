@@ -122,12 +122,43 @@ editButton.addEventListener('click', function() {
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
  <!-- <link rel="stylesheet" href="/CSS/all_features.css">-->
  <!-- <link rel="stylesheet" href="/CSS/calendar.css">-->
- <link rel="stylesheet" href="CSS/timeline.css" /> 
+ <!-- <link rel="stylesheet" href="CSS/timeline.css" />  -->
+
+ <link rel="stylesheet" href="/CSS/sowmya.css" /> 
 </head>
 
 <!-- <link rel="stylesheet" href="/CSS/all_features.css" />  -->
 
 <body>
+  <!-- Filter Icon -->
+<i class="fas fa-sliders-h" id="filterIcon"></i>
+<!-- Dark Mode Icon -->
+<i class="fas fa-moon" id="darkModeIcon"></i>
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="filterModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Filter Range</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="from-year">From:</label>
+        <input type="number" id = "from-year" name = "from-year" class="form-control"  placeholder="From">
+        <label for="to-year">To:</label>
+        <input type="number" id = "to-year" name = "to-year" class="form-control" placeholder="To">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="filter-button">Apply Filter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
  <div class = "outer-container">
 
 <div class="filter-bar">
@@ -136,13 +167,13 @@ editButton.addEventListener('click', function() {
       <option value="all">All Categories</option>
     </select>
    </div>
-    <div class="range-filter">
+<!--     <div class="range-filter">
     <label for="from-year">From:</label>
     <input type="number" id="from-year" name="from-year" min="0" max="2010" value="0" step="10">
     <label for="to-year">To:</label>
     <input type="number" id="to-year" name="to-year" min="0" max="2010" value="2010">
     <button id="filter-button">Filter</button>
-    </div>
+    </div> -->
   </div>
 
 <div id="timeline_container" class="scroll-container">
@@ -159,7 +190,7 @@ editButton.addEventListener('click', function() {
         </linearGradient>
       </defs>
 
-     <line id="mypath" x1="-9700" y1="180" x2="10000" y2="180" fill="#1c278a" stroke="url(#e0YvEuspUTQ2-stroke)" stroke-width="13" />
+     <line id="mypath" x1="-9500" y1="180" x2="10000" y2="180" fill="#1c278a" stroke="url(#e0YvEuspUTQ2-stroke)" stroke-width="13" />
     
         <g id ="sub_timeline" class="arrow_sub">
             <style type="text/css">
@@ -216,7 +247,7 @@ editButton.addEventListener('click', function() {
 
     </div>
 </div>
-
+<div id="overlay3"></div>
 <h1>Events</h1>
   <div id="eventscontainer"></div>
 
@@ -250,7 +281,7 @@ editButton.addEventListener('click', function() {
     const arrayColumn = (arr, n) => arr.map(x => x[n]);
 	var years_all_info = <?php echo json_encode($year_info); ?>;
     var sub_events = <?php echo json_encode($sub_info); ?>;
-    var additional_info = {"11":"Relavant content to Indigenous people around 9000 BC",
+    var additional_info = {"10":"Relavant content to Indigenous people around 9000 BC",
                         "12":"Relevant content to European contact around 1500",
                         "15":"Relevant content to USRevolution  around 1791",
                         "16":"Relevant content to WarA and WarB contact around 1812",
@@ -868,15 +899,84 @@ function findCircleAfterX(x) {
   });
   return circleAfter;
 }
-
+let isSpeaking = false;
+ let speakData;
 function extra_info (c_div, cid, backImage) {
+
+//speak button for info
+var card_button = document.createElement("button");
+
+  // Set the button text
+  card_button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M533.6 32.5C598.5 85.3 640 165.8 640 256s-41.5 170.8-106.4 223.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C557.5 398.2 592 331.2 592 256s-34.5-142.2-88.7-186.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM473.1 107c43.2 35.2 70.9 88.9 70.9 149s-27.7 113.8-70.9 149c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C475.3 341.3 496 301.1 496 256s-20.7-85.3-53.2-111.8c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zm-60.5 74.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3z"/></svg>';
+
+  // Set any other properties or attributes for the button as needed
+  card_button.setAttribute("class", "card_speak_button" + cid);
+
+  card_button.style.position = "absolute";
+  card_button.style.right = "0px";
+  card_button.style.top = "0px";
+  card_button.style.backgroundColor = "white";
+  card_button.style.width = "24px";
+
+  // Append the button to the back image
+  backImage.appendChild(card_button);
+
+let stop_button = document.createElement("button");
+stop_button.style.display = "none";
+let stop_button_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></svg>';
+stop_button.innerHTML = stop_button_icon;
+
+ stop_button.style.position = "absolute";
+  stop_button.style.right = "0px";
+  stop_button.style.top = "0px";
+  stop_button.style.backgroundColor = "white";
+  stop_button.style.width = "24px";
+backImage.appendChild(stop_button);
+
+card_button.onclick = function() {
+   if (!isSpeaking) {
+    isSpeaking = true;
+    card_button.style.display = "none";
+    stop_button.style.display = "inline-block";
+       let voices = getVoices();
+  let rate = 1, pitch = 2, volume = 1;
+  var ids =arrayColumn(years_all_info, 0);
+  var id = ids.indexOf(cid);
+  let text = years_all_info[id][7];
+
+    speakData = new SpeechSynthesisUtterance();
+    // Set event listener for when speech is finished
+     speakData.addEventListener('end', function() {
+      isSpeaking = false;
+      card_button.style.display = "inline-block";
+      stop_button.style.display = "none";
+    });
+    
+  // speak_custom(text, voices[2], 1, 1, 1);
+speak_custom(text, 1, 1, 1)
+  }
+
+};
+// Add event listener to stop button
+stop_button.addEventListener("click", function() {
+  if (isSpeaking) {
+    isSpeaking = false;
+    card_button.style.display = "inline-block";
+    stop_button.style.display = "none";
+    
+    // Cancel speech synthesis
+    window.speechSynthesis.cancel();
+  }
+});
+
+
 // Check to see if circle has additional info
   if (!(cid in additional_info)){ // if circle does not have any additional info then don't add any buttons to it.
     return;
   }
 
   // Check if button already exists in div
-  if (c_div.querySelector('button') !== null) {
+  if (c_div.querySelector('.my-button') !== null) {
     return; // Exit function if button already exists
   }
   
@@ -951,57 +1051,268 @@ function extra_info (c_div, cid, backImage) {
   backImage.appendChild(button);
 } // extra_info
 
-// Text-To-Speech JS
-const speakButtons = document.querySelectorAll(".speak-button");
-const textToSpeaks = document.querySelectorAll(".text-to-speak2");
+function getVoices() {
+  let voices = speechSynthesis.getVoices();
+  if(!voices.length){
+    let utterance = new SpeechSynthesisUtterance("");
+    speechSynthesis.speak(utterance);
+    voices = speechSynthesis.getVoices();
+  }
+  return voices;
+}
 
-speakButtons.forEach((speakButton, index) => {
-  speakButton.addEventListener("click", () => {
-    const msg = new SpeechSynthesisUtterance();
-    msg.text = textToSpeaks[index].textContent;
-    window.speechSynthesis.speak(msg);
-  });
-});
+var flag_speak_custom = 0;
+  if (flag_speak_custom==0)
+{
+
+   flag_speak_custom = 1;
+   speak_custom(" ", 1, 1, 0);
+}
+function speak_custom(text, rate, pitch, volume) {
+  // create a SpeechSynthesisUtterance to configure the how text to be spoken
+
+  let voices = getVoices(); 
+  // speakData = new SpeechSynthesisUtterance();
+  speakData.volume = volume; // From 0 to 1
+  speakData.rate = rate; // From 0.1 to 10
+  speakData.pitch = pitch; // From 0 to 2
+  speakData.text = text;
+  speakData.lang = 'en';
+  speakData.voice = getVoices()[2];
+  console.log("speaking");
+  // pass the SpeechSynthesisUtterance to speechSynthesis.speak to start speaking 
+  speechSynthesis.speak(speakData);
+
+}
+
+
+// Text-To-Speech JS
+// const speakButtons = document.querySelectorAll(".speak-button");
+// const textToSpeaks = document.querySelectorAll(".text-to-speak2");
+
+// speakButtons.forEach((speakButton, index) => {
+//   speakButton.addEventListener("click", () => {
+//     const msg = new SpeechSynthesisUtterance();
+//     msg.text = textToSpeaks[index].textContent;
+//     window.speechSynthesis.speak(msg);
+//   });
+// });
+
 </script>
 
 <script id = "search_timeline">
 
 
-    var eventsContainer = document.getElementById('eventscontainer');
-console.log(trial_events);
-    for (var i = 0; i < trial_events.length; i++) {
-    // must add a more_info section
-      var event = trial_events[i];
-      var eventDiv = document.createElement('div');
-      eventDiv.setAttribute('id', 'event-' + event.date_title+"_"+event.event_title);
-      eventDiv.setAttribute('class', 'event_more_info');
-      eventDiv.innerHTML = '<h2>' + event.date_title + '</h2><p>' + event.date + ' ' + event.date_marker + '</p>';
-      eventsContainer.appendChild(eventDiv);
-    }
+//     var eventsContainer = document.getElementById('eventscontainer');
+// console.log(trial_events);
+//     for (var i = 0; i < trial_events.length; i++) {
+//     // must add a more_info section
+//       var event = trial_events[i];
+//       var eventDiv = document.createElement('div');
+//       eventDiv.setAttribute('id', 'event-' + event.date_title+"_"+event.event_title);
+//       eventDiv.setAttribute('class', 'event_more_info');
+//       eventDiv.innerHTML = '<h2>' + event.date_title + '</h2><p>' + event.date + ' ' + event.date_marker + '</p>';
+//       eventsContainer.appendChild(eventDiv);
+//     }
 
-    // Check if there is a search parameter in the URL
-    var params = new URLSearchParams(window.location.search);
-    var searched_value = params.get('search');
-    if (searched_value) {
-     var searchedValue = searched_value.replace(" ", "_");
+//     // Check if there is a search parameter in the URL
+//     var params = new URLSearchParams(window.location.search);
+//     var searched_value = params.get('search');
+//     if (searched_value) {
+//      var searchedValue = searched_value.replace(" ", "_");
     
-      // Scroll to the corresponding div
-      scrollToDiv('event-' + searchedValue);
-    }
+//       // Scroll to the corresponding div
+//       scrollToDiv('event-' + searchedValue);
+//     }
+// Define your arrays
+// const date_titles = arrayColumn(years_all_info, 5);
+// const event_titles = arrayColumn(years_all_info, 9);
+// const categories_each = arrayColumn(years_all_info, 10);
 
+// // Check if the URL contains a search parameter
+// const searchParam = new URLSearchParams(window.location.search).get('search');
+// if (searchParam) {
+//   // Use regular expressions to parse the search parameter
+//   const match = searchParam.match(/^(\S+?)\s*([\w\s]+)\s*\(([\w\s]+)\)$/);
+//   if (match) {
+//     const dateTitle = match[1];
+//     const eventTitle = match[2].trim();
+//     const category = match[3].trim();
+//     console.log(dateTitle);
+//     // Check if the date title is in the date_titles array
+//     const dateIndex = date_titles.indexOf(dateTitle);
+//     if (dateIndex !== -1) {
+//       let index = -1;
+//       if (event_titles[dateIndex].toLowerCase().includes(eventTitle.toLowerCase())) {
+//         index = dateIndex;
+//       } else {
+//         for (let i = 0; i < event_titles.length; i++) {
+//           if (event_titles[i].toLowerCase().includes(eventTitle.toLowerCase())) {
+//             index = i;
+//             break;
+//           }
+//         }
+//       }
+//       if (index !== -1) {
+//         const cardId = year_all_info[index][3]+"_"+year_all_info[index][4];
+//         console.log(cardId);
+//         const element = document.getElementById(cardId);
+//         if (element) {
+//           element.scrollIntoView({ behavior: 'smooth' });
+//         }
+//       }
+//     }
+//     else {
+//       console.log("here");
+//       let bestMatchIndex = -1;
+//       let bestMatchScore = 0;
+//       for (let i = 0; i < date_titles.length; i++) {
+//         const eventScore = similarity(event_titles[i].toLowerCase(), eventTitle.toLowerCase);
+//         const categoryScore = similarity(categories_each[i].toLowerCase(), category.toLowerCase());
+//         const score = (eventScore + categoryScore) / 2;
+//         if (score > bestMatchScore) {
+//         bestMatchIndex = i;
+//         bestMatchScore = score;
+//       }
+//     }
+//     if (bestMatchIndex !== -1) {
+//       const cardId = year_all_info[bestMatchIndex][3]+"_"+year_all_info[bestMatchIndex][4];
+//       const element = document.getElementById(cardId);
+//       if (element) {
+//       element.scrollIntoView({ behavior: 'smooth' });
+//       }
+//     }
+//   }
+// }
+// }
 
-// Sceoll to Div or overlay
-    function scrollToDiv(divId) {
-        var element = document.getElementById(divId);
-        console.log(element);
-        if (element) 
-        {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
+// function similarity(string1, string2) {
+//   const string1Words = string1.toLowerCase().split(' ');
+//   const string2Words = string2.toLowerCase().split(' ');
+//   const intersection = string1Words.filter(word => string2Words.includes(word));
+//   const union = [...new Set([...string1Words, ...string2Words])];
+//   return intersection.length / union.length;
+// }
+
+// // Sceoll to Div or overlay
+//     function scrollToDiv(divId) {
+//         var element = document.getElementById(divId);
+//         console.log(element);
+//         if (element) 
+//         {
+//             element.scrollIntoView({ behavior: 'smooth' });
+//         }
+//     }
 </script>
 </body>
 
+<style>
+  /* Filter icon */
+.filterIcon {
+  cursor: pointer;
+  color: #333;
+  align: right;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.modal-title{
+    color: black;
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal label {
+  font-weight: bold;
+}
+
+.modal input {
+  padding: 5px;
+}
+
+.modal button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dark Mode Icon */
+#darkModeIcon {
+  cursor: pointer;
+  color: #333; /* Change color to desired color for dark mode icon */
+  /* Add additional styling for icon as needed */
+}
+
+body.dark-mode {
+  color: #FFF;
+  background-color: #36454F !important; /* Change background color to desired color for dark mode */
+}
+
+circle-label.dark-mode{
+    color: white;
+}
+
+  </style>
+
+  <script>
+    // Event listener for filter icon click
+$('#filterIcon').on('click', function() {
+  $('#filterModal').modal('show'); // Show the modal
+});
+
+// Event listener for Apply Filter button click
+$('#filter-button').on('click', function() {
+  let minValue = $('#minValue').val();
+  let maxValue = $('#maxValue').val();
+  // Perform operations with min and max values
+  console.log('Min Value:', minValue);
+  console.log('Max Value:', maxValue);
+
+  $('#filterModal').modal('hide'); // Hide the modal
+});
+
+$('#darkModeIcon').on('click', function() {
+  // Toggle dark mode class on body element
+  $('body').toggleClass('dark-mode');
+
+  // Toggle dark mode class on other elements that need to change
+  // For example, you can add additional elements by chaining .toggleClass() method
+  $('#filterIcon').toggleClass('dark-mode');
+  // Add more elements to toggle class for dark mode as needed
+});
+
+  </script>
 <?php 
 include '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/includes/footer.php'; 
 ?>
