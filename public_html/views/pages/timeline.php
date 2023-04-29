@@ -1,5 +1,5 @@
 <?php
-//echo getcwd() . "\n";
+//echo getcwd() . "\n";                 
 // error_reporting(E_ALL);
 // ini_set('display_errors', '1');
 require_once '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/controllers/ContentController.php';
@@ -127,23 +127,41 @@ editButton.addEventListener('click', function() {
 <head>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
- <!-- <link rel="stylesheet" href="/CSS/all_features.css">-->
+  <!-- <link rel="stylesheet" href="/CSS/all_features_o.css"> -->
  <!-- <link rel="stylesheet" href="/CSS/calendar.css">-->
- <!-- <link rel="stylesheet" href="CSS/timeline.css" />  -->
+ <link rel="stylesheet" href="CSS/timeline.css" /> 
 
- <link rel="stylesheet" href="/CSS/sowmya.css" /> 
+ <link rel="stylesheet" href="https://badger-timeline.infinityfreeapp.com/CSS/sowmya.css" /> 
+
 </head>
 
 <!-- <link rel="stylesheet" href="/CSS/all_features.css" />  -->
 
 <body>
 
+ 
+ <div class = "outer-container">
 
+<!-- <div class="filter-bar" style = "">
+   <div class="select-filter" id="filter">
+    <select id="filter_title">
+      <option value="all">All Categories</option>
+    </select>
+   </div> 
+    <div class="range-filter">
+    <label for="from-year">From:</label>
+    <input type="number" id="from-year" name="from-year" min="0" max="2010" value="0" step="10">
+    <label for="to-year">To:</label>
+    <input type="number" id="to-year" name="to-year" min="0" max="2010" value="2010">
+    <button id="filter-button">Filter</button>
+    </div>
+  </div> -->
+  <div class="filter-bar">
+     <!-- Dark Mode Icon -->
+<i style = "padding: 5px" class="fas fa-moon" id="darkModeIcon"onclick="toggleMode(this, 'lightModeIcon')" ></i>
+<i style = "display:none;" class="fa-light fa-sun-bright" id="lightModeIcon" onclick="toggleMode(this,'darkModeIcon')"><svg class="feather feather-sun" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="5"/><line x1="12" x2="12" y1="1" y2="3"/><line x1="12" x2="12" y1="21" y2="23"/><line x1="4.22" x2="5.64" y1="4.22" y2="5.64"/><line x1="18.36" x2="19.78" y1="18.36" y2="19.78"/><line x1="1" x2="3" y1="12" y2="12"/><line x1="21" x2="23" y1="12" y2="12"/><line x1="4.22" x2="5.64" y1="19.78" y2="18.36"/><line x1="18.36" x2="19.78" y1="5.64" y2="4.22"/></svg></i>
   <!-- Filter Icon -->
 <!-- <i class="fas fa-sliders-h" id="filterIcon"></i> -->
-
- <div class = "outer-container">
-<div class="filter-bar" >
 
 <i style = "padding: 5px" class="fas fa-filter" id="filterIcon"></i>
 <!-- Modal -->
@@ -202,24 +220,7 @@ editButton.addEventListener('click', function() {
     </div>
   </div>
 </div>
-
-  <!-- Dark Mode Icon -->
-<i style = "padding: 5px" class="fas fa-moon" id="darkModeIcon"></i>
-</div>
-<!-- <div class="filter-bar" style = "">
-   <div class="select-filter" id="filter">
-    <select id="filter_title">
-      <option value="all">All Categories</option>
-    </select>
-   </div> 
-    <div class="range-filter">
-    <label for="from-year">From:</label>
-    <input type="number" id="from-year" name="from-year" min="0" max="2010" value="0" step="10">
-    <label for="to-year">To:</label>
-    <input type="number" id="to-year" name="to-year" min="0" max="2010" value="2010">
-    <button id="filter-button">Filter</button>
-    </div>
-  </div> -->
+  </div>
 
 <div id="timeline_container" class="scroll-container">
 
@@ -259,11 +260,11 @@ editButton.addEventListener('click', function() {
 </div>
 
 </div>
- <div class="scroll-btns">
-<div style="width: 40px; position: relative;top: -53vh;left:2vw; cursor:pointer;" id = "left_arrow">
+ <div class="scroll-btns" style="height:0">
+<div style="width: 40px; position: relative;top: -62vh;left:2vw; cursor:pointer;" id = "left_arrow">
    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="chevron-double-left"><path d="M17,17a1,1,0,0,1-.71-.29l-4-4a1,1,0,0,1,0-1.41l4-4a1,1,0,0,1,1.41,1.41L14.41,12l3.29,3.29A1,1,0,0,1,17,17Z"></path><path d="M11,17a1,1,0,0,1-.71-.29l-4-4a1,1,0,0,1,0-1.41l4-4a1,1,0,0,1,1.41,1.41L8.41,12l3.29,3.29A1,1,0,0,1,11,17Z"></path></svg>
   </div>
-<div style="width: 40px; position: relative;top: -58vh; left:93.5vw;cursor:pointer;" id = "right_arrow"  >
+<div style="width: 40px; position: relative;top: -68vh; left:93.5vw;cursor:pointer;" id = "right_arrow"  >
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="chevron-double-right"><path d="M7,17a1,1,0,0,1-.71-1.71L9.59,12,6.29,8.71A1,1,0,0,1,7.71,7.29l4,4a1,1,0,0,1,0,1.41l-4,4A1,1,0,0,1,7,17Z"></path><path d="M13,17a1,1,0,0,1-.71-1.71L15.59,12,12.29,8.71a1,1,0,0,1,1.41-1.41l4,4a1,1,0,0,1,0,1.41l-4,4A1,1,0,0,1,13,17Z"></path></svg>
 </div>
 </div>
@@ -292,7 +293,7 @@ editButton.addEventListener('click', function() {
 
     </div>
 </div>
-<div id="overlay3"><h1>More Information</h1></div>
+<div id="overlay3" style="display:none; padding :0 100px"><h1>More Information</h1><button style="border:none;background-color: transparent; width:24px" id = "extra_info_speaker"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M533.6 32.5C598.5 85.3 640 165.8 640 256s-41.5 170.8-106.4 223.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C557.5 398.2 592 331.2 592 256s-34.5-142.2-88.7-186.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM473.1 107c43.2 35.2 70.9 88.9 70.9 149s-27.7 113.8-70.9 149c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C475.3 341.3 496 301.1 496 256s-20.7-85.3-53.2-111.8c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zm-60.5 74.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3z"/></svg></button><button style="display: none;border:none;background-color: transparent; width:24px" id = "extra_info_stop"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></svg></button></div>
 <!-- <h1>Events</h1>
   <div id="eventscontainer"></div>
  -->
@@ -316,7 +317,7 @@ function process_images(year_index){
     }
 
 //image with buttonhttps://badger-timeline.infinityfreeapp.com/public_html/views/pages/timeline
-var year_tooltip = "<div class='flip-container'><div class='flipper'><div id = "+years_all_info[year_index][0]+"A class='front'><img style ='max-height:260px;' src='https://badger-timeline.infinityfreeapp.com/public_html/assets/images/"+years_all_info[year_index][1]+"' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div id = "+years_all_info[year_index][0]+"B class='back'><img style ='max-height:260px;' src='https://badger-timeline.infinityfreeapp.com/public_html/assets/images/"+years_all_info[year_index][2]+"' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div></div>"; //put overlay3 here if you want it to be relative to the timeline
+var year_tooltip = "<div class='flip-container'><div class='flipper'><div id = "+years_all_info[year_index][0]+"A class='front'><img style ='max-height:260px;' src='https://badger-timeline.infinityfreeapp.com/public_html/assets/images/"+years_all_info[year_index][1]+"' alt='1730s'> </div><div id = "+years_all_info[year_index][0]+"B class='back'><img style ='max-height:260px;' src='https://badger-timeline.infinityfreeapp.com/public_html/assets/images/"+years_all_info[year_index][2]+"' alt='1753s'><div style = 'position:absolute; top: 0px;display: flex;right:0px' class='card_bar'></div></div></div></div></div>"; //put overlay3 here if you want it to be relative to the timeline
     var year_info = ' <div id="label" class="event-label" style=" display: block;height: 300px; white-space: normal; ">' + year_tooltip + '</div>';
 
     return year_info;
@@ -324,7 +325,7 @@ var year_tooltip = "<div class='flip-container'><div class='flipper'><div id = "
 
 function process_sub_images(front,back,title){
 
-    var year_tooltip = "<div class='flip-container' style = 'width:300px !important'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+front+"?raw=true' alt='1730s'  title='"+title+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+back+"?raw=true' alt='1753s'  title='"+title+"'></div></div></div>";
+    var year_tooltip = "<div class='flip-container' style = 'width:300px !important'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://badger-timeline.infinityfreeapp.com/public_html/assets/images/"+front+"' alt='1730s'  title='"+title+"'> </div><div class='back'><img style ='max-height:260px;' src='https://badger-timeline.infinityfreeapp.com/public_html/assets/images/"+back+"' alt='1753s'  title='"+title+"'></div></div></div>";
 
     var year_info = ' <div id="label" class="event-label" style=" display: block;height: 300px; white-space: normal; ">' + year_tooltip + '</div>';
 
@@ -505,10 +506,26 @@ const filterButton = document.querySelector("#filter-button");
 var circles = document.querySelectorAll(".first-circle");
 
 filterButton.addEventListener("click", () => {
+// First we need to close any existing circles
+    // Close circles ccl  
+    circles2.forEach((circle) => {  
+        // div.classList.add("event_name"); 
+        var cid = circle.dataset.eventid; 
+        var c_div = document.getElementById('circle_'+cid); 
+        if(circle.classList.contains('selected_circle')){ 
+        circle.classList.remove('selected_circle'); 
+        circle.classList.add('unselected_circle');  
+        c_div.style.display="none"; 
+        } 
+    });
   const fromYear = parseInt(document.querySelector("#from-year").value);
   const toYear = parseInt(document.querySelector("#to-year").value);
-
+  get_current_circles(circles); 
   circles.forEach((circle,index) => {
+    // If circle isn't a currentCircle then skip it
+    if(!(currentCircles.includes(circle))){ 
+        return;
+      };
     const year = parseInt(circle.dataset.year);
     var card_id = "circle_"+index;
     // console.log("card_id "+card_id);
@@ -596,6 +613,10 @@ circles2.forEach((circle) => {
 
   // Circle is clicked here (ccl)
   circle.addEventListener("mousedown", () => {
+  // Useless Circle Bug Fix Check to see if div is hidden   
+  if (div.classList.contains("hidden")){ //  if (div.style.display == "none") 
+    div.classList.remove("hidden"); 
+  }
   // create parser so we can get the attributes from year_tooltip
   // Create a new DOMParser object
   const parser = new DOMParser();
@@ -724,8 +745,13 @@ circles2.forEach((circle) => {
       return;
     }
   
+      // Check to see if circle is unselected 
+    if(circle.classList.contains("unselected_circle")){ 
+        return; 
+    }
     const d_width = d_img.scrollWidth;
  
+
     /* Here, we keep track of the event_id so that we know whether we are at an enen or odd numbered image.
      * This way, we can alternate the y coordinate of each Image
      */
@@ -840,7 +866,7 @@ firstLine.addEventListener('click', (event) => {
     var index = ids.indexOf(event_id);
      console.log(index);
      console.log(arrayColumn(sub_events, 1)[index]);
-	     var front_images = (arrayColumn(sub_events, 1)[index]).split(',');
+       var front_images = (arrayColumn(sub_events, 1)[index]).split(',');
        console.log(front_images);
     var back_images = (arrayColumn(sub_events, 2)[index]).split(',');
     const sub_events_container = document.querySelector("#sub_events_container");
@@ -957,26 +983,25 @@ var card_button = document.createElement("button");
   // Set any other properties or attributes for the button as needed
   card_button.setAttribute("class", "card_speak_button");
 
-  card_button.style.position = "absolute";
-  card_button.style.right = "0px";
-  card_button.style.top = "0px";
-  card_button.style.backgroundColor = "white";
+  card_button.style.display = "inline-block";
+  card_button.style.border= "none";
+  card_button.style.backgroundColor = "transparent";
   card_button.style.width = "24px";
 
   // Append the button to the back image
-  backImage.appendChild(card_button);
+  backImage.parentElement.querySelector('.card_bar').appendChild(card_button);
 
 let stop_button = document.createElement("button");
 stop_button.style.display = "none";
 let stop_button_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></svg>';
 stop_button.innerHTML = stop_button_icon;
 stop_button.setAttribute("class", "card_stop_button");
- stop_button.style.position = "absolute";
-  stop_button.style.right = "0px";
-  stop_button.style.top = "0px";
-  stop_button.style.backgroundColor = "white";
+ 
+  stop_button.style.display = "none";
+  stop_button.style.border= "none";
+  stop_button.style.backgroundColor = "transparent";
   stop_button.style.width = "24px";
-backImage.appendChild(stop_button);
+backImage.parentElement.querySelector('.card_bar').appendChild(stop_button);
 
 card_button.onclick = function() {
    if (!isSpeaking) {
@@ -1029,7 +1054,7 @@ stop_button.addEventListener("click", function() {
   const button = document.createElement("button");
 
   // Set the button text
-  button.innerHTML = "...";
+  button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"/></svg>';
 
   // Set any other properties or attributes for the button as needed
   button.setAttribute("class", "my-button" + cid);
@@ -1039,10 +1064,12 @@ stop_button.addEventListener("click", function() {
     // ADD EXTRA INFO OVERLAY
     if (cid in additional_info) { // Check to see if there is additional info for circle
       const overlay = document.getElementById("overlay3");
+      overlay.display="block";
       const text = document.createElement("p");
+      // console.log(additional_info[cid]);
       text.innerHTML  = additional_info[cid];
-      const img = document.createElement("img");
-      img.src = "https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/" + years_all_info[cid - 1][1] + ".jpg?raw=true";
+      // const img = document.createElement("img");
+      // img.src = "https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/" + years_all_info[cid - 1][1] + ".jpg?raw=true";
 
       // Check if overlay content already exists and remove it if it does
       const existingContent = overlay.querySelector('.overlay-content');
@@ -1055,21 +1082,34 @@ stop_button.addEventListener("click", function() {
       content.classList.add('overlay-content');
 
       // Create the speak button element or update the existing one
-      let speakButton = overlay.querySelector('#speak-button');
-      if (!speakButton) {
-        speakButton = document.createElement('button');
-        speakButton.id = 'speak-button';
-        speakButton.textContent = 'Speak';
-        content.appendChild(speakButton);
-      }
+      let speakButton = overlay.querySelector('#extra_info_speaker');
+      let stopButton = overlay.querySelector('#extra_info_stop');
       speakButton.addEventListener("click", () => {
+        if (!isSpeaking) {
+        isSpeaking = true;
+        stopButton.style.display="inline-block";
+        speakButton.style.display = "none";
         const msg = new SpeechSynthesisUtterance();
         msg.text = text.textContent;
         window.speechSynthesis.speak(msg);
+      }
+      else
+      {
+        speakButton.style.display="inline-block";
+        stopButton.style.display="none";
+      }
       });
-
+      stopButton.addEventListener("click", function() {
+      if (isSpeaking) {
+        isSpeaking = false;
+        speakButton.style.display = "inline-block";
+        stopButton.style.display = "none";
+        
+        // Cancel speech synthesis
+        window.speechSynthesis.cancel();
+      }
+    });
       content.appendChild(text);
-      content.appendChild(img);
       overlay.appendChild(content);
 
       // Show the overlay when the button is clicked
@@ -1085,15 +1125,15 @@ stop_button.addEventListener("click", function() {
   };
 
   // Button CSS
-  button.style.position = "absolute";
-  button.style.left = "0px";
-  button.style.top = "0px";
-  button.style.color = "lightcoral";
-  button.style.backgroundColor = "aqua";
-  button.style.fontSize = "24px";
+  // button.style.position = "relative";
+  // button.style.style = "width:20px;";
+  // button.style.top = "0px";
+  // button.style.backgroundColor = "transparent";
+  // button.style.border = "none";
+  button.style="margin-right:7px; width:20px; background-color:transparent; position:relative; top:0px; border:none";
 
   // Append the button to the back image
-  backImage.appendChild(button);
+  backImage.parentElement.querySelector('.card_bar').prepend(button);
 } // extra_info
 
 function getVoices() {
@@ -1281,14 +1321,18 @@ function similarity(string1, string2) {
   color: #333; /* Change color to desired color for dark mode icon */
   /* Add additional styling for icon as needed */
 }
-
+#lightModeIcon {
+  cursor: pointer;
+  color: white; /* Change color to desired color for dark mode icon */
+  /* Add additional styling for icon as needed */
+}
 body.dark-mode {
   color: #FFF;
   background-color: #383c3d !important; /* Change background color to desired color for dark mode */
 }
 
 .circle-label.dark-mode{
-  font-size: 30px;
+    font-size: 30px;
   /*fill: #343434;*/
   text-anchor: middle;
   fill: white;
@@ -1326,7 +1370,9 @@ $('#filter-button').on('click', function() {
   $('#filterModal').modal('hide'); // Hide the modal
 });
 
-$('#darkModeIcon').on('click', function() {
+ function toggleMode(e,elem) {
+  e.style.display = "none";
+  document.getElementById(elem).style.display = "block";
   // Toggle dark mode class on body element
   $('body').toggleClass('dark-mode');
 
@@ -1335,7 +1381,7 @@ $('#darkModeIcon').on('click', function() {
   $('#filterIcon').toggleClass('dark-mode');
   $('text').toggleClass('dark-mode');
   // Add more elements to toggle class for dark mode as needed
-});
+}
 
 
 
@@ -1357,6 +1403,17 @@ document.getElementById("categoryIcon").addEventListener("click", function() {
   // Event listener for category icon click
   $('#categoryIcon').on('click', function() {
     $('#categoryModal').modal('show'); // Show the modal
+        // Close circles ccl  
+        circles2.forEach((circle) => {  
+            // div.classList.add("event_name"); 
+            var cid = circle.dataset.eventid; 
+            var c_div = document.getElementById('circle_'+cid); 
+            if(circle.classList.contains('selected_circle')){ 
+            circle.classList.remove('selected_circle'); 
+            circle.classList.add('unselected_circle');  
+            c_div.style.display="none"; 
+            } 
+        });
   });
 
   // Event listener for Apply button click
@@ -1368,6 +1425,21 @@ document.getElementById("categoryIcon").addEventListener("click", function() {
     $('#categoryModal').modal('hide'); // Hide the modal
   });
 
+    //  
+    var currentCircles = []; // The current array of circles corresponding to current timeline  
+    function get_current_circles (circles2){  
+    // set currentCircles to 0 to empty array 
+    currentCircles.length = 0;  
+    var i = 0;  
+    circles2.forEach((circle) => {  
+        if (circle.classList.contains("hidden")){ 
+            return; 
+        } 
+        currentCircles[i] = circle; 
+        i++;  
+    }); 
+      
+  }
   </script>
 <?php 
 include '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/includes/footer.php'; 
