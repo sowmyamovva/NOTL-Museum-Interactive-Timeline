@@ -1,7 +1,7 @@
 <?php
 //echo getcwd() . "\n";
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+// error_reporting(E_ALL);
+// ini_set('display_errors', '1');
 require_once '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/controllers/ContentController.php';
 $controller = new ContentController();
 $events = $controller->getEvents();
@@ -9,6 +9,7 @@ $sub_events = $controller->getSubEvents();
 $cnt1 = 0;
 $cnt2 = 0;
 $year_info = array(array());
+$year_more_info = array();
 foreach ($events as $row)
 {
     $cnt2 = 0;
@@ -23,8 +24,13 @@ foreach ($events as $row)
     $year_info[$cnt1][$cnt2++] = $row["more_information"];
     $year_info[$cnt1][$cnt2++] = $row["event_title"];
     $year_info[$cnt1][$cnt2++] = $row["category"];
+    if(strlen($row["more_information"])>=5)
+    {
+      $year_more_info[$row["id"]] = $row["more_information"];
+    }
     $cnt1++;
 }
+// print_r($year_info);
   $cnt1 = 0;
   $cnt2 = 0;
   $sub_info = array(array());
@@ -56,6 +62,7 @@ $config = new Config();
 $connection = $config->getConnection();
 // CloseCon($conn);
 include '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/includes/header.php';
+header('Cache-Control: max-age=3600');
 ?>
 
 <?php
@@ -131,8 +138,76 @@ editButton.addEventListener('click', function() {
 
 <body>
 
-<div class="filter-bar">
-    <div class="select-filter" id="filter">
+
+  <!-- Filter Icon -->
+<!-- <i class="fas fa-sliders-h" id="filterIcon"></i> -->
+
+ <div class = "outer-container">
+<div class="filter-bar" >
+
+<i style = "padding: 5px" class="fas fa-filter" id="filterIcon"></i>
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="filterModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Filter Range</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="from-year">From:</label>
+        <input type="number" id = "from-year" name = "from-year" class="form-control"  placeholder="From">
+        <label for="to-year">To:</label>
+        <input type="number" id = "to-year" name = "to-year" class="form-control" placeholder="To">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="filter-button">Apply Filter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Category Icon -->
+<i style = "padding: 5px" class="fas fa-list" id="categoryIcon"></i>
+
+<!-- Category modal -->
+<div class="modal" tabindex="-1" role="dialog" id="categoryModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Select a Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="categorySelect">Category:</label>
+        <select class="form-control" id="filter_title">
+          <option value="all">All Categories</option>
+         <!--  <option value="Indigenous_History">Indigenous History</option>
+          <option value="European_Settlers">European Settlers</option>
+          <option value="War">War</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Fishing">Fishing</option>
+          <option value="Historical_Figures">Historical Figures</option> -->
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="applyCategory">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Dark Mode Icon -->
+<i style = "padding: 5px" class="fas fa-moon" id="darkModeIcon"></i>
+</div>
+<!-- <div class="filter-bar" style = "">
+   <div class="select-filter" id="filter">
     <select id="filter_title">
       <option value="all">All Categories</option>
     </select>
@@ -143,8 +218,8 @@ editButton.addEventListener('click', function() {
     <label for="to-year">To:</label>
     <input type="number" id="to-year" name="to-year" min="0" max="2010" value="2010">
     <button id="filter-button">Filter</button>
-    </div> 
-  </div>
+    </div>
+  </div> -->
 
 <div id="timeline_container" class="scroll-container">
 
@@ -170,7 +245,7 @@ editButton.addEventListener('click', function() {
                     stroke: white;
                     stroke-width: 3;}
             </style>
-            <line id="sub_line1" class="st0" x1="186" y1="160" x2="185.5" y2="320"/>
+            <line id="sub_line1" class="st0" x1="186" y1="180" x2="185.5" y2="320"/>
             <circle id ="sub_circle" class="st1 hidden" cx = "186" cy = "340" />
             <!-- <line id="sub_line2" class="st0" x1="8.5" y1="340" x2="181.5" y2="340"/>
             <line id="sub_line3" class="st0" x1="362.5" y1="340" x2="181.5" y2="340"/>
@@ -217,21 +292,21 @@ editButton.addEventListener('click', function() {
 
     </div>
 </div>
-<div id="overlay3"></div>
-<h1>Events</h1>
+<div id="overlay3"><h1>More Information</h1></div>
+<!-- <h1>Events</h1>
   <div id="eventscontainer"></div>
-
+ -->
 <script>
 
 const arrayColumn = (arr, n) => arr.map(x => x[n]);
 var years_all_info = <?php echo json_encode($year_info); ?>;
 var sub_events = <?php echo json_encode($sub_info); ?>;
-var additional_info = {"10":"Relavant content to Indigenous people around 9000 BC",
-                    "12":"Relevant content to European contact around 1500",
-                    "15":"Relevant content to USRevolution  around 1791",
-                    "16":"Relevant content to WarA and WarB contact around 1812",
-                  };
-
+// var additional_info = {"10":"Relavant content to Indigenous people around 9000 BC",
+//                     "12":"Relevant content to European contact around 1500",
+//                     "15":"Relevant content to USRevolution  around 1791",
+//                     "16":"Relevant content to WarA and WarB contact around 1812",
+//                   };
+var additional_info =<?php echo json_encode($year_more_info); ?>;
 
 function process_images(year_index){
     var time ="";
@@ -240,16 +315,16 @@ function process_images(year_index){
         time = ( years_all_info[year_index][3]+" "+years_all_info[year_index][4]) ;
     }
 
-//image with button
-var year_tooltip = "<div class='flip-container'><div class='flipper'><div id = "+years_all_info[year_index][0]+"A class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][1]+"?raw=true' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div id = "+years_all_info[year_index][0]+"B class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+years_all_info[year_index][2]+"?raw=true' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div></div>"; //put overlay3 here if you want it to be relative to the timeline
-    var year_info = ' <div id="label" class="event-label" style=" display: block;height: 300px; white-space: normal; "><time>' +time + '</time>' + year_tooltip + '</div>';
+//image with buttonhttps://badger-timeline.infinityfreeapp.com/public_html/views/pages/timeline
+var year_tooltip = "<div class='flip-container'><div class='flipper'><div id = "+years_all_info[year_index][0]+"A class='front'><img style ='max-height:260px;' src='https://badger-timeline.infinityfreeapp.com/public_html/assets/images/"+years_all_info[year_index][1]+"' alt='1730s'  title='"+years_all_info[3]+"_"+years_all_info[4]+"'> </div><div id = "+years_all_info[year_index][0]+"B class='back'><img style ='max-height:260px;' src='https://badger-timeline.infinityfreeapp.com/public_html/assets/images/"+years_all_info[year_index][2]+"' alt='1753s'  title='Information on "+years_all_info[year_index][5] +"'></div></div></div></div>"; //put overlay3 here if you want it to be relative to the timeline
+    var year_info = ' <div id="label" class="event-label" style=" display: block;height: 300px; white-space: normal; ">' + year_tooltip + '</div>';
 
     return year_info;
 }
 
 function process_sub_images(front,back,title){
 
-    var year_tooltip = "<div class='flip-container'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+front+".jpg?raw=true' alt='1730s'  title='"+title+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+back+".jpg?raw=true' alt='1753s'  title='"+title+"'></div></div></div>";
+    var year_tooltip = "<div class='flip-container' style = 'width:300px !important'><div class='flipper'><div class='front'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+front+"?raw=true' alt='1730s'  title='"+title+"'> </div><div class='back'><img style ='max-height:260px;' src='https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/"+back+"?raw=true' alt='1753s'  title='"+title+"'></div></div></div>";
 
     var year_info = ' <div id="label" class="event-label" style=" display: block;height: 300px; white-space: normal; ">' + year_tooltip + '</div>';
 
@@ -264,7 +339,7 @@ function process_sub_images(front,back,title){
 //     .getElementById("filter_title")
 //     .insertAdjacentHTML("beforeend", option);
 // }
-var categories = ["Indigenous_History", "European_Settlers", "War", "Transportation", "Fishing", "Historical_Figures"];
+var categories = ["Indigenous_History", "European_Settlers", "War_History", "Transportation_History", "Fisheries_History", "Historical_Figures"];
 
 var select = document.getElementById("filter_title");
 
@@ -464,8 +539,7 @@ filterSelect.addEventListener("change", function() {
    
    var card_id = "circle_"+index;
    // console.log("card_id "+card_id);
-    if (
-      selectedValue === "all" || circle.getAttribute("data-category") == selectedValue ) 
+    if (selectedValue === "all" || circle.getAttribute("data-category") == selectedValue ) 
       {
       circle.classList.remove("hidden");
       document.getElementById(index).classList.remove("hidden");
@@ -512,10 +586,10 @@ circles2.forEach((circle) => {
   const top_val = parseInt(getComputedStyle(c_timeline).getPropertyValue('top')); //top value of timeline
 
   // Position Divs relevant to timeline
-  const leftSmallOffset = 0; // Offsets the small images to the left
+  const leftSmallOffset = -3; // Offsets the small images to the left
   const leftBigOffset = 0; // Offsets the big images to the left      
-  const topEvenOffset = 370; // Offsets the odd images to be below timeline 1000
-  const topOddOffset = -10; // Offsets the even images to be above timeline 600
+  const topEvenOffset = 230; // Offsets the odd images to be below timeline 1000
+  const topOddOffset = -130; // Offsets the even images to be above timeline 600
 
   // Div get image
   const event_id = parseInt(circle.dataset.eventid, 10);
@@ -574,6 +648,15 @@ circles2.forEach((circle) => {
       circle.classList.add('unselected_circle');
       circle.setAttribute('r', 24);
       div.style.display="none";
+      var ci_d = circle.dataset.eventid;
+      var back_card = document.getElementById(cid+"B");
+        if (isSpeaking) {
+        isSpeaking = false;
+        
+        // Cancel speech synthesis
+        window.speechSynthesis.cancel();
+      }
+
     }
 
 
@@ -614,7 +697,7 @@ circles2.forEach((circle) => {
     // div.style.top = `${circle.getBoundingClientRect().top + 70}px`;
     // div.style.left = `${circle.getBoundingClientRect().left +10}px`;
 
-    document.body.appendChild(div); 
+    document.getElementById('timeline_box').appendChild(div); 
     // div.style.width = "300px";
 
     var my_img = div.querySelector("img");
@@ -642,29 +725,74 @@ circles2.forEach((circle) => {
     }
   
     const d_width = d_img.scrollWidth;
-
+ 
     /* Here, we keep track of the event_id so that we know whether we are at an enen or odd numbered image.
      * This way, we can alternate the y coordinate of each Image
      */
+     var bound = 0;
 
+     bound = document.getElementById("timeline_container").getBoundingClientRect().right;
     // We want to center the dive based on how big the images are.
     if (event_id % 2 ==1){  // Odd Numbered Image
         div.style.top = `${top_val + topOddOffset}px`;
         if (d_width < 210){ // Check to see if we're dealing with small image
+
+        if(circle.getBoundingClientRect().left<bound)
+          {
+            div.style = "display:block";
+
+            div.style.top = `${top_val + topOddOffset}px`;
             div.style.left = `${circle.getBoundingClientRect().left - leftSmallOffset}px`;
+          }
+          else
+          {
+            div.style = "display:none";
+          }
         }
-        else{ // We're dealing with bigger image
+        else
+        { // We're dealing with bigger image
+          if(circle.getBoundingClientRect().left<bound)
+          {
+            div.style = "display:block";
+
+            div.style.top = `${top_val + topOddOffset}px`;
             div.style.left = `${circle.getBoundingClientRect().left -leftBigOffset}px`;
             }
+          else
+          {
+            div.style = "display:none";
+          }
+        }
     }
     else{ // Even Numbered Image
       div.style.top = `${top_val + topEvenOffset}px`;
         if (d_width < 210 ){ // Check to see if we're dealing with small image
-            div.style.left = `${circle.getBoundingClientRect().left -leftSmallOffset}px`;
+            if(circle.getBoundingClientRect().left<bound)
+          {
+            div.style = "display:block";
+
+            div.style.top = `${top_val + topEvenOffset}px`;
+            div.style.left = `${circle.getBoundingClientRect().left - leftSmallOffset}px`;
+          }
+          else
+          {
+            div.style = "display:none";
+          }
         }
-        else{ // We're dealing with bigger image
+        else
+        { // We're dealing with bigger image
+            if(circle.getBoundingClientRect().left<bound)
+          {
+            div.style = "display:block";
+
+            div.style.top = `${top_val + topEvenOffset}px`;
             div.style.left = `${circle.getBoundingClientRect().left -leftBigOffset}px`;
             }
+          else
+          {
+            div.style = "display:none";
+          }
+        }
     }
     //Reformats first div to be uniform with the rest of the bottom divs.
     if (event_id == 1){
@@ -682,6 +810,8 @@ circles2.forEach((circle) => {
 // This boolean value tells us if we have content already contained within the subetimeline overlay
 var overlayPopulated = false; // BUG FIX
 
+let isSpeaking = false;
+ let speakData;
 firstLine.addEventListener('click', (event) => {
        
 
@@ -708,9 +838,11 @@ firstLine.addEventListener('click', (event) => {
     var ids =arrayColumn(sub_events, 3);
     // console.log(ids);
     var index = ids.indexOf(event_id);
-    // console.log(index);
-	     var front_images = arrayColumn(sub_events, 1);
-    var back_images = arrayColumn(sub_events, 2);
+     console.log(index);
+     console.log(arrayColumn(sub_events, 1)[index]);
+	     var front_images = (arrayColumn(sub_events, 1)[index]).split(',');
+       console.log(front_images);
+    var back_images = (arrayColumn(sub_events, 2)[index]).split(',');
     const sub_events_container = document.querySelector("#sub_events_container");
      // If sub-timeline already contains content, do not add it again.
      if (!overlayPopulated) {  /*BUG FIXES*/
@@ -813,8 +945,7 @@ function findCircleAfterX(x) {
   });
   return circleAfter;
 }
-let isSpeaking = false;
- let speakData;
+
 function extra_info (c_div, cid, backImage) {
 
 //speak button for info
@@ -824,7 +955,7 @@ var card_button = document.createElement("button");
   card_button.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M533.6 32.5C598.5 85.3 640 165.8 640 256s-41.5 170.8-106.4 223.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C557.5 398.2 592 331.2 592 256s-34.5-142.2-88.7-186.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM473.1 107c43.2 35.2 70.9 88.9 70.9 149s-27.7 113.8-70.9 149c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C475.3 341.3 496 301.1 496 256s-20.7-85.3-53.2-111.8c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zm-60.5 74.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3z"/></svg>';
 
   // Set any other properties or attributes for the button as needed
-  card_button.setAttribute("class", "card_speak_button" + cid);
+  card_button.setAttribute("class", "card_speak_button");
 
   card_button.style.position = "absolute";
   card_button.style.right = "0px";
@@ -839,7 +970,7 @@ let stop_button = document.createElement("button");
 stop_button.style.display = "none";
 let stop_button_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></svg>';
 stop_button.innerHTML = stop_button_icon;
-
+stop_button.setAttribute("class", "card_stop_button");
  stop_button.style.position = "absolute";
   stop_button.style.right = "0px";
   stop_button.style.top = "0px";
@@ -909,7 +1040,7 @@ stop_button.addEventListener("click", function() {
     if (cid in additional_info) { // Check to see if there is additional info for circle
       const overlay = document.getElementById("overlay3");
       const text = document.createElement("p");
-      text.textContent = additional_info[cid];
+      text.innerHTML  = additional_info[cid];
       const img = document.createElement("img");
       img.src = "https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/" + years_all_info[cid - 1][1] + ".jpg?raw=true";
 
@@ -978,7 +1109,7 @@ function getVoices() {
 var flag_speak_custom = 0;
   if (flag_speak_custom==0)
 {
-
+    speakData = new SpeechSynthesisUtterance();
    flag_speak_custom = 1;
    speak_custom(" ", 1, 1, 0);
 }
@@ -986,14 +1117,14 @@ function speak_custom(text, rate, pitch, volume) {
   // create a SpeechSynthesisUtterance to configure the how text to be spoken
 
   let voices = getVoices(); 
-  // speakData = new SpeechSynthesisUtterance();
+  speakData = new SpeechSynthesisUtterance();
   speakData.volume = volume; // From 0 to 1
   speakData.rate = rate; // From 0.1 to 10
   speakData.pitch = pitch; // From 0 to 2
   speakData.text = text;
   speakData.lang = 'en';
-  speakData.voice = getVoices()[2];
-  // console.log("speaking");
+  // speakData.voice = getVoices()[2];
+  console.log("speaking");
   // pass the SpeechSynthesisUtterance to speechSynthesis.speak to start speaking 
   speechSynthesis.speak(speakData);
 
@@ -1008,87 +1139,59 @@ function speak_custom(text, rate, pitch, volume) {
 
 //Define your arrays
 const date_titles = arrayColumn(years_all_info, 5);
-const event_titles = arrayColumn(years_all_info, 9);
-const categories_each = arrayColumn(years_all_info, 10);
+ const event_titles = arrayColumn(years_all_info, 9);
+// const categories_each = arrayColumn(years_all_info, 10);
 
 // Check if the URL contains a search parameter
 var searchParam = new URLSearchParams(window.location.search).get('search');
 if (searchParam != "") {
 
   // Use regular expressions to parse the search parameter
-  const regex = /^([\w\s]+?)\s*\|\s*([\w\s]+)\s*\(([\w\s]+)\)$/;
+  const regex = /^(\S+)\s*\|\s*(.+)$/;
   const match_array = regex.exec(searchParam);
   if (Array.isArray(match_array)) {
 
     const dateTitle = match_array[1];
     const eventTitle = match_array[2];
-    const category = match_array[3];
 
     // Check if the date title is in the date_titles array
-    const dateIndex = date_titles.indexOf(dateTitle);
-    let index = -1;
-    if (dateIndex != -1) 
-    {
-      index = dateIndex;
-    }
-     else if (event_titles.indexOf(eventTitle)!=-1) {
-        index = event_titles.indexOf(eventTitle);
-      }
-      else {
-        for (let i = 0; i < event_titles.length; i++) {
-          if (event_titles[i].toLowerCase().includes(eventTitle.toLowerCase())) {
-            index = i;
-            break;
-          }
-        }
-      }
-      if (index !== -1) {
-        // console.log("reaching..");
-        const cardId = years_all_info[index][3] + "_" + years_all_info[index][4];
-        // console.log(cardId);
-        const element = document.getElementById(cardId);
-        if (element) {
-          element.scrollIntoView({
-            behavior: 'smooth'
-          });
-          
-        // create a new mouse event with the type "mousedown"
-        const mouseDownEvent = new MouseEvent('mousedown');
+  if(date_titles.indexOf(dateTitle)<0)
+  {
+  let bestMatchIndex = -1;
+    let bestMatchScore = -Infinity;
+    for (let i = 0; i < dateTitles.length; i++) {
+      const dateScore = similarity(dateTitle, date_titles[i]);
+      const eventScore = similarity(eventTitle, event_titles[i]);
 
-        // dispatch the mouse down event to the SVG element
-        element.dispatchEvent(mouseDownEvent);
-        }
-      }
-    } else {
-      // console.log("here");
-      let bestMatchIndex = -1;
-      let bestMatchScore = 0;
-      for (let i = 0; i < date_titles.length; i++) {
-        const eventScore = similarity(event_titles[i].toLowerCase(), eventTitle.toLowerCase);
-        const categoryScore = similarity(categories_each[i].toLowerCase(), category.toLowerCase());
-        const score = (eventScore + categoryScore) / 2;
-        if (score > bestMatchScore) {
-          bestMatchIndex = i;
-          bestMatchScore = score;
-        }
-      }
-      if (bestMatchIndex !== -1) {
-        const cardId = years_all_info[bestMatchIndex][3] + "_" + years_all_info[bestMatchIndex][4];
-        const element = document.getElementById(cardId);
-        if (element) {
-          element.scrollIntoView({
-            behavior: 'smooth'
-          });
-          // create a new mouse event with the type "mousedown"
-        const mouseDownEvent = new MouseEvent('mousedown');
+      // calculate the overall similarity score for this date/event pair
+      const score = dateScore + eventScore;
 
-        // dispatch the mouse down event to the SVG element
-        element.dispatchEvent(mouseDownEvent);
-        }
+      if (score > bestMatchScore) {
+        bestMatchIndex = i;
+        bestMatchScore = score;
       }
     }
   }
+  else
+  {
+    bestMatchIndex = date_titles.indexOf(dateTitle);
+  }
+    // create the ID string for the matching card
+    const cardId = years_all_info[bestMatchIndex][3]+"_"+years_all_info[bestMatchIndex][4];
+    // console.log(cardId);
+    // scroll the element into view smoothly
+    const element = document.getElementById(cardId);
+    element.scrollIntoView({ behavior: 'smooth', block: 'center',
+            inline: 'center' });
 
+    // create a new mouse event with the type "mousedown"
+    const mouseDownEvent = new MouseEvent('mousedown');
+
+    // dispatch the mouse down event to the SVG element
+    element.dispatchEvent(mouseDownEvent);
+  }
+
+}
 
 
 function similarity(string1, string2) {
@@ -1111,6 +1214,161 @@ function similarity(string1, string2) {
 </script>
 </body>
 
+<style>
+  /* Filter icon */
+.filterIcon {
+  cursor: pointer;
+  color: #333;
+  align: right;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.modal-title{
+    color: black;
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal label {
+  font-weight: bold;
+}
+
+.modal input {
+  padding: 5px;
+}
+
+.modal button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dark Mode Icon */
+#darkModeIcon {
+  cursor: pointer;
+  color: #333; /* Change color to desired color for dark mode icon */
+  /* Add additional styling for icon as needed */
+}
+
+body.dark-mode {
+  color: #FFF;
+  background-color: #383c3d !important; /* Change background color to desired color for dark mode */
+}
+
+.circle-label.dark-mode{
+  font-size: 30px;
+  /*fill: #343434;*/
+  text-anchor: middle;
+  fill: white;
+}
+
+.modal {
+  position: absolute;
+  top: 90px; /* Adjust as needed */
+  left: 0;
+  right: 90px;
+  margin: auto;
+}
+
+.modal-backdrop {
+  z-index: 100;
+}
+
+
+  </style>
+
+  <script>
+    // Event listener for filter icon click
+$('#filterIcon').on('click', function() {
+  $('#filterModal').modal('show'); // Show the modal
+});
+
+// Event listener for Apply Filter button click
+$('#filter-button').on('click', function() {
+  let minValue = $('#minValue').val();
+  let maxValue = $('#maxValue').val();
+  // Perform operations with min and max values
+  // console.log('Min Value:', minValue);
+  // console.log('Max Value:', maxValue);
+
+  $('#filterModal').modal('hide'); // Hide the modal
+});
+
+$('#darkModeIcon').on('click', function() {
+  // Toggle dark mode class on body element
+  $('body').toggleClass('dark-mode');
+
+  // Toggle dark mode class on other elements that need to change
+  // For example, you can add additional elements by chaining .toggleClass() method
+  $('#filterIcon').toggleClass('dark-mode');
+  $('text').toggleClass('dark-mode');
+  // Add more elements to toggle class for dark mode as needed
+});
+
+
+
+// Event listener for category icon click
+document.getElementById("categoryIcon").addEventListener("click", function() {
+  var categories = ["Indigenous_History", "European_Settlers", "War", "Transportation", "Fishing", "Historical_Figures"];
+
+  // Generate the category options and append them to the drop-down menu
+  for (let i = 0; i < categories.length; i++) {
+    let text = categories[i];
+    var op_view = text.replace("_", " ");
+    var option = " <option value=" + categories[i] + ">" + op_view  + "</option>";
+    document
+      .getElementById("categoryDropdown")
+      .insertAdjacentHTML("beforeend", option);
+  }
+});
+
+  // Event listener for category icon click
+  $('#categoryIcon').on('click', function() {
+    $('#categoryModal').modal('show'); // Show the modal
+  });
+
+  // Event listener for Apply button click
+  $('#applyCategory').on('click', function() {
+    let selectedCategory = $('#categorySelect').val();
+    // Perform operations with selected category
+    console.log('Selected Category:', selectedCategory);
+
+    $('#categoryModal').modal('hide'); // Hide the modal
+  });
+
+  </script>
 <?php 
 include '/home/vol4_4/epizy.com/epiz_33561013/htdocs/public_html/includes/footer.php'; 
 ?>

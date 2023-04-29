@@ -198,7 +198,7 @@
 					<hr>
 					<p>Name: <?php echo $username; ?></p> <br> <br>
 					<p>Email: <?php echo $email; ?></p> <br> <br>
-					<button class="btn btn-secondary btn-sm" onclick="toggleEdit()">Edit</button>
+					<button class="btn btn-secondary" onclick="toggleEdit()">Edit</button>
 				</div>
 			</div>
 		</div>
@@ -227,11 +227,11 @@
         				<label for="avatar">Avatar</label>
         				<br>
         				<img src="https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/5b91dbca5c8246668075e686183b99a3e208144a/avatar2.jpg?raw=true" alt="Avatar 1" class="avatar-img rounded-circle mr-2">
-        				<img src="https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/5b91dbca5c8246668075e686183b99a3e208144a/Images/ShippingA.jpg?raw=true" alt="Avatar 2" class="avatar-img rounded-circle mr-2">
+        				<img src="https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/PaintShip.jpg?raw=true" alt="Avatar 2" class="avatar-img rounded-circle mr-2">
         				<img src="https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/5b91dbca5c8246668075e686183b99a3e208144a/avatar1.jpg?raw=true" alt="Avatar 3" class="avatar-img rounded-circle">
         			</div>
         			<div class="form-group text-center">
-        				<button type="submit" class="btn btn-secondary btn-sm">Save</button>
+        				<button type="submit" class="btn btn-secondary">Save</button>
         			</div>
         		</form>
         	</div>
@@ -258,7 +258,7 @@ else if(user_id%3 == 1)
 }
 else
 {
-    profile.src="https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/5b91dbca5c8246668075e686183b99a3e208144a/Images/ShippingA.jpg?raw=true";
+    profile.src="https://github.com/sowmyamovva/NOTL-Museum-Interactive-Timeline/blob/main/Images/PaintShip.jpg?raw=true";
 }
 const password = document.getElementById("password");
 const restrictions = document.getElementById("restrictions");
